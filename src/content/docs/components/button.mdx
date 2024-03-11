@@ -1,0 +1,70 @@
+---
+title: Button
+description: A trigger for an action or event.
+---
+
+import { Tabs, TabItem } from '@astrojs/starlight/components'
+import { Aside } from '@astrojs/starlight/components'
+import { Card } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Button from '@/components/Button.astro'
+
+Buttons are used to trigger an action or event, such as submitting a form, opening a modal, or serving as a link to another page.
+
+<Aside>
+  Button styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/buttons.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Button>Button</Button>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Button>Button</Button>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button type="button" data-component="Button" class="btn-contained">
+          Button
+        </button>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## Variants
+
+They come in many different styles such as **contained**, **outlined**, **subtle**, **text**, and **icon**, though styles should be added and removed as necessary based on the needs of the application.
+
+<PropTable
+  rows={[
+    {
+      prop: 'variant',
+      type: '"contained" | "outlined" | "subtle" | "text"',
+      description:
+        'The variant the button will take. Corresponds to the design system.',
+      default: '"contained"',
+    },
+    {
+      prop: 'size',
+      type: '"sm" | "md" | "lg"',
+      description: 'The size of the button. Corresponds to the design system.',
+      default: '"md"',
+    },
+  ]}
+/>
+
+| Variant   | Description                             |
+| --------- | --------------------------------------- |
+| contained | A solid button with a background color. |
+| contained | A solid button with a background color. |
+
+{/* TODO: Keep working on Prop Table -- Need to add popper */}

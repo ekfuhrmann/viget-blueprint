@@ -1,0 +1,20 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {}
+
+const { class: className, ...props } = Astro.props
+---
+
+<div
+  class:list={[
+    'not-content',
+    {
+      'p-40': !className,
+    },
+    className,
+  ]}
+  {...props}
+>
+  <slot />
+</div>

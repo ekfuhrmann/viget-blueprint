@@ -1,0 +1,52 @@
+---
+import { Icon } from '@astrojs/starlight/components'
+
+interface Row {
+  prop: string
+  required: boolean
+  description?: string
+  default?: string
+  type: string
+}
+
+interface Props {
+  rows: Row[]
+}
+
+const { rows } = Astro.props
+---
+
+<table class="text-left">
+  <thead>
+    <tr>
+      <th>Prop</th>
+      <th>Type</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+    {
+      rows.map((row) => (
+        <tr>
+          <td>
+            <div class="flex items-center gap-8">
+              {row.prop}
+              {row.required && <span class="text-red-500">*</span>}
+              <button
+                class="flex size-24 items-center justify-center rounded border border-[var(--sl-color-gray-5)] bg-transparent p-0 "
+                style="box-shadow:var(--sl-shadow-md)"
+              >
+                <Icon name="information" />
+              </button>
+            </div>
+          </td>
+          <td>
+            <code>{row.type}</code>
+          </td>
+          <td class="hidden">{row.description}</td>
+          <td>{row.default ? <code>{row.default}</code> : '—'}</td>
+        </tr>
+      ))
+    }
+  </tbody>
+</table>

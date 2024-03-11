@@ -1,9 +1,7 @@
 import { defineConfig } from "astro/config";
 import starlight from "@astrojs/starlight";
-
 import tailwind from "@astrojs/tailwind";
 
-// https://astro.build/config
 export default defineConfig({
   integrations: [
     starlight({
@@ -22,11 +20,14 @@ export default defineConfig({
             directory: "reference",
           },
         },
+        {
+          label: "Components",
+          autogenerate: { directory: "components" },
+        },
       ],
       customCss: ["@/styles/app.css"],
     }),
     tailwind({
-      // Disable the default base styles:
       applyBaseStyles: false,
     }),
   ],

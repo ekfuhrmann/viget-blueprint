@@ -1,10 +1,10 @@
-import starlightPlugin from "@astrojs/starlight-tailwind";
-import colors from "tailwindcss/colors";
-import { pxPair } from "./config/tailwind/helpers";
+import starlightPlugin from '@astrojs/starlight-tailwind'
+import colors from 'tailwindcss/colors'
+import { pxPair } from './config/tailwind/helpers'
 
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}"],
+  content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
   theme: {
     spacing: {
       ...pxPair(0),
@@ -34,7 +34,7 @@ export default {
     },
     extend: {
       colors: {
-        accent: colors.emerald, // Your Preferred accent color.
+        accent: colors.red, // Your Preferred accent color.
         gray: colors.zinc, // Your preferred gray scale.
       },
       fontFamily: {
@@ -43,5 +43,5 @@ export default {
       },
     },
   },
-  plugins: [starlightPlugin(), require("./config/tailwind/buttons")],
-};
+  plugins: [starlightPlugin(), require('./config/tailwind/buttons')],
+}

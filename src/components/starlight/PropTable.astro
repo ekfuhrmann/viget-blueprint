@@ -1,5 +1,6 @@
 ---
 import { Icon } from '@astrojs/starlight/components'
+import Tooltip from '@/components/starlight/tooltip/Tooltip.ts'
 
 interface Row {
   prop: string
@@ -14,6 +15,8 @@ interface Props {
 }
 
 const { rows } = Astro.props
+
+const UUID = crypto.randomUUID()
 ---
 
 <table class="text-left">
@@ -33,11 +36,25 @@ const { rows } = Astro.props
               {row.prop}
               {row.required && <span class="text-red-500">*</span>}
               <button
-                class="flex size-24 items-center justify-center rounded border border-[var(--sl-color-gray-5)] bg-transparent p-0 "
+                class="flex size-24 cursor-pointer items-center justify-center rounded border border-[var(--sl-color-gray-5)] bg-transparent p-0 hover:bg-white/10"
                 style="box-shadow:var(--sl-shadow-md)"
+                aria-describedby={`tooltip-${row.prop}-${UUID}`}
               >
                 <Icon name="information" />
               </button>
+              <div
+                id={`tooltip-${row.prop}-${UUID}`}
+                class="hidden bg-white"
+                role="tooltip"
+              >
+                {row.description}
+              </div>
+              <Tooltip.Root name="test">
+                <Tooltip.Trigger>
+                  <Icon name="information" />
+                </Tooltip.Trigger>
+                <Tooltip.Content>{row.description}</Tooltip.Content>
+              </Tooltip.Root>
             </div>
           </td>
           <td>

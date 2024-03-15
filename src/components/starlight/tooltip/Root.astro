@@ -23,34 +23,37 @@ const { uuid } = Astro.props
   } from '@floating-ui/dom'
 
   class Tooltip extends HTMLElement {
+    private trigger!: HTMLElement
+    private content!: HTMLElement
+    private arrow!: HTMLElement
+    private cleanup!: () => void
+
     constructor() {
       super()
+      this.setupElements()
 
-      this.isVisible = false
       this.cleanup = autoUpdate(this.trigger, this.content, this.create)
     }
 
     connectedCallback() {
-      ;[
-        ['click', this.toggle],
-        ['blur', this.hide],
-      ].forEach(([event, listener]) => {
-        this.trigger.addEventListener(event, listener)
-      })
+      this.trigger.addEventListener('click', this.toggleListener)
+      this.trigger.addEventListener('blur', this.hideListener)
     }
 
     disconnectedCallback() {
-      ;[
-        ['click', this.toggle],
-        ['blur', this.hide],
-      ].forEach(([event, listener]) => {
-        this.trigger.removeEventListener(event, listener)
-      })
+      this.trigger.removeEventListener('click', this.toggleListener)
+      this.trigger.removeEventListener('blur', this.hideListener)
+    }
+
+    private setupElements() {
+      this.trigger = this.querySelector('[data-tooltip-trigger]') as HTMLElement
+      this.content = this.querySelector('[data-tooltip-content]') as HTMLElement
+      this.arrow = this.querySelector('[data-tooltip-arrow]') as HTMLElement
     }
 
     private create = () => {
       computePosition(this.trigger, this.content, {
-        placement: 'bottom',
+        placement: 'top-start',
         middleware: [
           offset(6),
           flip(),
@@ -64,54 +67,58 @@ const { uuid } = Astro.props
         })
 
         // Accessing the data
-        const { x: arrowX, y: arrowY } = middlewareData.arrow
+        if (middlewareData.arrow) {
+          const { x: arrowX, y: arrowY } = middlewareData.arrow
 
-        const staticSide = {
-          top: 'bottom',
-          right: 'left',
-          bottom: 'top',
-          left: 'right',
-        }[placement.split('-')[0]]
+          const staticSide = {
+            top: 'bottom',
+            right: 'left',
+            bottom: 'top',
+            left: 'right',
+          }[placement.split('-')[0]]
 
-        Object.assign(this.arrow.style, {
-          left: arrowX != null ? `${arrowX}px` : '',
-          top: arrowY != null ? `${arrowY}px` : '',
-          right: '',
-          bottom: '',
-          [staticSide]: '-4px',
-        })
+          if (staticSide) {
+            Object.assign(this.arrow.style, {
+              left: arrowX != null ? `${arrowX}px` : '',
+              top: arrowY != null ? `${arrowY}px` : '',
+              right: '',
+              bottom: '',
+              [staticSide]: '-4px',
+            })
+          }
+        }
       })
     }
 
     private show = () => {
       this.content.style.display = 'block'
-
       this.create()
     }
 
     private hide = () => {
       this.content.style.display = 'none'
-
       this.cleanup
     }
 
     private toggle = () => {
-      this.isVisible = !this.isVisible
       this.isVisible ? this.hide() : this.show()
+      this.isVisible = !this.isVisible
     }
 
-    private get trigger() {
-      return this.querySelector('[data-tooltip-trigger]')
+    private toggleListener: EventListener = () => {
+      this.toggle()
     }
 
-    private get content() {
-      return this.querySelector('[data-tooltip-content]')
+    private hideListener: EventListener = () => {
+      this.hide()
     }
 
-    private get arrow() {
-      return this.querySelector('[data-tooltip-arrow]')
-    }
+    private isVisible: boolean = false
   }
 
   customElements.define('custom-tooltip', Tooltip)
+
+  function cleanup() {
+    throw new Error('Function not implemented.')
+  }
 </script>

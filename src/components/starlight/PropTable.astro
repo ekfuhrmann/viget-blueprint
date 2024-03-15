@@ -19,37 +19,46 @@ const { rows } = Astro.props
 const UUID = crypto.randomUUID()
 ---
 
-<table class="w-full text-left" width="100%">
-  <thead>
-    <tr>
-      <th>Prop</th>
-      <th>Type</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-    {
-      rows.map((row) => (
-        <tr>
-          <td>
-            <div class="flex items-center gap-8">
-              {row.prop}
-              {row.required && <span class="text-red-500">*</span>}
-              <Tooltip.Root name="test">
-                <Tooltip.Trigger>
-                  <Icon name="information" />
-                </Tooltip.Trigger>
-                <Tooltip.Content>{row.description}</Tooltip.Content>
-              </Tooltip.Root>
-            </div>
-          </td>
-          <td>
-            <code>{row.type}</code>
-          </td>
-          <td class="hidden">{row.description}</td>
-          <td>{row.default ? <code>{row.default}</code> : '—'}</td>
-        </tr>
-      ))
-    }
-  </tbody>
-</table>
+<div class="overflow-auto">
+  <table class="!table w-full text-left">
+    <thead>
+      <tr>
+        <th>Prop</th>
+        <th>Type</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+      {
+        rows.map((row) => (
+          <tr>
+            <td>
+              <div class="flex items-center gap-8">
+                <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_30%)] px-4 text-[var(--sl-color-text)]">
+                  {row.prop}
+                  {row.required && <span class="text-red-500">*</span>}
+                </span>
+                <Tooltip.Root name="test">
+                  <Tooltip.Trigger>
+                    <Icon name="information" />
+                  </Tooltip.Trigger>
+                  <Tooltip.Content>{row.description}</Tooltip.Content>
+                </Tooltip.Root>
+              </div>
+            </td>
+            <td>
+              <code class="break-normal rounded">{row.type}</code>
+            </td>
+            <td>
+              {row.default ? (
+                <code class="whitespace-nowrap rounded">{row.default}</code>
+              ) : (
+                '—'
+              )}
+            </td>
+          </tr>
+        ))
+      }
+    </tbody>
+  </table>
+</div>

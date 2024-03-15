@@ -34,7 +34,7 @@ export default {
     },
     extend: {
       colors: {
-        accent: colors.red, // Your Preferred accent color.
+        accent: colors.emerald, // Your Preferred accent color.
         gray: colors.zinc, // Your preferred gray scale.
       },
       fontFamily: {

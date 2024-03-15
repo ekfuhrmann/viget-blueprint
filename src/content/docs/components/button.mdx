@@ -3,12 +3,18 @@ title: Button
 description: A trigger for an action or event.
 ---
 
-import { Tabs, TabItem } from '@astrojs/starlight/components'
-import { Aside } from '@astrojs/starlight/components'
-import { Card } from '@astrojs/starlight/components'
+import {
+  Tabs,
+  TabItem,
+  Aside,
+  Icon,
+  Card,
+  Code,
+} from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
 import Button from '@/components/Button.astro'
+import ButtonRaw from '@/components/Button.astro?raw'
 
 Buttons are used to trigger an action or event, such as submitting a form, opening a modal, or serving as a link to another page.
 
@@ -40,9 +46,9 @@ Buttons are used to trigger an action or event, such as submitting a form, openi
   </Preview.Docs>
 </Preview.Root>
 
-## Variants
+## API Reference
 
-They come in many different styles such as **contained**, **outlined**, **subtle**, **text**, and **icon**, though styles should be added and removed as necessary based on the needs of the application.
+This component is based on the `button` and `a` HTML elements. The following are the props that can be passed to the component.
 
 <PropTable
   rows={[
@@ -59,12 +65,187 @@ They come in many different styles such as **contained**, **outlined**, **subtle
       description: 'The size of the button. Corresponds to the design system.',
       default: '"md"',
     },
+    {
+      prop: 'icon',
+      type: 'boolean',
+      description:
+        'Whether the button should be an icon only button or not. If `true`, the button will omit the text, become a 1:1 aspect ratio, and only display the icon.',
+      default: 'false',
+    },
+    {
+      prop: 'href',
+      type: 'string',
+      description:
+        'The URL to link to. Passing in a value will cause the element to render as an anchor.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'Whether the button is disabled or not.',
+      default: 'false',
+    },
   ]}
 />
 
-| Variant   | Description                             |
-| --------- | --------------------------------------- |
-| contained | A solid button with a background color. |
-| contained | A solid button with a background color. |
+## Examples
 
-{/* TODO: Keep working on Prop Table -- Need to add popper */}
+### Variants
+
+Buttons come in many different styles such as **contained**, **outlined**, **subtle**, **text**, and **icon**. Styles should be added, removed, and tweaked as necessary based on the needs of the project.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap gap-16">
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+      <Button variant="subtle">Subtle</Button>
+      <Button variant="text">Text</Button>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Button variant="contained">Contained</Button>
+        <Button variant="outlined">Outlined</Button>
+        <Button variant="subtle">Subtle</Button>
+        <Button variant="text">Text</Button>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button type="button" data-component="Button" class="btn-contained">
+          Contained
+        </button>
+        <button type="button" data-component="Button" class="btn-outlined">
+          Outlined
+        </button>
+        <button type="button" data-component="Button" class="btn-subtle">
+          Subtle
+        </button>
+        <button type="button" data-component="Button" class="btn-text">
+          Text
+        </button>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Size
+
+Buttons come in the following different sizes: `sm`, `md`, and `lg`. By default, buttons will use `md` unless specified. Sizes should be added, removed, and tweaked as necessary based on the needs of the project.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap items-center gap-16">
+      <Button size="sm">Button</Button>
+      <Button>Button</Button>
+      <Button size="lg">Button</Button>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Button size="sm">Button</Button>
+        <Button>Button</Button>
+        <Button size="lg">Button</Button>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button
+          type="button"
+          data-component="Button"
+          class="btn-contained btn-sm"
+        >
+          Button
+        </button>
+        <button type="button" data-component="Button" class="btn-contained">
+          Button
+        </button>
+        <button
+          type="button"
+          data-component="Button"
+          class="btn-contained btn-lg"
+        >
+          Button
+        </button>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Icon
+
+Button Icons are buttons that only contain an icon. They are useful for situations where you want to provide a button that is only an icon, such as in a toolbar. By adding the btn-icon class, the button will have a 1:1 aspect ration and the text will be omitted and used only for screen-reader purposes.
+
+<Preview.Root>
+  <Preview.Canvas>
+  <div class="flex flex-wrap items-center gap-16">
+    <Button icon variant="subtle" title="More Information">
+      <Icon name="information" />
+      More Information
+    </Button>
+  </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        ---
+        import { Icon } from '@astrojs/starlight/components'
+        ---
+
+        <Button icon variant="subtle" title="More Information">
+          <Icon name="information" />
+          More Information
+        </Button>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button type="button" data-component="Button" class="btn-subtle btn-icon" title="More Information">
+          <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="--sl-icon-size: 1em;" data-astro-source-file="/home/eric/dev/starlight-docs/node_modules/@astrojs/starlight/user-components/Icon.astro" data-astro-source-loc="16:2"><path d="M12 11a1 1 0 0 0-1 1v4a1 1 0 0 0 2 0v-4a1 1 0 0 0-1-1Zm.38-3.92a1 1 0 0 0-.76 0 1 1 0 0 0-.33.21 1.15 1.15 0 0 0-.21.33 1 1 0 0 0 .21 1.09c.097.088.209.16.33.21A1 1 0 0 0 13 8a1.05 1.05 0 0 0-.29-.71 1 1 0 0 0-.33-.21ZM12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20Zm0 18a8 8 0 1 1 0-16.001A8 8 0 0 1 12 20Z"></path></svg>
+          More Information
+        </button>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Link
+
+Buttons can also be used as links. By passing in an `href` prop, the button will render as an anchor.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Button href="#">Button</Button>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Button href="#">Button</Button>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button href="#" data-component="Button" class="btn-contained">
+          Button
+        </button>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component for generating the button. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Button component, and what properties to consider.
+
+<Code code={ButtonRaw} lang="astro" title="Button.astro" />

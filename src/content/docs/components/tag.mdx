@@ -1,0 +1,135 @@
+---
+title: Tag
+description: A component for categorizing or markup.
+---
+
+import {
+  Tabs,
+  TabItem,
+  Aside,
+  Icon,
+  Card,
+  Code,
+} from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Tag from '@/components/Tag.astro'
+import TagRaw from '@/components/Tag.astro?raw'
+
+Tags are used to categorize or markup content. They are often used in blog posts, articles, and other content to help users find related content.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Tag>Tag</Tag>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag>Tag</Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <span
+          data-component="Tag"
+          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm bg-sky-600 px-10 text-center text-base text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-20"
+        >
+          Tag
+        </span>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `span` element, but can be used with any element. The following are the props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'as',
+      type: 'TagType',
+      description:
+        'The HTML tag to render. By default the component will render as a `span` unless `href` is defined, at which point it will render as an `a`.',
+      default: 'span',
+    },
+    {
+      prop: 'variant',
+      type: '"contained" | "outlined"',
+      description:
+        'The variant the tag will take. Corresponds to the design system.',
+      default: '"contained"',
+    },
+    {
+      prop: 'size',
+      type: '"sm" | "md"',
+      description: 'The size of the tag. Corresponds to the design system.',
+      default: '"md"',
+    },
+    {
+      prop: 'clickable',
+      type: 'boolean',
+      description:
+        'Whether the tag should be rendered as a clickable element. By default, a tag with an `href` will be clickable.',
+      default: 'false',
+    },
+    {
+      prop: 'href',
+      type: 'string',
+      description:
+        'The URL to link to. Passing in a value will cause the element to render as an anchor.',
+    },
+  ]}
+/>
+
+## Examples
+
+### Variants
+
+Tag components come in two variants, **contained** and **outlined**. Variants should be added, removed, and tweaked as necessary based on the needs of the project.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap gap-16">
+      <Tag variant="contained">Tag</Tag>
+      <Tag variant="outlined">Tag</Tag>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag variant="contained">Tag</Tag>
+        <Tag variant="outlined">Tag</Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <span
+          data-component="Tag"
+          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm bg-sky-600 px-10 text-center text-base text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-20"
+        >
+          Tag
+        </span>
+        <span
+          data-component="Tag"
+          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm border border-sky-600 bg-transparent px-10 text-center text-base text-sky-600 focus:outline-none focus-visible:ring-4 dark:border-white dark:text-white [&_svg]:size-20"
+        >
+          Tag
+        </span>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component for generating the button. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Button component, and what properties to consider.
+
+<Code code={TagRaw} lang="astro" title="Tag.astro" />
+
+{/* TODO: add size, icons, clickable examples */}

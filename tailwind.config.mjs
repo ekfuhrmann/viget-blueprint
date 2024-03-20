@@ -11,6 +11,7 @@ export default {
       ...pxPair(1),
       ...pxPair(2),
       ...pxPair(4),
+      ...pxPair(6),
       ...pxPair(8),
       ...pxPair(10),
       ...pxPair(12),

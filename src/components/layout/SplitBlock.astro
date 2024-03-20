@@ -1,0 +1,61 @@
+---
+import type { HTMLTag, HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<HTMLTag> {
+  /**
+    The element type to render the block as.
+  */
+  as?: HTMLTag
+  /**
+    The column split ratio.
+  */
+  split?: '1/4' | '1/3' | '1/2' | '2/3' | '3/4'
+  /**
+    Whether to reverse the order of the columns.
+  */
+  reverse?: boolean
+}
+
+const {
+  class: className,
+  split = '1/2',
+  reverse = false,
+  as: Element = 'div',
+  ...attrs
+} = Astro.props
+---
+
+<Element
+  data-layout="SplitBlock"
+  class:list={[
+    'grid',
+    className,
+    {
+      'md:grid-cols-[1fr_3fr]': split === '1/4',
+      'md:grid-cols-[1fr_2fr]': split === '1/3',
+      'md:grid-cols-2': split === '1/2',
+      'md:grid-cols-[2fr_1fr]': split === '2/3',
+      'md:grid-cols-[3fr_1fr]': split === '3/4',
+    },
+  ]}
+  {...attrs}
+>
+  <!-- slots are used to handle the interior section split  -->
+  <div>
+    <slot name="1" />
+    <slot />
+  </div>
+  {
+    Astro.slots.has('2') && (
+      <div
+        class:list={[
+          {
+            'md:order-first': reverse,
+          },
+        ]}
+      >
+        <slot name="2" />
+      </div>
+    )
+  }
+</Element>

@@ -20,7 +20,7 @@ Tags are used to categorize or markup content. They are often used in blog posts
 
 <Preview.Root>
   <Preview.Canvas>
-    <Tag>Tag</Tag>
+    <Tag clickable>Tag</Tag>
   </Preview.Canvas>
   <Preview.Docs>
     <Tabs>
@@ -33,7 +33,7 @@ Tags are used to categorize or markup content. They are often used in blog posts
         ```html
         <span
           data-component="Tag"
-          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm bg-sky-600 px-10 text-center text-base text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-20"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           Tag
         </span>
@@ -65,9 +65,9 @@ This component is based on the `span` element, but can be used with any element.
     },
     {
       prop: 'size',
-      type: '"sm" | "md"',
+      type: '"sm" | "md" | "lg"',
       description: 'The size of the tag. Corresponds to the design system.',
-      default: '"md"',
+      default: '"sm"',
     },
     {
       prop: 'clickable',
@@ -89,7 +89,7 @@ This component is based on the `span` element, but can be used with any element.
 
 ### Variants
 
-Tag components come in two variants, **contained** and **outlined**. Variants should be added, removed, and tweaked as necessary based on the needs of the project.
+Use the `variant` prop to adjust the visual style. Tag components come in the following variants: `contained` and `outlined`, and should be added, removed, and tweaked as necessary based on the needs of the project.
 
 <Preview.Root>
   <Preview.Canvas>
@@ -110,16 +110,170 @@ Tag components come in two variants, **contained** and **outlined**. Variants sh
         ```html
         <span
           data-component="Tag"
-          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm bg-sky-600 px-10 text-center text-base text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-20"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           Tag
         </span>
         <span
           data-component="Tag"
-          class="inline-flex min-h-40 items-center justify-center gap-4 rounded-sm border border-sky-600 bg-transparent px-10 text-center text-base text-sky-600 focus:outline-none focus-visible:ring-4 dark:border-white dark:text-white [&_svg]:size-20"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm border border-sky-600 bg-transparent text-center text-xs font-medium text-sky-600 focus:outline-none focus-visible:ring-4 dark:border-white dark:text-white [&_svg]:size-12"
         >
           Tag
         </span>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Sizes
+
+Use the `size` prop to adjust the tag size. Tags come in the following sizes: `sm`, `md` and `lg`. Sizes should be added, removed, and tweaked as necessary based on the needs of the project.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap items-center gap-16">
+      <Tag size="sm">Tag</Tag>
+      <Tag size="md">Tag</Tag>
+      <Tag size="lg">Tag</Tag>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag size="sm">Tag</Tag>
+        <Tag size="md">Tag</Tag>
+        <Tag size="lg">Tag</Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <span
+          data-component="Tag"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+        >
+          Tag
+        </span>
+        <span
+          data-component="Tag"
+          class="inline-flex min-h-28 items-center justify-center gap-4 rounded-sm bg-sky-600 px-8 text-center text-sm font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-16"
+        >
+          Tag
+        </span>
+        <span
+          data-component="Tag"
+          class="inline-flex min-h-36 items-center justify-center gap-4 rounded-sm bg-sky-600 px-10 text-center text-base font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-20"
+        >
+          Tag
+        </span>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Icon
+
+Tags can be used with icons to provide additional context.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap items-center gap-16">
+      <Tag>
+        <Icon name="approve-check" />
+        Approved
+      </Tag>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag>
+          <Icon name="approve-check" />
+          Approved
+        </Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <span
+          data-component="Tag"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+        >
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 24 24"
+            fill="currentColor"
+            style="--sl-icon-size: 1em;"
+            data-astro-source-file="/home/eric/dev/starlight-docs/node_modules/@astrojs/starlight/user-components/Icon.astro"
+            data-astro-source-loc="16:2"
+          >
+            <path d="M18.71 7.21a1 1 0 0 0-1.42 0l-7.45 7.46-3.13-3.14A1.02 1.02 0 1 0 5.29 13l3.84 3.84a1.001 1.001 0 0 0 1.42 0l8.16-8.16a1 1 0 0 0 0-1.47Z"></path>
+          </svg>
+          Approved
+        </span>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Link
+
+Use the `href` prop to convert a tag to a link element.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Tag href="#">Tag</Tag>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag href="#">Tag</Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <a
+          href="#"
+          data-component="Tag"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
+        >
+          Tag
+        </a>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Clickable
+
+Use the `clickable` prop to convert a tag to a clickable element. This is useful when you want to add an `onClick` event to the tag. By default, a tag with an `href` will be clickable.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Tag clickable>Tag</Tag>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tag clickable>Tag</Tag>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <button
+          type="button"
+          data-component="Tag"
+          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
+        >
+          Tag
+        </button>
         ```
       </TabItem>
     </Tabs>
@@ -131,5 +285,3 @@ Tag components come in two variants, **contained** and **outlined**. Variants sh
 Depending on the framework, it’s sometimes beneficial to use a component for generating the button. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Button component, and what properties to consider.
 
 <Code code={TagRaw} lang="astro" title="Tag.astro" />
-
-{/* TODO: add size, icons, clickable examples */}

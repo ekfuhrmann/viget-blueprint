@@ -1,0 +1,244 @@
+---
+title: Split Block
+description: An Astro layout component that allows you to split content into two columns and serve whatever content you would like within each column.
+---
+
+import {
+  Tabs,
+  TabItem,
+  Aside,
+  Icon,
+  Card,
+  Code,
+} from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import SplitBlock from '@/components/layout/SplitBlock.astro'
+import SplitBlockRaw from '@/components/layout/SplitBlock.astro?raw'
+
+Split block is an Astro layout component that allows you to split content into two columns and serve whatever content you would like within each column. The split block component is responsive and can be used to create a variety of layouts.
+
+<Aside>
+  Split Block is built as an Astro component. You can leverage the pattern used
+  here for different frameworks to create similar flexible layouts for your
+  content.
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <SplitBlock
+      split="1/2"
+      class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+    >
+      <div
+        class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+        slot="1"
+      />
+      <div
+        class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+        slot="2"
+      />
+    </SplitBlock>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <SplitBlock split="1/2">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div data-layout="SplitBlock" class="grid md:grid-cols-2">
+          <div>Slot 1</div>
+          <div>Slot 2</div>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component uses `grid` to create responsive split layouts. The following are the props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'as',
+      type: 'HTMLTag',
+      description: 'The element type to render the block as.',
+      default: 'div',
+    },
+    {
+      prop: 'split',
+      type: '"1/4" | "1/3" | "1/2" | "2/3" | "3/4"',
+      description:
+        'The split ratio of the block. The value is a fraction of the total width of the block. For example, `1/2` will split the block into two equal columns.',
+      default: '1/2',
+    },
+    {
+      prop: 'reverse',
+      type: 'boolean',
+      description:
+        'Reverse the order of the columns when columns are not stacked.',
+      default: 'false',
+    },
+  ]}
+/>
+
+## Examples
+
+### Splits
+
+The `split` prop can be used to define the ratio of the split. The value is a fraction of the total width of the block. Split Block comes with the following splits: `1/4`, `1/3`, `1/2`, `2/3`, and `3/4`. Splits should be added, removed, and modified as needed to create the desired layout.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-col md:gap-32">
+      <SplitBlock
+        split="1/4"
+        class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+      >
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+          slot="1"
+        />
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+          slot="2"
+        />
+      </SplitBlock>
+      <SplitBlock
+        split="1/3"
+        class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+      >
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+          slot="1"
+        />
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+          slot="2"
+        />
+      </SplitBlock>
+      <SplitBlock
+        split="1/2"
+        class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+      >
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+          slot="1"
+        />
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+          slot="2"
+        />
+      </SplitBlock>
+      <SplitBlock
+        split="2/3"
+        class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+      >
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+          slot="1"
+        />
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+          slot="2"
+        />
+      </SplitBlock>
+      <SplitBlock
+        split="3/4"
+        class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+      >
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+          slot="1"
+        />
+        <div
+          class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+          slot="2"
+        />
+      </SplitBlock>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <SplitBlock split="1/4">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+
+        <SplitBlock split="1/3">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+
+        <SplitBlock split="1/2">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+
+        <SplitBlock split="2/3">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+
+        <SplitBlock split="3/4">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Reverse
+
+The `reverse` prop can be used to reverse the order of the columns when columns are not stacked. This can be useful for alternating the layout of the columns.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <SplitBlock
+      reverse
+      split="1/2"
+      class="relative min-h-128 gap-2 border-2 border-dashed border-blue-500 bg-blue-500/20 p-2 text-xs font-bold leading-tight text-blue-500 before:absolute before:-translate-y-full before:content-['Block']"
+    >
+      <div
+        class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_1']"
+        slot="1"
+      />
+      <div
+        class="h-full border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot_2']"
+        slot="2"
+      />
+    </SplitBlock>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <SplitBlock reverse split="1/2">
+          <div slot="1">Slot 1</div>
+          <div slot="2">Slot 2</div>
+        </SplitBlock>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Split Block component, and what properties to consider.
+
+<Code code={SplitBlockRaw} lang="astro" title="SplitBlock.astro" />

@@ -27,7 +27,7 @@ type Props<TagType extends HTMLTag> = Polymorphic<{
 const {
   as: TagType,
   variant = 'contained',
-  size = 'md',
+  size = 'sm',
   clickable = false,
   href = undefined,
   class: className,
@@ -41,7 +41,7 @@ const Element = TagType ? TagType : href ? 'a' : clickable ? 'button' : 'span'
   href={href}
   type={clickable ? 'button' : undefined}
   class:list={[
-    'inline-flex items-center justify-center gap-4 rounded-sm text-center focus:outline-none focus-visible:ring-4',
+    'inline-flex items-center justify-center gap-4 rounded-sm text-center font-medium focus:outline-none focus-visible:ring-4',
     {
       'bg-sky-600 text-white dark:bg-sky-200 dark:text-sky-800':
         variant === 'contained',
@@ -51,8 +51,9 @@ const Element = TagType ? TagType : href ? 'a' : clickable ? 'button' : 'span'
         variant === 'outlined',
       'hover:border-sky-700 hover:bg-sky-100 hover:text-sky-700 focus-visible:border-sky-700 focus-visible:bg-sky-100 focus-visible:ring-sky-600/50 active:bg-sky-200/80 active:text-sky-800 dark:hover:border-white dark:hover:bg-white/25 dark:hover:text-white dark:focus-visible:border-white dark:focus-visible:bg-white/25 dark:focus-visible:ring-white/50 dark:active:bg-white/30':
         variant === 'outlined' && (href || clickable),
-      'min-h-32 px-8 text-sm [&_svg]:size-16': size === 'sm',
-      'min-h-40 px-10 text-base [&_svg]:size-20': size === 'md',
+      'px-6 min-h-20 text-xs [&_svg]:size-12': size === 'sm',
+      'min-h-28 px-8 text-sm [&_svg]:size-16': size === 'md',
+      'min-h-36 px-10 text-base [&_svg]:size-20': size === 'lg',
     },
     className,
   ]}

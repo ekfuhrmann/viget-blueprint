@@ -1,0 +1,29 @@
+---
+import { Image } from 'astro:assets'
+import type { ImageMetadata } from 'astro'
+import type { HTMLAttributes } from 'astro/types'
+
+interface ImageProps extends ImageMetadata {}
+
+interface CaptionProps extends HTMLAttributes<'figcaption'> {}
+
+interface Props extends HTMLAttributes<'figure'> {
+  image: {
+    alt: string
+  } & ImageProps
+  caption: {
+    text: string
+  } & CaptionProps
+}
+
+const {
+  image: { alt = '', ...image },
+  caption: { text, ...captionAttrs },
+  ...attrs
+} = Astro.props
+---
+
+<figure {...attrs}>
+  {image && <Image alt={alt} {...image} />}
+  {text && <figcaption {...captionAttrs}>{text}</figcaption>}
+</figure>

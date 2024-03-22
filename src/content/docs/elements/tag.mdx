@@ -13,8 +13,8 @@ import {
 } from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
-import Tag from '@/components/Tag.astro'
-import TagRaw from '@/components/Tag.astro?raw'
+import Tag from '@/components/elements/Tag.astro'
+import TagRaw from '@/components/elements/Tag.astro?raw'
 
 Tags are used to categorize or markup content. They are often used in blog posts, articles, and other content to help users find related content.
 
@@ -33,7 +33,7 @@ Tags are used to categorize or markup content. They are often used in blog posts
         ```html
         <span
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           Tag
         </span>
@@ -110,13 +110,13 @@ Use the `variant` prop to adjust the visual style. Tag components come in the fo
         ```html
         <span
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           Tag
         </span>
         <span
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm border border-sky-600 bg-transparent text-center text-xs font-medium text-sky-600 focus:outline-none focus-visible:ring-4 dark:border-white dark:text-white [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm border border-sky-600 bg-transparent px-6 text-center text-xs font-medium text-sky-600 focus:outline-none focus-visible:ring-4 dark:border-white dark:text-white [&_svg]:size-12"
         >
           Tag
         </span>
@@ -151,7 +151,7 @@ Use the `size` prop to adjust the tag size. Tags come in the following sizes: `s
         ```html
         <span
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           Tag
         </span>
@@ -200,7 +200,7 @@ Tags can be used with icons to provide additional context.
         ```html
         <span
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white focus:outline-none focus-visible:ring-4 dark:bg-sky-200 dark:text-sky-800 [&_svg]:size-12"
         >
           <svg
             aria-hidden="true"
@@ -240,7 +240,7 @@ Use the `href` prop to convert a tag to a link element.
         <a
           href="#"
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
         >
           Tag
         </a>
@@ -270,7 +270,7 @@ Use the `clickable` prop to convert a tag to a clickable element. This is useful
         <button
           type="button"
           data-component="Tag"
-          class="px-6 inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
+          class="inline-flex min-h-20 items-center justify-center gap-4 rounded-sm bg-sky-600 px-6 text-center text-xs font-medium text-white hover:bg-sky-700 focus:outline-none focus-visible:bg-sky-700 focus-visible:ring-4 focus-visible:ring-sky-600/50 active:bg-sky-800 dark:bg-sky-200 dark:text-sky-800 dark:hover:bg-sky-50 dark:focus-visible:bg-sky-50 dark:focus-visible:ring-white/50 dark:active:bg-sky-100 [&_svg]:size-12"
         >
           Tag
         </button>

@@ -25,8 +25,8 @@ export default defineConfig({
           autogenerate: { directory: 'layout' },
         },
         {
-          label: 'Components',
-          autogenerate: { directory: 'components' },
+          label: 'Elements',
+          autogenerate: { directory: 'elements' },
         },
       ],
       customCss: ['@/styles/app.css'],

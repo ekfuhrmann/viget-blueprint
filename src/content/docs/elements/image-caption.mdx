@@ -1,0 +1,100 @@
+---
+title: Image Caption
+description: A component that groups an image with a caption.
+---
+
+import {
+  Tabs,
+  TabItem,
+  Aside,
+  Icon,
+  Card,
+  Code,
+} from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import { Image } from 'astro:assets'
+import PropTable from '@/components/starlight/PropTable.astro'
+import ImageCaption from '@/components/elements/ImageCaption.astro'
+import ImageCaptionRaw from '@/components/elements/ImageCaption.astro?raw'
+
+Image Caption components are used to group an image with a caption. This component is useful for displaying images with a caption that provides context to the image.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex">
+      <ImageCaption
+        image={{
+          src: 'https://place-hold.it/400x300',
+          alt: '',
+          width: 400,
+          height: 300,
+        }}
+        caption={{
+          text: 'Ipsum dolor sit esse fugiat sint enim minim.',
+        }}
+      />
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <ImageCaption
+          image={{
+            src: 'https://place-hold.it/400x300',
+            alt: '',
+            width: 400,
+            height: 300
+          }}
+          caption={{
+            text: 'Ipsum dolor sit esse fugiat sint enim minim.'
+          }}
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <figure>
+          <img
+            src="https://place-hold.it/400x300"
+            alt=""
+            width="400"
+            height="300"
+            loading="lazy"
+            decoding="async"
+          >
+          <figcaption>Ipsum dolor sit esse fugiat sint enim minim.</figcaption>
+        </figure>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `figure` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'image',
+      type: `HTMLAttributes<'img'>`,
+      description:
+        'The image properties that include the source, alt text, width, height, decoding, loading, and class.',
+    },
+    {
+      prop: 'caption',
+      type: `HTMLAttributes<'figcaption'>`,
+      description:
+        'The caption properties that include the text and any additional HTML attributes.',
+    },
+  ]}
+/>
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up an Image Caption component, and what properties to consider.
+
+<Code code={ImageCaptionRaw} lang="astro" title="ImageCaption.astro" />

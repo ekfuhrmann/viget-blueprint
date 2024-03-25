@@ -48,7 +48,7 @@ Buttons are used to trigger an action or event, such as submitting a form, openi
 
 ## API Reference
 
-This component is based on the `button` and `a` HTML elements. The following are the props that can be passed to the component.
+This component is based on the `<button>` and `<a>` HTML elements. The following are the props that can be passed to the component.
 
 <PropTable
   rows={[
@@ -64,6 +64,12 @@ This component is based on the `button` and `a` HTML elements. The following are
       type: '"sm" | "md" | "lg"',
       description: 'The size of the button. Corresponds to the design system.',
       default: '"md"',
+    },
+    {
+      prop: 'title',
+      type: 'string',
+      description:
+        'The title of the button. Used for screen readers and assistive tooltips',
     },
     {
       prop: 'icon',

@@ -42,7 +42,7 @@ module.exports = plugin(({ addComponents }) => {
         hover:bg-sky-100 hover:border-sky-700 hover:text-sky-700
         active:bg-sky-200/80 active:text-sky-800
         focus-visible:bg-sky-100 focus-visible:border-sky-700 focus-visible:ring-sky-600/50
-        dark:!border-white dark:!text-white
+        dark:border-white dark:text-white
         dark:hover:bg-white/25
         dark:active:bg-white/30
         dark:focus-visible:bg-sky-100/30 dark:focus-visible:ring-white/50`]: {},
@@ -55,7 +55,7 @@ module.exports = plugin(({ addComponents }) => {
         hover:bg-sky-100 hover:text-sky-700
         active:bg-sky-200/80 active:text-sky-800
         focus-visible:bg-sky-100 focus-visible:border-sky-700 focus-visible:ring-sky-600/50
-        dark:!text-white
+        dark:text-white
         dark:hover:bg-white/25
         dark:active:bg-white/30
         dark:focus-visible:bg-sky-100/30 dark:focus-visible:ring-white/75`]: {},

@@ -1,65 +1,71 @@
 ---
-import type { HTMLTag, Polymorphic } from "astro/types";
+import type { HTMLTag, Polymorphic } from 'astro/types'
 
 type Props<Tag extends HTMLTag> = Polymorphic<{
   /**
     The HTML tag to render for the component. By default the component will render as a `button` unless `href` is defined, at which point it will render as an `a`.
   */
-  as: Tag;
+  as: Tag
   /**
     The variant the button will take. Corresponds to the design system.
   */
-  variant?: "contained" | "outlined" | "subtle" | "text";
+  variant?: 'contained' | 'outlined' | 'subtle' | 'text'
   /**
     The size of the button. Corresponds to the design system.
   */
-  size?: "sm" | "md" | "lg";
+  size?: 'sm' | 'md' | 'lg'
+  /**
+    The tooltip/assistive text to display on the button.
+  */
+  title?: string
   /**
     Whether the button should be an icon only button or not. If `true`, the button will omit the text, become a 1:1 aspect ratio, and only display the icon.
   */
-  icon?: boolean;
+  icon?: boolean
   /**
     The URL to link to. Passing in a value will cause the element to render as an anchor.
   */
-  href?: string;
+  href?: string
   /**
     Button type (if applicable). Do not add a type if `href` is set.
   */
-  type?: "button" | "submit" | undefined;
+  type?: 'button' | 'submit' | undefined
   /**
     Whether the button is disabled or not.
   */
-  disabled?: boolean;
-}>;
+  disabled?: boolean
+}>
 
 const {
   as: Tag,
-  variant = "contained",
-  size = "md",
+  variant = 'contained',
+  size = 'md',
+  title,
   icon = false,
   href = undefined,
-  type = href ? undefined : "button",
+  type = href ? undefined : 'button',
   disabled = false,
   class: className,
   ...props
-} = Astro.props;
+} = Astro.props
 
-const Element = Tag ? Tag : href && !disabled ? "a" : "button";
+const Element = Tag ? Tag : href && !disabled ? 'a' : 'button'
 ---
 
 <Element
   href={!disabled ? href : undefined}
   disabled={disabled}
   type={type}
+  title={title}
   class:list={[
     {
-      "btn-contained": variant === "contained",
-      "btn-outlined": variant === "outlined",
-      "btn-subtle": variant === "subtle",
-      "btn-text": variant === "text",
-      "btn-icon": icon,
-      "btn-sm": size === "sm",
-      "btn-lg": size === "lg",
+      'btn-contained': variant === 'contained',
+      'btn-outlined': variant === 'outlined',
+      'btn-subtle': variant === 'subtle',
+      'btn-text': variant === 'text',
+      'btn-icon': icon,
+      'btn-sm': size === 'sm',
+      'btn-lg': size === 'lg',
     },
     className,
   ]}

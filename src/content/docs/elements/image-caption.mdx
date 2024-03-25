@@ -74,7 +74,7 @@ Image Caption components are used to group an image with a caption. This compone
 
 ## API Reference
 
-This component is based on the `figure` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+This component is based on the `<figure>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
 
 <PropTable
   rows={[
@@ -83,14 +83,47 @@ This component is based on the `figure` element and can take in any additional H
       type: `HTMLAttributes<'img'>`,
       description:
         'The image properties that include the source, alt text, width, height, decoding, loading, and class.',
+      children: [
+        {
+          prop: 'src',
+          type: 'string',
+          description: 'The URL of the image.',
+          required: true,
+        },
+
+        {
+          prop: 'alt',
+          type: 'string',
+          description: 'The alt text of the image.',
+          required: true,
+        },
+        {
+          prop: 'width',
+          type: 'number',
+          description: 'The width of the image.',
+        },
+        {
+          prop: 'height',
+          type: 'number',
+          description: 'The height of the image.',
+        },
+      ],
     },
     {
       prop: 'caption',
       type: `HTMLAttributes<'figcaption'>`,
       description:
         'The caption properties that include the text and any additional HTML attributes.',
+      children: [
+        {
+          prop: 'text',
+          type: 'string',
+          description: 'The text of the caption.',
+        },
+      ],
     },
-  ]}
+
+]}
 />
 
 ## Astro Component

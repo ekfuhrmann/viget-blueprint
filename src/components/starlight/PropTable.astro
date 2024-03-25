@@ -8,6 +8,15 @@ interface Row {
   description?: string
   default?: string
   type: string
+  children: [
+    {
+      prop: string
+      required: boolean
+      description?: string
+      default?: string
+      type: string
+    },
+  ]
 }
 
 interface Props {
@@ -31,32 +40,79 @@ const UUID = crypto.randomUUID()
     <tbody>
       {
         rows.map((row) => (
-          <tr>
-            <td>
-              <div class="flex items-center gap-8">
-                <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_30%)] px-4 text-[var(--sl-color-text)]">
-                  {row.prop}
-                  {row.required && <span class="text-red-500">*</span>}
-                </span>
-                <Tooltip.Root name="test">
-                  <Tooltip.Trigger>
-                    <Icon name="information" />
-                  </Tooltip.Trigger>
-                  <Tooltip.Content>{row.description}</Tooltip.Content>
-                </Tooltip.Root>
-              </div>
-            </td>
-            <td>
-              <code class="break-normal rounded">{row.type}</code>
-            </td>
-            <td>
-              {row.default ? (
-                <code class="whitespace-nowrap rounded">{row.default}</code>
-              ) : (
-                '—'
-              )}
-            </td>
-          </tr>
+          <>
+            <tr>
+              <td>
+                <div class="flex items-center gap-8">
+                  <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_30%)] px-4 text-[var(--sl-color-text)]">
+                    {row.prop}
+                    {row.required && <span class="text-red-500">*</span>}
+                  </span>
+                  <Tooltip.Root name="test">
+                    <Tooltip.Trigger>
+                      <Icon name="information" />
+                    </Tooltip.Trigger>
+                    <Tooltip.Content>{row.description}</Tooltip.Content>
+                  </Tooltip.Root>
+                </div>
+              </td>
+              <td>
+                <code class="break-normal rounded">{row.type}</code>
+              </td>
+              <td>
+                {row.default ? (
+                  <code class="whitespace-nowrap rounded">{row.default}</code>
+                ) : (
+                  '—'
+                )}
+              </td>
+            </tr>
+            {row.children &&
+              row.children.map((childRow, index) => (
+                <tr>
+                  <td>
+                    <div
+                      class:list={[
+                        'flex items-center gap-8 pl-12 before:text-sm',
+                        {
+                          'before:content-["├─"]':
+                            index !== row.children.length - 1,
+                          'before:content-["└─"]':
+                            index === row.children.length - 1,
+                        },
+                      ]}
+                    >
+                      <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_20%)] px-4 text-sm text-[var(--sl-color-text)]">
+                        {childRow.prop}
+                        {childRow.required && (
+                          <span class="text-red-500">*</span>
+                        )}
+                      </span>
+                      <Tooltip.Root name="test">
+                        <Tooltip.Trigger>
+                          <Icon name="information" />
+                        </Tooltip.Trigger>
+                        <Tooltip.Content>
+                          {childRow.description}
+                        </Tooltip.Content>
+                      </Tooltip.Root>
+                    </div>
+                  </td>
+                  <td>
+                    <code class="break-normal rounded">{childRow.type}</code>
+                  </td>
+                  <td>
+                    {childRow.default ? (
+                      <code class="whitespace-nowrap rounded">
+                        {childRow.default}
+                      </code>
+                    ) : (
+                      '—'
+                    )}
+                  </td>
+                </tr>
+              ))}
+          </>
         ))
       }
     </tbody>

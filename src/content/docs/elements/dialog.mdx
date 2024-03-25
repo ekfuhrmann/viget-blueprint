@@ -1,0 +1,92 @@
+---
+title: Dialog
+description: A trigger for an action or event.
+---
+
+import {
+  Tabs,
+  TabItem,
+  Aside,
+  Icon,
+  Card,
+  Code,
+} from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import DialogTest from '@/components/elements/Dialog.astro'
+import Dialog from '@/components/elements/dialog/Dialog.ts'
+import Button from '@/components/elements/Button.astro'
+import ButtonRaw from '@/components/elements/Button.astro?raw'
+
+The dialog component informs users about a task and can contain critical information, require decisions, or involve multiple tasks. The Dialog component can be used to create a modal, alert, or other custom dialog and can be fully customized to fit your needs.
+
+<Aside>
+  Dialog’s core component styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/dialog.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog.Root>
+      <Dialog.Trigger />
+    </Dialog.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Dialog.Root>
+          <Dialog.Trigger />
+        </Dialog.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-dialog>
+          <dialog data-dialog="dialog" class="dialog">
+            <button type="button" data-component="Button" title="Close" data-dialog="close" class="btn-subtle btn-icon btn-sm absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"><path d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"></path></svg>
+              Close
+            </button>
+            <div class="bg-white p-24 text-black dark:border dark:border-gray-500 dark:bg-gray-900 dark:text-white">
+              <div class="flex items-center">
+                No content has been provided for this dialog.
+              </div>
+            </div>
+          </dialog>
+
+          <button type="button" data-component="Button" data-dialog="trigger" class="btn-contained">Open Dialog</button>
+        </custom-dialog>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `<dialog>` element. The following are the props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'variant',
+      type: '"contained" | "outlined" | "subtle" | "text"',
+      description:
+        'The variant the button will take. Corresponds to the design system.',
+      default: '"contained"',
+    },
+  ]}
+/>
+
+## Examples
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component for generating the button. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Button component, and what properties to consider.
+
+<Code code={ButtonRaw} lang="astro" title="Button.astro" />
+
+{/* TODO: this should be rewritten as a compound component */}

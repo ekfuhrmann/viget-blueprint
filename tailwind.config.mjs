@@ -44,5 +44,9 @@ export default {
       },
     },
   },
-  plugins: [starlightPlugin(), require('./config/tailwind/buttons')],
+  plugins: [
+    starlightPlugin(),
+    require('./config/tailwind/buttons'),
+    require('./config/tailwind/dialog'),
+  ],
 }

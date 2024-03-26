@@ -1,9 +1,12 @@
 ---
+import type { ComponentProps } from 'astro/types'
 import Button from '@/components/elements/Button.astro'
+
+type ButtonProps = ComponentProps<typeof Button>
+
+const { ...ButtonProps } = Astro.props
 ---
 
-<dialog-trigger>
-  <slot>
-    <Button>Open Dialog</Button>
-  </slot>
-</dialog-trigger>
+<Button data-dialog="trigger" {...ButtonProps}>
+  <slot>Open Dialog</slot>
+</Button>

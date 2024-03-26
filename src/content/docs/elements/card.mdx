@@ -1,0 +1,132 @@
+---
+title: Card
+description: A component for displaying content in a list-like format.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Card from '@/components/elements/Card.astro'
+import clock from '@/assets/svg/clock.svg?raw'
+import CardRaw from '@/components/elements/Card.astro?raw'
+
+Cards are used to display content in a list-like format. They are often used to display a collection of items, such as blog posts, products, or other types of content.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Card>
+      <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+        <Fragment set:html={clock} />
+      </div>
+      <div class="flex flex-col gap-8">
+        <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+        <p class="text-sm">Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.</p>
+      </div>
+    </Card>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Card>
+          <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+            <Fragment set:html={clock} />
+          </div>
+          <div class="flex flex-col gap-8">
+            <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+            <p class="text-sm">Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.</p>
+          </div>
+        </Card>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <article class="flex flex-col gap-24 items-start">
+          <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          </div>
+          <div class="flex flex-col gap-8">
+            <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+            <p class="text-sm">
+              Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.
+            </p>
+          </div>
+        </article>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `<article>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'align',
+      type: '"left" | "center"',
+      description: 'The alignment of the content inside the card.',
+      default: '"left"',
+    },
+  ]}
+/>
+
+## Examples
+
+### Centered
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Card align="center">
+      <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+        <Fragment set:html={clock} />
+      </div>
+      <div class="flex flex-col gap-8">
+        <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+        <p class="text-sm">Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.</p>
+      </div>
+    </Card>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /align=.*"/
+        <Card align="center">
+          <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+            <Fragment set:html={clock} />
+          </div>
+          <div class="flex flex-col gap-8">
+            <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+            <p class="text-sm">Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.</p>
+          </div>
+        </Card>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <article class="flex flex-col gap-24 items-center text-center">
+          <div class="flex size-48 items-center justify-center rounded-full bg-sky-200 text-black [&_svg]:size-24">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+          </div>
+          <div class="flex flex-col gap-8">
+            <h2 class="text-xl font-bold">Lorem ipsum dolor sit amet</h2>
+            <p class="text-sm">
+              Cillum dolor nisi et sunt in in et ullamco eiusmod duis aute et fugiat excepteur. Sit irure consectetur anim do aliqua excepteur amet nulla magna enim proident incididunt ipsum.
+            </p>
+          </div>
+        </article>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component for generating the Card. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Card component, and what properties to consider.
+
+<Code code={CardRaw} lang="astro" title="Card.astro" />

@@ -1,0 +1,413 @@
+---
+title: Text Input
+description: The text input component is used to collect text-based data from the user.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import TextInput from '@/components/forms/TextInput.astro'
+import TextInputRaw from '@/components/forms/TextInput.astro?raw'
+
+Text input components are used to collect text-based data from the user. It should be used for single-line text input fields such as **text**, **email**, **password**, **number**, **tel**, and **url** fields.
+
+<Aside>
+  Input field styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/input.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <TextInput
+      label="Label"
+      name="example-1"
+      placeholder="Placeholder"
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <TextInput
+          label="Label"
+          name="example-1"
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group max-w-xs"
+          data-layout="FieldGroup"
+          data-component="TextInput"
+        >
+          <label for="example-1" id="label-example-1">
+            <span class="field-label">Label</span>
+          </label>
+          <input
+            type="text"
+            id="example-1"
+            name="input-example-1"
+            placeholder="Placeholder"
+            aria-labelledby="label-example-1"
+          >
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component inherits from the [Field Group component](/forms/field-group/).
+
+This component is based on the `<input>` element and can take in any additional HTML attributes through the use of the `inputProps` property. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'name',
+      type: 'string',
+      description:
+        'Unique name of the input field. Should follow a kebab-case naming convention (e.g. "first-name")',
+      required: true,
+    },
+    {
+      prop: 'label',
+      type: 'string',
+      description: 'Visual or assistive label for the input field',
+      required: true,
+    },
+    {
+      prop: 'labelHidden',
+      type: 'boolean',
+      description:
+        'Whether to visually hide the label or not. When hidden, the label will still be available to screen readers',
+      default: 'false',
+    },
+    {
+      prop: 'sublabel',
+      type: 'string',
+      description: 'Sub-label content for the input field',
+    },
+    {
+      prop: 'instructions',
+      type: 'string',
+      description:
+        'Instructions for the input field that will be placed below the input',
+    },
+    {
+      prop: 'placeholder',
+      type: 'string',
+      description: 'Placeholder text for the input field',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'Whether the input field is disabled or not',
+      default: 'false',
+    },
+    {
+      prop: 'required',
+      type: 'boolean | "long"',
+      description:
+        'Whether the input field is required or not. If set to "long", the input field will be marked as required and include explicit "required" text.',
+      default: 'false',
+    },
+    {
+      prop: 'type',
+      type: '"text" | "email" | "password" | "number" | "tel" | "url"',
+      description: 'Type of input field',
+      default: '"text"',
+    },
+    {
+      prop: 'inputProps',
+      type: 'HTMLAttributes<input>',
+      description: 'Additional attributes to pass to the input field',
+    },
+    {
+      prop: 'errorMessages',
+      type: 'string[]',
+      description: 'Error messages to display below the input field',
+    },
+
+]}
+/>
+
+## Examples
+
+### Required
+
+Use the `required` prop to mark a field as required. You can also use the `required` prop to mark a field as required and include explicit “required” text by passing the value `"long"`.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap gap-24">
+      <TextInput
+        label="Label"
+        name="example-2"
+        required
+        placeholder="Placeholder"
+        class="max-w-xs"
+      />
+      <TextInput
+        label="Label"
+        name="example-3"
+        required="long"
+        placeholder="Placeholder"
+        class="max-w-xs"
+      />
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro 'required' /required="long"/
+        <TextInput
+          label="Label"
+          name="example-2"
+          required
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        <TextInput
+          label="Label"
+          name="example-3"
+          required="long"
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="field-group max-w-xs" data-required="" data-layout="FieldGroup" data-component="TextInput">
+          <label for="example-2" id="label-example-2">
+            <span class="field-label">Label</span>
+          </label>
+          <input type="text" id="example-2" name="input-example-2" placeholder="Placeholder" required="" aria-labelledby="label-example-2">
+        </div>
+        <div class="field-group max-w-xs" data-required="long" data-layout="FieldGroup" data-component="TextInput">
+          <label for="example-3" id="label-example-3">
+            <span class="field-label">Label</span>
+          </label>
+          <input type="text" id="example-3" name="input-example-3" placeholder="Placeholder" required="" aria-labelledby="label-example-3">
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Disabled
+
+Use the `disabled` prop to disable the input field.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <TextInput
+      label="Label"
+      name="example-4"
+      placeholder="Placeholder"
+      disabled
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro "disabled"
+        <TextInput
+          label="Label"
+          name="example-4"
+          placeholder="Placeholder"
+          disabled
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Helper Text
+
+Use the `sublabel` and `instructions` props to add helper text to the input field.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <TextInput
+      label="Label"
+      name="example-5"
+      sublabel="Sublabel lorem ipsum dolor sit amet."
+      instructions="Instructions lorem ipsum dolor."
+      placeholder="Placeholder"
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /sublabel=.*"/ /instructions=.*"/
+        <TextInput
+          label="Label"
+          name="example-5"
+          sublabel="Sublabel lorem ipsum dolor sit amet."
+          instructions="Instructions lorem ipsum dolor."
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group max-w-xs"
+          data-layout="FieldGroup"
+          data-component="TextInput"
+        >
+          <label for="example-5" id="label-example-5">
+            <span class="field-label">Label</span>
+            <span class="field-sublabel">Sublabel lorem ipsum dolor sit amet.</span>
+          </label>
+          <input
+            type="text"
+            id="example-5"
+            name="input-example-5"
+            placeholder="Placeholder"
+            aria-labelledby="label-example-5 instructions-example-5"
+          >
+          <span
+            class="field-instructions" id="instructions-example-5"
+          >
+            Instructions lorem ipsum dolor.
+          </span>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Errors
+
+Use the `errorMessages` prop to display error messages below the input field.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <TextInput
+      label="Label"
+      name="example-6"
+      errorMessages={['Error message 1', 'Error message 2']}
+      placeholder="Placeholder"
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /errorMessages=.*}/
+        <TextInput
+          label="Label"
+          name="example-6"
+          errorMessages={['Error message 1', 'Error message 2']}
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group max-w-xs"
+          data-state="error"
+          data-layout="FieldGroup"
+          data-component="TextInput"
+        >
+          <label for="example-6" id="label-example-6">
+            <span class="field-label">Label</span>
+          </label>
+          <input
+            type="text"
+            id="example-6"
+            name="input-example-6"
+            placeholder="Placeholder"
+            aria-labelledby="label-example-6"
+          >
+          <ul class="field-errors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-0 top-2 size-16 shrink-0"><line x1="12" y1="9" x2="12" y2="13"></line><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <li>Error message 1</li>
+            <li>Error message 2</li>
+          </ul>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Hidden Label
+
+Use the `labelHidden` prop to visually hide the label. When hidden, the label will still be available to screen readers.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <TextInput
+      label="Label"
+      name="example-7"
+      labelHidden
+      placeholder="Placeholder"
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro "labelHidden"
+        <TextInput
+          label="Label"
+          name="example-7"
+          labelHidden
+          placeholder="Placeholder"
+          class="max-w-xs"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group max-w-xs"
+          data-layout="FieldGroup"
+          data-component="TextInput"
+        >
+          <label for="example-7" id="label-example-7">
+            <span class="field-label sr-only">Label</span>
+          </label>
+          <input
+            type="text"
+            id="example-7"
+            name="input-example-7"
+            placeholder="Placeholder"
+            aria-labelledby="label-example-7"
+          >
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a text input component, and what properties to consider.
+
+<Code code={TextInputRaw} lang="astro" title="TextInput.astro" />

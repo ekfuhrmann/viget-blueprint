@@ -46,7 +46,7 @@ const {
   type = href ? undefined : 'button',
   disabled = false,
   class: className,
-  ...props
+  ...attrs
 } = Astro.props
 
 const Element = Tag ? Tag : href && !disabled ? 'a' : 'button'
@@ -70,7 +70,7 @@ const Element = Tag ? Tag : href && !disabled ? 'a' : 'button'
     className,
   ]}
   data-component="Button"
-  {...props}
+  {...attrs}
 >
   <slot />
 </Element>

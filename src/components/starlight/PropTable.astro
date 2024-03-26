@@ -43,7 +43,7 @@ const UUID = crypto.randomUUID()
           <>
             <tr>
               <td>
-                <div class="flex items-center gap-8">
+                <div class="flex items-center gap-4">
                   <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_30%)] px-4 text-[var(--sl-color-text)]">
                     {row.prop}
                     {row.required && <span class="text-red-500">*</span>}
@@ -73,7 +73,7 @@ const UUID = crypto.randomUUID()
                   <td>
                     <div
                       class:list={[
-                        'flex items-center gap-8 pl-12 before:text-sm',
+                        'flex items-center gap-4 pl-12 before:text-sm',
                         {
                           'before:content-["├─"]':
                             index !== row.children.length - 1,

@@ -3,14 +3,7 @@ title: Tag
 description: A component for categorizing or markup.
 ---
 
-import {
-  Tabs,
-  TabItem,
-  Aside,
-  Icon,
-  Card,
-  Code,
-} from '@astrojs/starlight/components'
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
 import Tag from '@/components/elements/Tag.astro'
@@ -101,7 +94,7 @@ Use the `variant` prop to adjust the visual style. Tag components come in the fo
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /variant=.*"/
         <Tag variant="contained">Tag</Tag>
         <Tag variant="outlined">Tag</Tag>
         ```
@@ -141,7 +134,7 @@ Use the `size` prop to adjust the tag size. Tags come in the following sizes: `s
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /size=.*"/
         <Tag size="sm">Tag</Tag>
         <Tag size="md">Tag</Tag>
         <Tag size="lg">Tag</Tag>
@@ -189,7 +182,7 @@ Tags can be used with icons to provide additional context.
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /<Icon.*>/
         <Tag>
           <Icon name="approve-check" />
           Approved
@@ -231,7 +224,7 @@ Use the `href` prop to convert a tag to a link element.
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /href=.*"/
         <Tag href="#">Tag</Tag>
         ```
       </TabItem>
@@ -261,7 +254,7 @@ Use the `clickable` prop to convert a tag to a clickable element. This is useful
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro "clickable"
         <Tag clickable>Tag</Tag>
         ```
       </TabItem>

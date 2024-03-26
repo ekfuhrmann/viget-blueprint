@@ -1,0 +1,119 @@
+---
+title: Field Group
+description: A wrapper component used to create a consistent look and feel for form inputs and to provide a consistent way to handle error messages and helper text in forms.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import { Image } from 'astro:assets'
+import PropTable from '@/components/starlight/PropTable.astro'
+import FieldGroup from '@/components/forms/FieldGroup.astro'
+import FieldGroupRaw from '@/components/forms/FieldGroup.astro?raw'
+
+Field Group components are used as a wrapper component to create a consistent look and feel for form inputs and to provide a consistent way to handle error messages and helper text.
+
+<Aside>
+  Input field styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/input.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <FieldGroup
+      label="Label"
+      name="example-1"
+      sublabel="Sub-label content here lorem ipsum"
+      instructions="Instruction content goes here lorem ipsum dolor sit."
+    >
+      <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+    </FieldGroup>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <FieldGroup
+          label="Label"
+          name="example-1"
+          sublabel="Sub-label content here lorem ipsum"
+          instructions="Instruction content goes here lorem ipsum dolor sit."
+        >
+          <div>Slot</div>
+        </FieldGroup>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="field-group" data-layout="FieldGroup">
+          <label for="example-1" id="label-example-1">
+            <span class="field-label">Label</span>
+            <span class="field-sublabel">Sub-label content here lorem ipsum</span>
+          </label>
+          <div>Slot</div>
+          <span class="field-instructions" id="instructions-example-1">Instruction content goes here lorem ipsum dolor sit.</span>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `<div>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'name',
+      type: 'string',
+      description:
+        'Unique name of the input field. Should follow a kebab-case naming convention (e.g. "first-name")',
+      required: true,
+    },
+    {
+      prop: 'label',
+      type: 'string',
+      description: 'Visual or assistive label for the input field',
+      required: true,
+    },
+    {
+      prop: 'labelHidden',
+      type: 'boolean',
+      description:
+        'Whether to visually hide the label or not. When hidden, the label will still be available to screen readers',
+      default: 'false',
+    },
+    {
+      prop: 'sublabel',
+      type: 'string',
+      description: 'Sub-label content for the input field',
+    },
+    {
+      prop: 'instructions',
+      type: 'string',
+      description:
+        'Instructions for the input field that will be placed below the input',
+    },
+    {
+      prop: 'required',
+      type: 'boolean | "long"',
+      description:
+        'Whether the input field is required or not. If set to "long", the input field will be marked as required and include explicit "required" text.',
+      default: 'false',
+    },
+    {
+      prop: 'errorMessages',
+      type: 'string[]',
+      description: 'Error messages to display below the input field',
+    },
+  ]}
+/>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a field group component, and what properties to consider.
+
+<Code code={FieldGroupRaw} lang="astro" title="FieldGroup.astro" />

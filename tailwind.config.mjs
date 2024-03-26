@@ -35,7 +35,7 @@ export default {
     },
     extend: {
       colors: {
-        accent: colors.emerald, // Your Preferred accent color.
+        accent: colors.blue, // Your Preferred accent color.
         gray: colors.zinc, // Your preferred gray scale.
       },
       fontFamily: {
@@ -48,5 +48,6 @@ export default {
     starlightPlugin(),
     require('./config/tailwind/buttons'),
     require('./config/tailwind/dialog'),
+    require('./config/tailwind/inputs'),
   ],
 }

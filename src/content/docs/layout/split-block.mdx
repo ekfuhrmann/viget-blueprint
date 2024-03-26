@@ -3,14 +3,7 @@ title: Split Block
 description: An Astro layout component that allows you to split content into two columns and serve whatever content you would like within each column.
 ---
 
-import {
-  Tabs,
-  TabItem,
-  Aside,
-  Icon,
-  Card,
-  Code,
-} from '@astrojs/starlight/components'
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
 import SplitBlock from '@/components/layout/SplitBlock.astro'
@@ -170,7 +163,7 @@ The `split` prop can be used to define the ratio of the split. The value is a fr
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /split=.*"/
         <SplitBlock split="1/4">
           <div slot="1">Slot 1</div>
           <div slot="2">Slot 2</div>
@@ -226,7 +219,7 @@ The `reverse` prop can be used to reverse the order of the columns when columns 
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro "reverse"
         <SplitBlock reverse split="1/2">
           <div slot="1">Slot 1</div>
           <div slot="2">Slot 2</div>

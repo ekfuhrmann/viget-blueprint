@@ -1,36 +1,47 @@
 ---
-title: Welcome to Starlight
-description: Get started building your docs site with Starlight.
+title: Welcome to Blueprint
+description: A component-driven library designed to provide comprehensive guidance on building and using web components, offering documentation, suggestions, and best practices, with a strong emphasis on accessibility.
 template: splash
 hero:
-  tagline: Congrats on setting up a new Starlight project!
+  tagline: Building Blocks for Your Web Components
   image:
     file: ../../assets/houston.webp
   actions:
-    - text: Example Guide
-      link: /guides/example/
+    - text: Getting Started
+      link: /guides/getting-started/
       icon: right-arrow
       variant: primary
-    - text: Read the Starlight docs
-      link: https://starlight.astro.build
+    - text: Checkout the Github repo
+      link: https://github.com/ekfuhrmann/starlight-docs/
       icon: external
 ---
 
-import { Card, CardGrid } from '@astrojs/starlight/components';
+import { LinkCard, Card, CardGrid } from '@astrojs/starlight/components'
 
-## Next steps
+## Introduction
 
-<CardGrid stagger>
-	<Card title="Update content" icon="pencil">
-		Edit `src/content/docs/index.mdx` to see this page change.
-	</Card>
-	<Card title="Add new content" icon="add-document">
-		Add Markdown or MDX files to `src/content/docs` to create new pages.
-	</Card>
-	<Card title="Configure your site" icon="setting">
-		Edit your `sidebar` and other config in `astro.config.mjs`.
-	</Card>
-	<Card title="Read the docs" icon="open-book">
-		Learn more in [the Starlight Docs](https://starlight.astro.build/).
-	</Card>
+Blueprint is a component-driven library designed to provide comprehensive guidance on building and using web components. It offers documentation, suggestions, and best practices, with a strong emphasis on accessibility.
+
+Each component in Blueprint comes with detailed documentation that includes examples of how the component can be constructed and best practices to consider when using it. This makes it easy for developers to understand how to use the components in their own projects. In addition, we provide the compiled HTML of each component, allowing developers to simply copy and paste the code into their own projects if desired.
+
+One of the key features of Blueprint is its platform agnosticism. Despite being built in Astro, the components and practices outlined in Blueprint are applicable across a variety of platforms, including React, WordPress, Craft, Django, and more. This means that no matter what platform you're working on, you can draw from the Blueprint documentation to construct and use these components effectively.
+
+## Sections
+
+<LinkCard
+  title="Elements"
+  href="/elements/button/"
+  description="Core building blocks for your project."
+/>
+<CardGrid>
+  <LinkCard
+    title="Layout"
+    href="/layout/split-block/"
+    description="Structural foundations for your project setup."
+  />
+  <LinkCard
+    title="Forms"
+    href="/forms/field-group/"
+    description="Essential components for user input and data submission."
+  />
 </CardGrid>

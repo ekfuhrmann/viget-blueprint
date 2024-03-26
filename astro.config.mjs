@@ -5,9 +5,9 @@ import tailwind from '@astrojs/tailwind'
 export default defineConfig({
   integrations: [
     starlight({
-      title: 'My Docs',
+      title: 'Blueprint',
       social: {
-        github: 'https://github.com/withastro/starlight',
+        github: 'https://github.com/ekfuhrmann/starlight-docs/',
       },
       sidebar: [
         {
@@ -15,14 +15,12 @@ export default defineConfig({
           autogenerate: { directory: 'guides' },
         },
         {
-          label: 'Reference',
-          autogenerate: {
-            directory: 'reference',
-          },
-        },
-        {
           label: 'Layout',
           autogenerate: { directory: 'layout' },
+        },
+        {
+          label: 'Forms',
+          autogenerate: { directory: 'forms' },
         },
         {
           label: 'Elements',

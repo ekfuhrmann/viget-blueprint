@@ -31,7 +31,7 @@ const {
   clickable = false,
   href = undefined,
   class: className,
-  ...props
+  ...attrs
 } = Astro.props
 
 const Element = TagType ? TagType : href ? 'a' : clickable ? 'button' : 'span'
@@ -58,7 +58,7 @@ const Element = TagType ? TagType : href ? 'a' : clickable ? 'button' : 'span'
     className,
   ]}
   data-component="Tag"
-  {...props}
+  {...attrs}
 >
   <slot />
 </Element>

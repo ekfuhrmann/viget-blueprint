@@ -1,0 +1,42 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import Button from '@/components/elements/Button.astro'
+import close from '@/assets/svg/close.svg?raw'
+
+interface Props extends HTMLAttributes<'dialog'> {
+  /*
+    Whether or not the close button should be hidden.
+  */
+  hideClose?: boolean
+  /*
+    Classes to pass into the dialog content element.
+  */
+  class: string
+}
+
+const { hideClose = false, class: className, ...attrs } = Astro.props
+---
+
+<dialog data-dialog="dialog" class:list={['dialog', className]} {...attrs}>
+  {
+    !hideClose && (
+      <Button
+        icon
+        size="sm"
+        title="Close"
+        variant="subtle"
+        class="absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12"
+        data-dialog="close"
+      >
+        <Fragment set:html={close} />
+        Close
+      </Button>
+    )
+  }
+
+  <slot>
+    <div class="flex items-center">
+      No content has been provided for this dialog.
+    </div>
+  </slot>
+</dialog>

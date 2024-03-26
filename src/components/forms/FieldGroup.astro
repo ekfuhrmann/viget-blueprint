@@ -1,0 +1,94 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  /**
+   Unique name of the input field. Should follow a kebab-case naming convention (e.g. "first-name")
+  */
+  name: string
+  /**
+   Visual or assistive label for the input field
+  */
+  label: string
+  /**
+   Whether to visually hide the label or not. When hidden, the label will still be available to screen readers
+  */
+  labelHidden?: boolean
+  /**
+   Sublabel for the input field
+  */
+  sublabel?: string
+  /**
+   Instructions for the input field that will be placed below the input
+  */
+  instructions?: string
+  /**
+   Whether the input field is required or not. If set to 'long', the input field will be marked as required and include explicit "required" text.
+  */
+  required?: boolean | 'long'
+  /**
+   Error messages to display below the input field
+  */
+  errorMessages?: string[]
+}
+
+const {
+  name,
+  label,
+  labelHidden = false,
+  sublabel,
+  instructions,
+  required = false,
+  errorMessages = [],
+  class: className,
+  ...attrs
+} = Astro.props
+---
+
+<div
+  class:list={['field-group', className]}
+  data-required={required}
+  data-state={errorMessages.length > 0 ? 'error' : null}
+  data-layout="FieldGroup"
+  {...attrs}
+>
+  <label for={name} id={`label-${name}`}>
+    <span class:list={['field-label', { 'sr-only': labelHidden }]}>{label}</span
+    >
+    {sublabel && <span class="field-sublabel">{sublabel}</span>}
+  </label>
+
+  <slot />
+
+  {
+    instructions && (
+      <span class="field-instructions" id={`instructions-${name}`}>
+        {instructions}
+      </span>
+    )
+  }
+
+  {
+    errorMessages.length > 0 && (
+      <ul class="field-errors">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="absolute left-0 top-2 size-16 shrink-0"
+        >
+          <line x1="12" y1="9" x2="12" y2="13" />
+          <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z" />
+          <line x1="12" y1="17" x2="12.01" y2="17" />
+        </svg>
+        {errorMessages.map((message) => (
+          <li>{message}</li>
+        ))}
+      </ul>
+    )
+  }
+</div>

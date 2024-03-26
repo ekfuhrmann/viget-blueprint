@@ -3,14 +3,7 @@ title: Button
 description: A trigger for an action or event.
 ---
 
-import {
-  Tabs,
-  TabItem,
-  Aside,
-  Icon,
-  Card,
-  Code,
-} from '@astrojs/starlight/components'
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
 import Button from '@/components/elements/Button.astro'
@@ -111,7 +104,7 @@ Use the `variant` prop to adjust the visual style. Buttons come in the following
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /variant=.*"/
         <Button variant="contained">Contained</Button>
         <Button variant="outlined">Outlined</Button>
         <Button variant="subtle">Subtle</Button>
@@ -153,7 +146,7 @@ Use the `size` prop to adjust the size. Buttons come in the following different 
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /size=.*"/
         <Button size="sm">Button</Button>
         <Button>Button</Button>
         <Button size="lg">Button</Button>
@@ -200,7 +193,7 @@ Use the `icon` prop to make the button into an icon button. Button Icons are but
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro "icon"
         ---
         import { Icon } from '@astrojs/starlight/components'
         ---
@@ -235,7 +228,7 @@ Use the `href` prop to convert a button to a link element. This is useful when y
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro
+        ```astro /href=.*"/
         <Button href="#">Button</Button>
         ```
       </TabItem>

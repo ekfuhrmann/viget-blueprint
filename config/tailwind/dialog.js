@@ -3,7 +3,7 @@ const plugin = require('tailwindcss/plugin')
 module.exports = plugin(({ addComponents }) => {
   addComponents({
     '.dialog': {
-      '@apply invisible p-0 opacity-0 fixed inset-24 overflow-hidden z-50 open:visible bg-transparent m-auto':
+      '@apply invisible opacity-0 fixed inset-24 overflow-hidden z-50 open:visible m-auto bg-white p-24 text-black dark:border dark:border-gray-500 dark:bg-gray-900 dark:text-white rounded':
         {},
       '&[open]': {
         animation:

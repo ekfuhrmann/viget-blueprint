@@ -13,7 +13,7 @@ interface Props extends HTMLAttributes<'dialog'> {
 const { hideClose = false, class: className, ...attrs } = Astro.props
 ---
 
-<custom-dialog>
+<custom-dialog-old>
   <dialog data-dialog="dialog" class="dialog" {...attrs}>
     {
       !hideClose && (
@@ -51,7 +51,7 @@ const { hideClose = false, class: className, ...attrs } = Astro.props
   <slot name="trigger">
     <Button data-dialog="trigger">Open Dialog</Button>
   </slot>
-</custom-dialog>
+</custom-dialog-old>
 
 <script>
   class CustomDialog extends HTMLElement {
@@ -147,5 +147,5 @@ const { hideClose = false, class: className, ...attrs } = Astro.props
     }
   }
 
-  customElements.define('custom-dialog', CustomDialog)
+  customElements.define('custom-dialog-old', CustomDialog)
 </script>

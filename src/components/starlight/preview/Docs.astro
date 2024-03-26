@@ -3,7 +3,7 @@ import type { HTMLAttributes } from 'astro/types'
 
 interface Props extends HTMLAttributes<'div'> {}
 
-const { class: className, ...props } = Astro.props
+const { class: className, ...attrs } = Astro.props
 ---
 
 <div
@@ -14,7 +14,7 @@ const { class: className, ...props } = Astro.props
     },
     className,
   ]}
-  {...props}
+  {...attrs}
 >
   <slot />
 </div>

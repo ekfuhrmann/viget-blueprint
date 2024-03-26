@@ -5,3 +5,100 @@
 <custom-dialog>
   <slot />
 </custom-dialog>
+
+<script>
+  class CustomDialog extends HTMLElement {
+    constructor() {
+      super()
+    }
+
+    connectedCallback() {
+      this.dialogTrigger.addEventListener(
+        'click',
+        this.handleDialogTriggerClick,
+      )
+      this.dialog.addEventListener('click', this.handleDialogClick)
+      this.dialogCloses?.forEach((dialogClose: Element) => {
+        dialogClose.addEventListener('click', this.handleDialogCloseClick)
+      })
+      this.dialogForm?.addEventListener('submit', this.handleDialogFormSubmit)
+    }
+
+    disconnectedCallback() {
+      this.dialogTrigger.removeEventListener(
+        'click',
+        this.handleDialogTriggerClick,
+      )
+      this.dialog.removeEventListener('click', this.handleDialogClick)
+      this.dialogCloses?.forEach((dialogClose: Element) => {
+        dialogClose.removeEventListener('click', this.handleDialogCloseClick)
+      })
+      this.dialogForm?.removeEventListener(
+        'submit',
+        this.handleDialogFormSubmit,
+      )
+    }
+
+    private static readonly DELAY_TIME = 300
+
+    private get dialogTrigger(): HTMLButtonElement {
+      return this.querySelector('[data-dialog="trigger"]')!
+    }
+
+    private get dialog(): HTMLDialogElement {
+      return this.querySelector('[data-dialog="dialog"]')!
+    }
+
+    private get dialogCloses(): NodeListOf<Element> {
+      return this.querySelectorAll('[data-dialog="close"]')
+    }
+
+    private get dialogForm(): HTMLFormElement | null {
+      return this.querySelector('form')
+    }
+
+    // Open the dialog when the user clicks the trigger
+    private handleDialogTriggerClick = () => {
+      if ('dialogStatus' in this.dialog.dataset) return
+
+      this.dialog.dataset.dialogStatus = 'opening'
+
+      setTimeout(() => {
+        delete this.dialog.dataset.dialogStatus
+      }, CustomDialog.DELAY_TIME)
+      this.dialog.showModal()
+    }
+
+    // Close the dialog when the user clicks backdrop
+    private handleDialogClick = (event: Event) => {
+      if ('dialogStatus' in this.dialog.dataset) return
+
+      if (event.target === this.dialog) this.handleDialogClose()
+    }
+
+    // Close the dialog when the user clicks a close button
+    private handleDialogCloseClick = (event: Event) => {
+      event.preventDefault()
+
+      this.handleDialogClose()
+    }
+
+    // Close the dialog when the form is submitted and valid
+    private handleDialogFormSubmit = (event: Event) => {
+      event.preventDefault()
+
+      if (this.dialogForm?.checkValidity()) this.handleDialogClose()
+    }
+
+    // Close the dialog with delay for animation
+    private handleDialogClose() {
+      this.dialog.dataset.dialogStatus = 'closing'
+      setTimeout(() => {
+        delete this.dialog.dataset.dialogStatus
+        this.dialog.close()
+      }, CustomDialog.DELAY_TIME)
+    }
+  }
+
+  customElements.define('custom-dialog', CustomDialog)
+</script>

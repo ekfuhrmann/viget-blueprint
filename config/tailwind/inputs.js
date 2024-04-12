@@ -7,7 +7,7 @@ module.exports = plugin(({ addComponents }) => {
       '@apply flex flex-col gap-8': {},
       // label container
       '& label': {
-        '@apply flex flex-col': {},
+        '@apply flex flex-col [&:has(.sr-only:last-child)]:sr-only': {},
       },
       // label
       '& .field-label': {

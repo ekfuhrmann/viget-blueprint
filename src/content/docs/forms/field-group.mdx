@@ -10,7 +10,7 @@ import PropTable from '@/components/starlight/PropTable.astro'
 import FieldGroup from '@/components/forms/FieldGroup.astro'
 import FieldGroupRaw from '@/components/forms/FieldGroup.astro?raw'
 
-Field Group components are used as a wrapper component to create a consistent look and feel for form inputs and to provide a consistent way to handle error messages and helper text.
+Field Group components are used as a wrapper component to create a consistent look and feel for form inputs and to provide a consistent way to handle error messages and helper text. It is suggest that this component be baked into your normal form input component.
 
 <Aside>
   Input field styles are generated via a [Tailwind
@@ -111,6 +111,208 @@ This component is based on the `<div>` element and can take in any additional HT
     },
   ]}
 />
+
+## Examples
+
+### Required
+
+Use the `required` prop to mark a field as required. You can also use the `required` prop to mark a field as required and include explicit “required” text by passing the value `"long"`.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap gap-24 [&>*]:flex-1">
+      <FieldGroup label="Label" name="example-2" required>
+        <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+      </FieldGroup>
+      <FieldGroup label="Label" name="example-3" required="long">
+        <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+      </FieldGroup>
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro 'required' /required="long"/
+        <FieldGroup label="Label" name="example-2" required>
+          <div>Slot</div>
+        </FieldGroup>
+        <FieldGroup label="Label" name="example-3" required="long">
+          <div>Slot</div>
+        </FieldGroup>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="field-group" data-required data-layout="FieldGroup">
+          <label for="example-2" id="label-example-2">
+            <span class="field-label">Label</span>
+          </label>
+          <div>Slot</div>
+        </div>
+        <div class="field-group" data-required="long" data-layout="FieldGroup">
+          <label for="example-2" id="label-example-2">
+            <span class="field-label">Label</span>
+          </label>
+          <div>Slot</div>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Helper Text
+
+Use the `sublabel` and `instructions` props to add helper text to the input field.
+
+<Aside>
+  You will need to bind the `sublabel` and `instructions` props to the input
+  field component you are using by adding an `aria-labelledby` attribute to the
+  input field and referencing the `id` of both the `label` and `instructions`
+  elements respectively.
+
+  See [Text Input](/forms/text-input/) for a working example.
+
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <FieldGroup
+      label="Label"
+      name="example-4"
+      sublabel="Sublabel lorem ipsum dolor sit amet."
+      instructions="Instructions lorem ipsum dolor."
+    >
+      <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+    </FieldGroup>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /sublabel=.*"/ /instructions=.*"/
+        <FieldGroup
+          label="Label"
+          name="example-4"
+          sublabel="Sublabel lorem ipsum dolor sit amet."
+          instructions="Instructions lorem ipsum dolor."
+        >
+          <div>Slot</div>
+        </FieldGroup>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="field-group" data-required data-layout="FieldGroup">
+          <label for="example-4" id="label-example-4">
+            <span class="field-label">Label</span>
+            <span class="field-sublabel">
+              Sublabel lorem ipsum dolor sit amet.
+            </span>
+          </label>
+          <div>Slot</div>
+          <span class="field-instructions" id="instructions-example-4">
+            Instructions lorem ipsum dolor.
+          </span>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Errors
+
+Use the `errorMessages` prop to display error messages below the input field.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <FieldGroup
+      label="Label"
+      name="example-5"
+      errorMessages={['Error message 1', 'Error message 2']}
+    >
+      <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+    </FieldGroup>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /errorMessages=.*}/
+        <FieldGroup
+          label="Label"
+          name="example-5"
+          errorMessages={['Error message 1', 'Error message 2']}
+        >
+          <div>Slot</div>
+        </FieldGroup>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-state="error"
+          data-layout="FieldGroup"
+        >
+          <label for="example-5" id="label-example-5">
+            <span class="field-label">Label</span>
+          </label>
+          <div>Slot</div>
+          <ul class="field-errors">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-0 top-2 size-16 shrink-0"><line x1="12" y1="9" x2="12" y2="13"></line><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <li>Error message 1</li>
+            <li>Error message 2</li>
+          </ul>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Hidden Label
+
+Use the `labelHidden` prop to visually hide the label. When hidden, the label will still be available to screen readers.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <FieldGroup
+      label="Label"
+      name="example-6"
+      labelHidden
+    >
+      <div class="h-40 border-2 border-dashed border-red-500 bg-red-500/20 p-4 text-red-500 before:absolute before:content-['Slot']"></div>
+    </FieldGroup>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro "labelHidden"
+        <FieldGroup
+          label="Label"
+          name="example-6"
+          labelHidden
+        >
+          <div>Slot</div>
+        </FieldGroup>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-layout="FieldGroup"
+        >
+          <label for="example-6" id="label-example-6">
+            <span class="field-label sr-only">Label</span>
+          </label>
+          <div>Slot</div>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
 
 ## Astro Component
 

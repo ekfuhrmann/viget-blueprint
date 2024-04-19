@@ -94,6 +94,21 @@ import Dialog from '@/components/elements/dialog/Dialog'
 
 The root element of the Dialog component. This element wraps the content and trigger elements and provides the scripting logic to open and close the dialog.
 
+### Content
+
+The content of the Dialog component. This component is based on the `<dialog>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'hideClose',
+      type: 'boolean',
+      description: 'Whether or not the close button should be hidden.',
+      default: 'false',
+    },
+  ]}
+/>
+
 ### Trigger
 
 The trigger that opens the Dialog component. This element inherits from the [Button component](/elements/button/).
@@ -136,21 +151,6 @@ The trigger that opens the Dialog component. This element inherits from the [But
       prop: 'disabled',
       type: 'boolean',
       description: 'Whether the button is disabled or not.',
-      default: 'false',
-    },
-  ]}
-/>
-
-### Content
-
-The content of the Dialog component. This component is based on the `<dialog>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
-
-<PropTable
-  rows={[
-    {
-      prop: 'hideClose',
-      type: 'boolean',
-      description: 'Whether or not the close button should be hidden.',
       default: 'false',
     },
   ]}

@@ -1,0 +1,48 @@
+---
+import type { ComponentProps, HTMLAttributes } from 'astro/types'
+import FieldGroup from '@/components/forms/FieldGroup.astro'
+
+interface Props extends ComponentProps<typeof FieldGroup> {
+  /**
+    The array of options to display in the dropdown
+  */
+  options: [{ label: string; value: string }]
+  /**
+   Whether the input field is disabled or not
+  */
+  disabled?: boolean
+  /**
+   Additional props to pass into the input field
+  */
+  inputProps?: HTMLAttributes<'select'>
+}
+
+const {
+  options,
+  disabled = false,
+  inputProps,
+  ...fieldGroupProps
+} = Astro.props
+---
+
+<FieldGroup data-component="Select" {...fieldGroupProps}>
+  <select
+    id={fieldGroupProps.name}
+    name={`input-${fieldGroupProps.name}`}
+    disabled={disabled}
+    required={fieldGroupProps.required === true ||
+      fieldGroupProps.required === 'long'}
+    aria-labelledby={`label-${fieldGroupProps.name}${
+      fieldGroupProps.instructions
+        ? ` instructions-${fieldGroupProps.name}`
+        : ''
+    }`}
+    {...inputProps}
+  >
+    {
+      options.map((option) => (
+        <option value={option.value}>{option.label}</option>
+      ))
+    }
+  </select>
+</FieldGroup>

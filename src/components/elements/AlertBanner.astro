@@ -1,0 +1,68 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import Button from '@/components/elements/Button.astro'
+import close from '@/assets/svg/close.svg?raw'
+
+interface Props extends HTMLAttributes<'div'> {
+  /**
+    Whether or not the close button should be hidden.
+  */
+  hideClose?: boolean
+  /*
+    Classes to pass into the alert banner content element.
+  */
+  class: string
+}
+
+const { hideClose = false, class: className, ...attrs } = Astro.props
+---
+
+<custom-alert-banner role="alert">
+  <div
+    class:list={[
+      'relative flex bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48',
+      className,
+    ]}
+    {...attrs}
+  >
+    <slot>
+      <div class="flex items-center">
+        No content has been provided for this dialog.
+      </div>
+    </slot>
+
+    {
+      !hideClose && (
+        <Button
+          icon
+          size="sm"
+          title="Close"
+          variant="subtle"
+          class="absolute right-24 top-24"
+          data-dialog="close"
+        >
+          <Fragment set:html={close} />
+          Close
+        </Button>
+      )
+    }
+  </div>
+</custom-alert-banner>
+
+<script>
+  class CustomAlertBanner extends HTMLElement {
+    constructor() {
+      super()
+
+      const alertButton = this.querySelector('[data-dialog="close"]')
+
+      if (alertButton) {
+        alertButton.addEventListener('click', () => {
+          this.remove()
+        })
+      }
+    }
+  }
+
+  customElements.define('custom-alert-banner', CustomAlertBanner)
+</script>

@@ -1,0 +1,554 @@
+---
+title: Select
+description: The select component is used to create a dropdown list of options.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Select from '@/components/forms/Select.astro'
+import SelectRaw from '@/components/forms/Select.astro?raw'
+
+Select components are used to create a dropdown list of options.
+
+<Aside>
+  Select styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/input.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Select
+      label="Label"
+      name="example-1"
+      options={[
+        { value: null, label: '- Select -' },
+        { value: 'option-a', label: 'Option A' },
+        { value: 'option-b', label: 'Option B' },
+        { value: 'option-c', label: 'Option C' },
+      ]}
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Select
+          label="Label"
+          name="example-1"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-1" id="label-example-1">
+            <span class="field-label">Label</span>
+          </label>
+          <select
+            id="example-1"
+            name="input-example-1"
+            aria-labelledby="label-example-1"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component inherits from the [Field Group component](/forms/field-group/).
+
+This component is based on the `<select>` element and can take in any additional HTML attributes through the use of the `inputProps` property. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'name',
+      type: 'string',
+      description:
+        'Unique name of the select. Should follow a kebab-case naming convention (e.g. "first-name")',
+      required: true,
+    },
+    {
+      prop: 'label',
+      type: 'string',
+      description: 'Visual or assistive label for the select',
+      required: true,
+    },
+    {
+      prop: 'options',
+      type: '[{ value: string, label: string }]',
+      description: 'The array of options to display in the dropdown',
+      required: true,
+    },
+    {
+      prop: 'labelHidden',
+      type: 'boolean',
+      description:
+        'Whether to visually hide the label or not. When hidden, the label will still be available to screen readers',
+      default: 'false',
+    },
+    {
+      prop: 'sublabel',
+      type: 'string',
+      description: 'Sub-label content for the select',
+    },
+    {
+      prop: 'instructions',
+      type: 'string',
+      description:
+        'Instructions for the select that will be placed below the input',
+    },
+    {
+      prop: 'placeholder',
+      type: 'string',
+      description: 'Placeholder text for the select',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'Whether the select is disabled or not',
+      default: 'false',
+    },
+    {
+      prop: 'required',
+      type: 'boolean | "long"',
+      description:
+        'Whether the select is required or not. If set to "long", the select will be marked as required and include explicit "required" text.',
+      default: 'false',
+    },
+    {
+      prop: 'inputProps',
+      type: 'HTMLAttributes<select>',
+      description: 'Additional attributes to pass to the select field',
+    },
+    {
+      prop: 'errorMessages',
+      type: 'string[]',
+      description: 'Error messages to display below the select',
+    },
+
+]}
+/>
+
+## Examples
+
+### Required
+
+Use the `required` prop to mark a field as required. You can also use the `required` prop to mark a field as required and include explicit “required” text by passing the value `"long"`.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-wrap gap-24">
+      <Select
+        label="Label"
+        name="example-2"
+        options={[
+          { value: null, label: '- Select -' },
+          { value: 'option-a', label: 'Option A' },
+          { value: 'option-b', label: 'Option B' },
+          { value: 'option-c', label: 'Option C' },
+        ]}
+        required
+        class="flex-1"
+      />
+      <Select
+        label="Label"
+        name="example-3"
+        options={[
+          { value: null, label: '- Select -' },
+          { value: 'option-a', label: 'Option A' },
+          { value: 'option-b', label: 'Option B' },
+          { value: 'option-c', label: 'Option C' },
+        ]}
+        required="long"
+        class="flex-1"
+      />
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro 'required' /required="long"/
+        <Select
+          label="Label"
+          name="example-2"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          required
+        />
+        <Select
+          label="Label"
+          name="example-3"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          required="long"
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-required=""
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-2" id="label-example-2">
+            <span class="field-label">Label</span>
+          </label>
+          <select
+            id="example-2"
+            name="input-example-2"
+            required=""
+            aria-labelledby="label-example-2"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+        </div>
+        <div
+          class="field-group"
+          data-required="long"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-3" id="label-example-3">
+            <span class="field-label">Label</span>
+          </label>
+          <select
+            id="example-3"
+            name="input-example-3"
+            required=""
+            aria-labelledby="label-example-3"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### Disabled
+
+Use the `disabled` prop to disable the select.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Select
+      label="Label"
+      name="example-4"
+      options={[
+        { value: null, label: '- Select -' },
+        { value: 'option-a', label: 'Option A' },
+        { value: 'option-b', label: 'Option B' },
+        { value: 'option-c', label: 'Option C' },
+      ]}
+      disabled
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro "disabled"
+        <Select
+          label="Label"
+          name="example-4"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          disabled
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-4" id="label-example-4">
+            <span class="field-label">Label</span>
+          </label>
+          <select
+            id="example-4"
+            name="input-example-4"
+            disabled=""
+            aria-labelledby="label-example-4"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Helper Text
+
+Use the `sublabel` and `instructions` props to add helper text to the select.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Select
+      label="Label"
+      name="example-5"
+      options={[
+        { value: null, label: '- Select -' },
+        { value: 'option-a', label: 'Option A' },
+        { value: 'option-b', label: 'Option B' },
+        { value: 'option-c', label: 'Option C' },
+      ]}
+      sublabel="Sublabel lorem ipsum dolor sit amet."
+      instructions="Instructions lorem ipsum dolor."
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /sublabel=.*"/ /instructions=.*"/
+        <Select
+          label="Label"
+          name="example-5"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          sublabel="Sublabel lorem ipsum dolor sit amet."
+          instructions="Instructions lorem ipsum dolor."
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-5" id="label-example-5">
+            <span class="field-label">Label</span>
+            <span class="field-sublabel">
+              Sublabel lorem ipsum dolor sit amet.
+            </span>
+          </label>
+          <select
+            id="example-5"
+            name="input-example-5"
+            aria-labelledby="label-example-5 instructions-example-5"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+          <span class="field-instructions" id="instructions-example-5">
+            Instructions lorem ipsum dolor.
+          </span>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Errors
+
+Use the `errorMessages` prop to display error messages below the select.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Select
+      label="Label"
+      name="example-6"
+      options={[
+        { value: null, label: '- Select -' },
+        { value: 'option-a', label: 'Option A' },
+        { value: 'option-b', label: 'Option B' },
+        { value: 'option-c', label: 'Option C' },
+      ]}
+      errorMessages={['Error message 1', 'Error message 2']}
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /errorMessages=.*}/
+        <Select
+          label="Label"
+          name="example-6"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          errorMessages={['Error message 1', 'Error message 2']}
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-state="error"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-6" id="label-example-6">
+            <span class="field-label">Label</span>
+          </label>
+          <select
+            id="example-6"
+            name="input-example-6"
+            aria-labelledby="label-example-6"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+          <ul class="field-errors">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="absolute left-0 top-2 size-16 shrink-0"
+            >
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
+            <li>Error message 1</li>
+            <li>Error message 2</li>
+          </ul>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+  </Preview.Docs>
+</Preview.Root>
+
+### With Hidden Label
+
+Use the `labelHidden` prop to visually hide the label. When hidden, the label will still be available to screen readers.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Select
+      label="Label"
+      name="example-6"
+      options={[
+        { value: null, label: '- Select -' },
+        { value: 'option-a', label: 'Option A' },
+        { value: 'option-b', label: 'Option B' },
+        { value: 'option-c', label: 'Option C' },
+      ]}
+      labelHidden
+      class="max-w-xs"
+    />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro "labelHidden"
+        <Select
+          label="Label"
+          name="example-6"
+          options={[
+            { value: null, label: '- Select -' },
+            { value: 'option-a', label: 'Option A' },
+            { value: 'option-b', label: 'Option B' },
+            { value: 'option-c', label: 'Option C' },
+          ]}
+          labelHidden
+        />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          class="field-group"
+          data-layout="FieldGroup"
+          data-component="Select"
+        >
+          <label for="example-6" id="label-example-6">
+            <span class="field-label sr-only">Label</span>
+          </label>
+          <select
+            id="example-6"
+            name="input-example-6"
+            aria-labelledby="label-example-6"
+          >
+            <option>- Select -</option>
+            <option value="option-a">Option A</option>
+            <option value="option-b">Option B</option>
+            <option value="option-c">Option C</option>
+          </select>
+        </div>
+
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a select component, and what properties to consider.
+
+<Code code={SelectRaw} lang="astro" title="Select.astro" />

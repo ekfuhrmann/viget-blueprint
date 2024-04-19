@@ -1,25 +1,25 @@
 ---
-title: Text Input
-description: The text input component is used to collect text-based data from the user.
+title: Text Area
+description: The text area component is used to collect large amounts of text from the user.
 ---
 
 import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
 import Preview from '@/components/starlight/preview/Preview.ts'
 import PropTable from '@/components/starlight/PropTable.astro'
-import TextInput from '@/components/forms/TextInput.astro'
-import TextInputRaw from '@/components/forms/TextInput.astro?raw'
+import TextArea from '@/components/forms/TextArea.astro'
+import TextAreaRaw from '@/components/forms/TextArea.astro?raw'
 
-Text input components are used to collect text-based data from the user. It should be used for single-line text input fields such as **text**, **email**, **password**, **number**, **tel**, and **url** fields.
+Text area components are used to collect large amounts of text from the user.
 
 <Aside>
-  Input field styles are generated via a [Tailwind
+  Textarea styles are generated via a [Tailwind
   Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
   [here](https://github.com/ekfuhrmann/starlight-docs/blob/master/config/tailwind/input.js).
 </Aside>
 
 <Preview.Root>
   <Preview.Canvas>
-    <TextInput
+    <TextArea
       label="Label"
       name="example-1"
       placeholder="Placeholder"
@@ -30,36 +30,30 @@ Text input components are used to collect text-based data from the user. It shou
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro
-        <TextInput
-          label="Label"
-          name="example-1"
-          placeholder="Placeholder"
-          class="max-w-xs"
-        />
+        <TextArea label="Label" name="example-1" placeholder="Placeholder" />
         ```
       </TabItem>
       <TabItem label="Compiled" icon="seti:html">
         ```html
         <div
-          class="field-group max-w-xs"
+          class="field-group"
           data-layout="FieldGroup"
-          data-component="TextInput"
+          data-component="TextArea"
         >
           <label for="example-1" id="label-example-1">
             <span class="field-label">Label</span>
           </label>
-          <input
-            type="text"
+          <textarea
+            class="min-h-[124px] resize-none"
             id="example-1"
             name="input-example-1"
             placeholder="Placeholder"
             aria-labelledby="label-example-1"
-          >
+          ></textarea>
         </div>
         ```
       </TabItem>
     </Tabs>
-
   </Preview.Docs>
 </Preview.Root>
 
@@ -67,7 +61,7 @@ Text input components are used to collect text-based data from the user. It shou
 
 This component inherits from the [Field Group component](/forms/field-group/).
 
-This component is based on the `<input>` element and can take in any additional HTML attributes through the use of the `inputProps` property. The following are the custom props that can be passed to the component.
+This component is based on the `<textarea>` element and can take in any additional HTML attributes through the use of the `inputProps` property. The following are the custom props that can be passed to the component.
 
 <PropTable
   rows={[
@@ -75,13 +69,13 @@ This component is based on the `<input>` element and can take in any additional 
       prop: 'name',
       type: 'string',
       description:
-        'Unique name of the input field. Should follow a kebab-case naming convention (e.g. "first-name")',
+        'Unique name of the textarea. Should follow a kebab-case naming convention (e.g. "first-name")',
       required: true,
     },
     {
       prop: 'label',
       type: 'string',
-      description: 'Visual or assistive label for the input field',
+      description: 'Visual or assistive label for the textarea',
       required: true,
     },
     {
@@ -94,47 +88,41 @@ This component is based on the `<input>` element and can take in any additional 
     {
       prop: 'sublabel',
       type: 'string',
-      description: 'Sub-label content for the input field',
+      description: 'Sub-label content for the textarea',
     },
     {
       prop: 'instructions',
       type: 'string',
       description:
-        'Instructions for the input field that will be placed below the input',
+        'Instructions for the textarea that will be placed below the input',
     },
     {
       prop: 'placeholder',
       type: 'string',
-      description: 'Placeholder text for the input field',
+      description: 'Placeholder text for the textarea',
     },
     {
       prop: 'disabled',
       type: 'boolean',
-      description: 'Whether the input field is disabled or not',
+      description: 'Whether the textarea is disabled or not',
       default: 'false',
     },
     {
       prop: 'required',
       type: 'boolean | "long"',
       description:
-        'Whether the input field is required or not. If set to "long", the input field will be marked as required and include explicit "required" text.',
+        'Whether the textarea is required or not. If set to "long", the textarea will be marked as required and include explicit "required" text.',
       default: 'false',
     },
     {
-      prop: 'type',
-      type: '"text" | "email" | "password" | "number" | "tel" | "url"',
-      description: 'Type of input field',
-      default: '"text"',
-    },
-    {
       prop: 'inputProps',
-      type: 'HTMLAttributes<input>',
-      description: 'Additional attributes to pass to the input field',
+      type: 'HTMLAttributes<textarea>',
+      description: 'Additional attributes to pass to the textarea field',
     },
     {
       prop: 'errorMessages',
       type: 'string[]',
-      description: 'Error messages to display below the input field',
+      description: 'Error messages to display below the textarea',
     },
 
 ]}
@@ -149,14 +137,14 @@ Use the `required` prop to mark a field as required. You can also use the `requi
 <Preview.Root>
   <Preview.Canvas>
     <div class="flex flex-wrap gap-24">
-      <TextInput
+      <TextArea
         label="Label"
         name="example-2"
         required
         placeholder="Placeholder"
         class="flex-1"
       />
-      <TextInput
+      <TextArea
         label="Label"
         name="example-3"
         required="long"
@@ -169,13 +157,13 @@ Use the `required` prop to mark a field as required. You can also use the `requi
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro 'required' /required="long"/
-        <TextInput
+        <TextArea
           label="Label"
           name="example-2"
           required
           placeholder="Placeholder"
         />
-        <TextInput
+        <TextArea
           label="Label"
           name="example-3"
           required="long"
@@ -185,31 +173,56 @@ Use the `required` prop to mark a field as required. You can also use the `requi
       </TabItem>
       <TabItem label="Compiled" icon="seti:html">
         ```html
-        <div class="field-group" data-required="" data-layout="FieldGroup" data-component="TextInput">
+        <div
+          class="field-group"
+          data-required=""
+          data-layout="FieldGroup"
+          data-component="TextArea"
+        >
           <label for="example-2" id="label-example-2">
             <span class="field-label">Label</span>
           </label>
-          <input type="text" id="example-2" name="input-example-2" placeholder="Placeholder" required="" aria-labelledby="label-example-2">
+          <textarea
+            class="min-h-[124px] resize-none"
+            id="example-2"
+            name="input-example-2"
+            placeholder="Placeholder"
+            required
+            aria-labelledby="label-example-2"
+          ></textarea>
         </div>
-        <div class="field-group" data-required="long" data-layout="FieldGroup" data-component="TextInput">
+        <div
+          class="field-group"
+          data-required="long"
+          data-layout="FieldGroup"
+          data-component="TextArea"
+        >
           <label for="example-3" id="label-example-3">
             <span class="field-label">Label</span>
           </label>
-          <input type="text" id="example-3" name="input-example-3" placeholder="Placeholder" required="" aria-labelledby="label-example-3">
+          <textarea
+            class="min-h-[124px] resize-none"
+            id="example-3"
+            name="input-example-3"
+            placeholder="Placeholder"
+            required
+            aria-labelledby="label-example-3"
+          ></textarea>
         </div>
         ```
       </TabItem>
     </Tabs>
+
   </Preview.Docs>
 </Preview.Root>
 
 ### Disabled
 
-Use the `disabled` prop to disable the input field.
+Use the `disabled` prop to disable the textarea.
 
 <Preview.Root>
   <Preview.Canvas>
-    <TextInput
+    <TextArea
       label="Label"
       name="example-4"
       placeholder="Placeholder"
@@ -221,7 +234,7 @@ Use the `disabled` prop to disable the input field.
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro "disabled"
-        <TextInput
+        <TextArea
           label="Label"
           name="example-4"
           placeholder="Placeholder"
@@ -234,33 +247,35 @@ Use the `disabled` prop to disable the input field.
         <div
           class="field-group"
           data-layout="FieldGroup"
-          data-component="TextInput"
+          data-component="TextArea"
         >
           <label for="example-4" id="label-example-4">
             <span class="field-label">Label</span>
           </label>
-          <input
-            type="text"
+          <textarea
+            class="min-h-[124px] resize-none"
             id="example-4"
             name="input-example-4"
             placeholder="Placeholder"
             disabled
             aria-labelledby="label-example-4"
-          />
+          ></textarea>
         </div>
+
         ```
       </TabItem>
     </Tabs>
+
   </Preview.Docs>
 </Preview.Root>
 
 ### With Helper Text
 
-Use the `sublabel` and `instructions` props to add helper text to the input field.
+Use the `sublabel` and `instructions` props to add helper text to the textarea.
 
 <Preview.Root>
   <Preview.Canvas>
-    <TextInput
+    <TextArea
       label="Label"
       name="example-5"
       sublabel="Sublabel lorem ipsum dolor sit amet."
@@ -273,7 +288,7 @@ Use the `sublabel` and `instructions` props to add helper text to the input fiel
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro /sublabel=.*"/ /instructions=.*"/
-        <TextInput
+        <TextArea
           label="Label"
           name="example-5"
           sublabel="Sublabel lorem ipsum dolor sit amet."
@@ -287,38 +302,37 @@ Use the `sublabel` and `instructions` props to add helper text to the input fiel
         <div
           class="field-group"
           data-layout="FieldGroup"
-          data-component="TextInput"
+          data-component="TextArea"
         >
           <label for="example-5" id="label-example-5">
             <span class="field-label">Label</span>
             <span class="field-sublabel">Sublabel lorem ipsum dolor sit amet.</span>
           </label>
-          <input
-            type="text"
+          <textarea
+            class="min-h-[124px] resize-none"
             id="example-5"
             name="input-example-5"
             placeholder="Placeholder"
             aria-labelledby="label-example-5 instructions-example-5"
-          >
-          <span
-            class="field-instructions" id="instructions-example-5"
-          >
+          ></textarea>
+          <span class="field-instructions" id="instructions-example-5">
             Instructions lorem ipsum dolor.
           </span>
         </div>
         ```
       </TabItem>
     </Tabs>
+
   </Preview.Docs>
 </Preview.Root>
 
 ### With Errors
 
-Use the `errorMessages` prop to display error messages below the input field.
+Use the `errorMessages` prop to display error messages below the textarea.
 
 <Preview.Root>
   <Preview.Canvas>
-    <TextInput
+    <TextArea
       label="Label"
       name="example-6"
       errorMessages={['Error message 1', 'Error message 2']}
@@ -330,7 +344,7 @@ Use the `errorMessages` prop to display error messages below the input field.
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro /errorMessages=.*}/
-        <TextInput
+        <TextArea
           label="Label"
           name="example-6"
           errorMessages={['Error message 1', 'Error message 2']}
@@ -344,20 +358,33 @@ Use the `errorMessages` prop to display error messages below the input field.
           class="field-group"
           data-state="error"
           data-layout="FieldGroup"
-          data-component="TextInput"
+          data-component="TextArea"
         >
           <label for="example-6" id="label-example-6">
             <span class="field-label">Label</span>
           </label>
-          <input
-            type="text"
+          <textarea
+            class="min-h-[124px] resize-none"
             id="example-6"
             name="input-example-6"
             placeholder="Placeholder"
             aria-labelledby="label-example-6"
-          >
+          ></textarea>
           <ul class="field-errors">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="absolute left-0 top-2 size-16 shrink-0"><line x1="12" y1="9" x2="12" y2="13"></line><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="17" x2="12.01" y2="17"></line></svg>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="absolute left-0 top-2 size-16 shrink-0"
+            >
+              <line x1="12" y1="9" x2="12" y2="13"></line>
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+              <line x1="12" y1="17" x2="12.01" y2="17"></line>
+            </svg>
             <li>Error message 1</li>
             <li>Error message 2</li>
           </ul>
@@ -374,7 +401,7 @@ Use the `labelHidden` prop to visually hide the label. When hidden, the label wi
 
 <Preview.Root>
   <Preview.Canvas>
-    <TextInput
+    <TextArea
       label="Label"
       name="example-7"
       labelHidden
@@ -386,7 +413,7 @@ Use the `labelHidden` prop to visually hide the label. When hidden, the label wi
     <Tabs>
       <TabItem label="Astro" icon="astro">
         ```astro "labelHidden"
-        <TextInput
+        <TextArea
           label="Label"
           name="example-7"
           labelHidden
@@ -399,27 +426,29 @@ Use the `labelHidden` prop to visually hide the label. When hidden, the label wi
         <div
           class="field-group"
           data-layout="FieldGroup"
-          data-component="TextInput"
+          data-component="TextArea"
         >
           <label for="example-7" id="label-example-7">
             <span class="field-label sr-only">Label</span>
           </label>
-          <input
-            type="text"
+          <textarea
+            class="min-h-[124px] resize-none"
             id="example-7"
             name="input-example-7"
             placeholder="Placeholder"
             aria-labelledby="label-example-7"
-          >
+          ></textarea>
         </div>
+
         ```
       </TabItem>
     </Tabs>
+
   </Preview.Docs>
 </Preview.Root>
 
 ## Astro Component
 
-It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a text input component, and what properties to consider.
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a textarea component, and what properties to consider.
 
-<Code code={TextInputRaw} lang="astro" title="TextInput.astro" />
+<Code code={TextAreaRaw} lang="astro" title="TextArea.astro" />

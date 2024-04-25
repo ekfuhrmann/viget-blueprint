@@ -1,0 +1,135 @@
+---
+title: Accordion
+description: A component for displaying collapsible content.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Accordion from '@/components/elements/accordion/Accordion'
+import AccordionRaw from '@/components/elements/accordion/Accordion.ts?raw'
+import AccordionRootRaw from '@/components/elements/accordion/Root.astro?raw'
+import AccordionSummaryRaw from '@/components/elements/accordion/Summary.astro?raw'
+import AccordionContentRaw from '@/components/elements/accordion/Content.astro?raw'
+import TextInput from '@/components/forms/TextInput.astro'
+import Button from '@/components/elements/Button.astro'
+
+The accordion component is for displaying collapsible content.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Accordion.Root>
+      <Accordion.Summary>
+        <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+      </Accordion.Summary>
+      <Accordion.Content>
+        <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </Accordion.Content>
+    </Accordion.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Accordion.Root>
+          <Accordion.Summary>
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+          </Accordion.Summary>
+          <Accordion.Content>
+            <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </Accordion.Content>
+        </Accordion.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <details data-component="Accordion" class="group/details flex flex-col border-t last-of-type:border-b">
+          <summary
+            class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+          >
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <span
+              class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+            >
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 bg-[var(--sl-color-gray-1)]"
+              ></span>
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-[var(--sl-color-gray-1)] transition-transform duration-500 group-open/details:rotate-[360deg]"
+              ></span>
+            </span>
+          </summary>
+          <div class="mb-24">
+            <p>
+              <strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+          </div>
+        </details>
+
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Anatomy
+
+{/* TODO: finish this */}
+
+This component is comprised of several elements that work together to create a dialog. The following are the elements that make up the Dialog component.
+
+```astro
+---
+import Dialog from '@/components/elements/dialog/Dialog'
+---
+
+<Dialog.Root>
+  <Dialog.Content />
+  <Dialog.Trigger />
+</Dialog.Root>
+```
+
+## API Reference
+
+### Root
+
+The root element of the Dialog component. This element wraps the content and trigger elements and provides the scripting logic to open and close the dialog.
+
+### Content
+
+The content of the Dialog component. This component is based on the `<dialog>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'hideClose',
+      type: 'boolean',
+      description: 'Whether or not the close button should be hidden.',
+      default: 'false',
+    },
+  ]}
+/>
+
+### Trigger
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro compound component to serve as a blueprint for how you could possibly set up a Dialog component, and what properties to consider.
+
+<Tabs>
+  {/* <TabItem label="Accordion" icon="seti:typescript">
+    <Code code={AccordionRaw} lang="typescript" title="Accordion.ts" />
+  </TabItem>
+  <TabItem label="Root" icon="astro">
+    <Code code={AccordionRootRaw} lang="astro" title="Root.astro" />
+  </TabItem>
+  <TabItem label="Summary" icon="astro">
+    <Code code={AccordionSummaryRaw} lang="astro" title="Summary.astro" />
+  </TabItem>
+  <TabItem label="Content" icon="astro">
+    <Code code={AccordionContentRaw} lang="astro" title="Content.astro" />
+  </TabItem> */}
+</Tabs>

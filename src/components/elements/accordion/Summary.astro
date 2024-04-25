@@ -1,0 +1,37 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'summary'> {
+  /**
+    Hide expand/collapse marker for the summary element
+  */
+  hideMarker?: boolean
+}
+
+const { hideMarker = false, class: className, ...attrs } = Astro.props
+---
+
+<summary
+  class:list={[
+    'group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none',
+    className,
+  ]}
+  {...attrs}
+>
+  <slot />
+
+  {
+    !hideMarker && (
+      <span
+        class:list={[
+          'relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all',
+          'group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300',
+          'dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700',
+        ]}
+      >
+        <span class="absolute inset-0 m-auto h-4 w-20 bg-[var(--sl-color-gray-1)]" />
+        <span class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-[var(--sl-color-gray-1)] transition-transform duration-500 group-open/details:rotate-[360deg]" />
+      </span>
+    )
+  }
+</summary>

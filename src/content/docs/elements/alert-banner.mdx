@@ -70,45 +70,67 @@ Alert Banners are used to display notifications or time-sensitive information, i
   </Preview.Docs>
 </Preview.Root>
 
-{/* TODO: finish this */}
-
 ## API Reference
 
-This component is based on the `<article>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+This component is based on the `<div>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
 
 <PropTable
   rows={[
     {
-      prop: 'align',
-      type: '"left" | "center"',
-      description: 'The alignment of the content inside the card.',
-      default: '"left"',
+      prop: 'hideClose',
+      type: 'boolean',
+      description: 'Whether or not the close button should be hidden.',
+      default: 'false',
     },
   ]}
 />
 
 ## Examples
 
-### Centered
+### Hide Close
+
+Use the `hideClose` prop to hide the close button from the Alert Banner.
 
 <Preview.Root>
   <Preview.Canvas>
-
+    <AlertBanner hideClose class="flex-col gap-16">
+      <h2 class="text-md font-bold">Consectetur quis magna</h2>
+      <p>
+        Ea incididunt non aliqua consequat deserunt. Lorem excepteur labore aute
+        amet ullamco sit magna do exercitation est cillum Lorem enim. Non sit
+        est non veniam ea duis magna commodo enim ex.
+      </p>
+    </AlertBanner>
   </Preview.Canvas>
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro /hideClose=.*"/
-
+        ```astro
+        <AlertBanner hideClose class="flex-col gap-16">
+          <h2 class="text-md font-bold">Consectetur quis magna</h2>
+          <p>
+            Ea incididunt non aliqua consequat deserunt. Lorem excepteur labore
+            aute amet ullamco sit magna do exercitation est cillum Lorem enim.
+            Non sit est non veniam ea duis magna commodo enim ex.
+          </p>
+        </AlertBanner>
         ```
       </TabItem>
       <TabItem label="Compiled" icon="seti:html">
         ```html
-
+        <custom-alert-banner role="alert">
+          <div class="relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48">
+            <h2 class="text-md font-bold">Consectetur quis magna</h2>
+            <p>
+              Ea incididunt non aliqua consequat deserunt. Lorem excepteur
+              labore aute amet ullamco sit magna do exercitation est cillum
+              Lorem enim. Non sit est non veniam ea duis magna commodo enim ex.
+            </p>
+          </div>
+        </custom-alert-banner>
         ```
       </TabItem>
     </Tabs>
-
   </Preview.Docs>
 </Preview.Root>
 

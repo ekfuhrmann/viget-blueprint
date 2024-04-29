@@ -52,7 +52,9 @@ const UUID = crypto.randomUUID()
                     <Tooltip.Trigger>
                       <Icon name="information" />
                     </Tooltip.Trigger>
-                    <Tooltip.Content>{row.description}</Tooltip.Content>
+                    <Tooltip.Content>
+                      <p>{row.description}</p>
+                    </Tooltip.Content>
                   </Tooltip.Root>
                 </div>
               </td>
@@ -93,7 +95,7 @@ const UUID = crypto.randomUUID()
                           <Icon name="information" />
                         </Tooltip.Trigger>
                         <Tooltip.Content>
-                          {childRow.description}
+                          <p>{childRow.description}</p>
                         </Tooltip.Content>
                       </Tooltip.Root>
                     </div>
@@ -118,3 +120,27 @@ const UUID = crypto.randomUUID()
     </tbody>
   </table>
 </div>
+
+<script>
+  // Identify `code` blocks from the description and wrap them in a styled `code` block element
+  function formatCodeInString(str: string) {
+    return str
+      .split('`')
+      .map((part: any, index: number) => {
+        if (index % 2 === 0) {
+          return part
+        } else {
+          return `<code class="bg-[var(--sl-color-bg-inline-code)] -my-2 py-2 px-6 rounded text-xs">${part}</code>`
+        }
+      })
+      .join('')
+  }
+
+  const tooltipDescriptions = document.querySelectorAll(
+    '[data-tooltip-content] p',
+  )
+
+  tooltipDescriptions.forEach((description) => {
+    description.innerHTML = formatCodeInString(description.innerHTML)
+  })
+</script>

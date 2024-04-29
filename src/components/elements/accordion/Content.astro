@@ -1,11 +1,18 @@
 ---
-import type { HTMLAttributes } from 'astro/types'
+import type { HTMLTag, Polymorphic } from 'astro/types'
 
-interface Props extends HTMLAttributes<'div'> {}
+type Props<Tag extends HTMLTag> = Polymorphic<{
+  /**
+    The HTML tag to render for the component. By default the component will render as a `div`.
+  */
+  as: Tag
+}>
 
-const { class: className, ...attrs } = Astro.props
+const { as: Tag, class: className, ...attrs } = Astro.props
+
+const Element = Tag ? Tag : 'div'
 ---
 
-<div class:list={['mb-24', className]} {...attrs}>
+<Element class:list={['mb-24', className]} {...attrs}>
   <slot />
-</div>
+</Element>

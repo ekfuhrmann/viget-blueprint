@@ -77,50 +77,281 @@ The accordion component is for displaying collapsible content.
 
 ## Anatomy
 
-{/* TODO: finish this */}
-
-This component is comprised of several elements that work together to create a dialog. The following are the elements that make up the Dialog component.
+This component is comprised of several elements that work together to create an accordion. The following are the elements that make up the Accordion component.
 
 ```astro
 ---
-import Dialog from '@/components/elements/dialog/Dialog'
+import Accordion from '@/components/elements/accordion/Accordion.ts'
 ---
 
-<Dialog.Root>
-  <Dialog.Content />
-  <Dialog.Trigger />
-</Dialog.Root>
+<Accordion.Root>
+  <Accordion.Summary />
+  <Accordion.Content />
+</Accordion.Root>
 ```
 
 ## API Reference
 
 ### Root
 
-The root element of the Dialog component. This element wraps the content and trigger elements and provides the scripting logic to open and close the dialog.
+The root element of the Accordion component. This element wraps the summary and content elements.
 
-### Content
+<Aside>
+  Use the `group/details` class to apply styles based on the open and close
+  states of the accordion.
+</Aside>
 
-The content of the Dialog component. This component is based on the `<dialog>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+### Summary
+
+The summary is the element that is always visible and is used to trigger the accordion to open and close. This component is based on the `<summary>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<Aside>
+  Use the `group/summary` class to apply styles based on the hover and focus
+  states of the summary.
+</Aside>
 
 <PropTable
   rows={[
     {
-      prop: 'hideClose',
+      prop: 'hideMarker',
       type: 'boolean',
-      description: 'Whether or not the close button should be hidden.',
+      description:
+        'Hide the expand/collapse marker for the summary element. This is useful when you want to use a custom marker than what is provided',
       default: 'false',
     },
   ]}
 />
 
-### Trigger
+### Content
+
+The content is the element that is hidden by default and is shown when the accordion is opened. By default, this component is based on the `<div>` element but can be changed to any HTML element by adjusting the `as` property.
+
+<PropTable
+  rows={[
+    {
+      prop: 'as',
+      type: 'TagType',
+      description:
+        'The HTML tag to render. By default the component will render as a `div`.',
+      default: 'div',
+    },
+  ]}
+/>
+
+## Examples
+
+### Custom Summary & Content
+
+You can customize the summary and content elements to fit the needs of your project. In this example, we have replaced the marker in the summary and provided an image as the content.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Accordion.Root>
+      <Accordion.Summary hideMarker>
+        <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+        <div class="btn-contained group-open/details:hidden group-focus-visible/summary:ring-4">Expand</div>
+        <div class="btn-contained hidden group-open/details:flex group-focus-visible/summary:ring-4">Collapse</div>
+      </Accordion.Summary>
+      <Accordion.Content as="img" src="https://plus.unsplash.com/premium_photo-1675629118284-c9eb039df8cd?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="a snow covered field with trees and mountains in the background" class="w-full object-cover"/>
+    </Accordion.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Accordion.Root>
+          <Accordion.Summary hideMarker>
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <div class="btn-contained group-open/details:hidden group-focus-visible/summary:ring-4">Expand</div>
+            <div class="btn-contained hidden group-open/details:flex group-focus-visible/summary:ring-4">Collapse</div>
+          </Accordion.Summary>
+          <Accordion.Content as="img" src="https://plus.unsplash.com/premium_photo-1675629118284-c9eb039df8cd?q=80&w=2576&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="a snow covered field with trees and mountains in the background" class="w-full object-cover"/>
+        </Accordion.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <details
+          data-component="Accordion"
+          class="group/details flex flex-col border-t last-of-type:border-b"
+          open=""
+        >
+          <summary
+            class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+          >
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <div
+              class="btn-contained group-open/details:hidden group-focus-visible/summary:ring-4"
+            >
+              Expand
+            </div>
+            <div
+              class="btn-contained hidden group-open/details:flex group-focus-visible/summary:ring-4"
+            >
+              Collapse
+            </div>
+          </summary>
+          <img
+            src="https://plus.unsplash.com/premium_photo-1675629118284-c9eb039df8cd?q=80&amp;w=2576&amp;auto=format&amp;fit=crop&amp;ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt="a snow covered field with trees and mountains in the background"
+            class="mb-24 w-full object-cover"
+          />
+        </details>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Accordion List
+
+Accordions can be stacked to display a list of items that can be expanded and collapsed.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Accordion.Root>
+      <Accordion.Summary>
+        <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+      </Accordion.Summary>
+      <Accordion.Content>
+        <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </Accordion.Content>
+    </Accordion.Root>
+    <Accordion.Root>
+      <Accordion.Summary>
+        <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+      </Accordion.Summary>
+      <Accordion.Content>
+        <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </Accordion.Content>
+    </Accordion.Root>
+    <Accordion.Root>
+      <Accordion.Summary>
+        <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+      </Accordion.Summary>
+      <Accordion.Content>
+        <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+      </Accordion.Content>
+    </Accordion.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Accordion.Root>
+          <Accordion.Summary>
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+          </Accordion.Summary>
+          <Accordion.Content>
+            <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </Accordion.Content>
+        </Accordion.Root>
+        <Accordion.Root>
+          <Accordion.Summary>
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+          </Accordion.Summary>
+          <Accordion.Content>
+            <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </Accordion.Content>
+        </Accordion.Root>
+        <Accordion.Root>
+          <Accordion.Summary>
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+          </Accordion.Summary>
+          <Accordion.Content>
+            <p><strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+          </Accordion.Content>
+        </Accordion.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <details data-component="Accordion" class="group/details flex flex-col border-t last-of-type:border-b">
+          <summary
+            class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+          >
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <span
+              class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+            >
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 bg-[var(--sl-color-gray-1)]"
+              ></span>
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-[var(--sl-color-gray-1)] transition-transform duration-500 group-open/details:rotate-[360deg]"
+              ></span>
+            </span>
+          </summary>
+          <div class="mb-24">
+            <p>
+              <strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+          </div>
+        </details>
+        <details data-component="Accordion" class="group/details flex flex-col border-t last-of-type:border-b">
+          <summary
+            class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+          >
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <span
+              class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+            >
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 bg-[var(--sl-color-gray-1)]"
+              ></span>
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-[var(--sl-color-gray-1)] transition-transform duration-500 group-open/details:rotate-[360deg]"
+              ></span>
+            </span>
+          </summary>
+          <div class="mb-24">
+            <p>
+              <strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+          </div>
+        </details>
+        <details data-component="Accordion" class="group/details flex flex-col border-t last-of-type:border-b">
+          <summary
+            class="group/summary flex cursor-pointer items-center justify-between py-24 marker:content-none focus:outline-none"
+          >
+            <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>
+            <span
+              class="relative size-28 shrink-0 rounded border-2 border-transparent text-gray-600 transition-all group-hover/summary:bg-sky-200 group-focus-visible/summary:border-sky-700 group-active/summary:bg-sky-300 dark:group-hover/summary:bg-gray-800 dark:group-focus-visible/summary:border-gray-600 dark:group-active/summary:bg-gray-700"
+            >
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 bg-[var(--sl-color-gray-1)]"
+              ></span>
+              <span
+                class="absolute inset-0 m-auto h-4 w-20 rotate-90 bg-[var(--sl-color-gray-1)] transition-transform duration-500 group-open/details:rotate-[360deg]"
+              ></span>
+            </span>
+          </summary>
+          <div class="mb-24">
+            <p>
+              <strong>Lorem ipsum dolor</strong> <a href="#">sit amet</a>, consectetur
+              adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
+              magna aliqua.
+            </p>
+          </div>
+        </details>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
 
 ## Astro Component
 
-It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro compound component to serve as a blueprint for how you could possibly set up a Dialog component, and what properties to consider.
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro compound component to serve as a blueprint for how you could possibly set up an Accordion component, and what properties to consider.
 
 <Tabs>
-  {/* <TabItem label="Accordion" icon="seti:typescript">
+  <TabItem label="Accordion" icon="seti:typescript">
     <Code code={AccordionRaw} lang="typescript" title="Accordion.ts" />
   </TabItem>
   <TabItem label="Root" icon="astro">
@@ -131,5 +362,5 @@ It’s recommended that an element like this is made as a reusable component. In
   </TabItem>
   <TabItem label="Content" icon="astro">
     <Code code={AccordionContentRaw} lang="astro" title="Content.astro" />
-  </TabItem> */}
+  </TabItem>
 </Tabs>

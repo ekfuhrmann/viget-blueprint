@@ -2,8 +2,20 @@
 
 ---
 
-<div
-  class="not-content flex flex-col divide-y divide-[var(--sl-color-gray-5)] border border-[var(--sl-color-gray-5)]"
+<preview-block
+  class="not-content flex flex-col divide-y divide-[var(--sl-color-gray-6)] overflow-hidden rounded-lg border border-[var(--sl-color-gray-6)]"
 >
   <slot />
-</div>
+</preview-block>
+
+<style is:global>
+  preview-block starlight-tabs {
+    [role='tabpanel'] {
+      @apply !mt-0;
+    }
+
+    .expressive-code .frame pre {
+      @apply rounded-none border-0;
+    }
+  }
+</style>

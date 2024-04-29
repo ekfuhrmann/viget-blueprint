@@ -1,0 +1,26 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'div'> {
+  /**
+    The controlled value of the tab to bind to the correct content panel.
+  */
+  value: string
+}
+
+const { value, ...attrs } = Astro.props
+---
+
+<div
+  id={`tabpanel-${value}`}
+  aria-labelledby={`tab-${value}`}
+  role="tabpanel"
+  tabindex="0"
+  hidden="true"
+  {...attrs}
+>
+  <slot />
+  <a href={`#tab-${value}`} class="btn-text sr-only focus-visible:not-sr-only"
+    >Back to tabs list</a
+  >
+</div>

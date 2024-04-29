@@ -28,9 +28,11 @@ const { rows } = Astro.props
 const UUID = crypto.randomUUID()
 ---
 
-<div class="overflow-auto">
-  <table class="!table w-full text-left">
-    <thead>
+<div
+  class="overflow-auto rounded-lg ring-1 ring-inset ring-[var(--sl-color-gray-6)]"
+>
+  <table class="!table w-full rounded text-left">
+    <thead class="bg-gray-100 dark:bg-gray-800">
       <tr>
         <th>Prop</th>
         <th>Type</th>
@@ -44,16 +46,22 @@ const UUID = crypto.randomUUID()
             <tr>
               <td>
                 <div class="flex items-center gap-4">
-                  <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_30%)] px-4 text-[var(--sl-color-text)]">
+                  <span class="rounded bg-[rgb(from_var(--sl-color-accent)_r_g_b_/_70%)] px-4 text-[var(--sl-color-text-invert)] dark:text-[var(--sl-color-text)]">
                     {row.prop}
-                    {row.required && <span class="text-red-500">*</span>}
+                    {row.required && <span title="required">*</span>}
                   </span>
                   <Tooltip.Root name="test">
                     <Tooltip.Trigger>
                       <Icon name="information" />
                     </Tooltip.Trigger>
                     <Tooltip.Content>
-                      <p>{row.description}</p>
+                      {Array.isArray(row.description) ? (
+                        row.description.map((paragraph) => (
+                          <p class="[&+&]:mt-8">{paragraph}</p>
+                        ))
+                      ) : (
+                        <p>{row.description}</p>
+                      )}
                     </Tooltip.Content>
                   </Tooltip.Root>
                 </div>
@@ -84,18 +92,22 @@ const UUID = crypto.randomUUID()
                         },
                       ]}
                     >
-                      <span class="rounded bg-[rgb(from_var(--sl-color-accent-high)_r_g_b_/_20%)] px-4 text-sm text-[var(--sl-color-text)]">
+                      <span class="rounded bg-[rgb(from_var(--sl-color-accent)_r_g_b_/_70%)] px-4 text-sm text-[var(--sl-color-text-invert)] dark:text-[var(--sl-color-text)]">
                         {childRow.prop}
-                        {childRow.required && (
-                          <span class="text-red-500">*</span>
-                        )}
+                        {childRow.required && <span title="required">*</span>}
                       </span>
                       <Tooltip.Root name="test">
                         <Tooltip.Trigger>
                           <Icon name="information" />
                         </Tooltip.Trigger>
                         <Tooltip.Content>
-                          <p>{childRow.description}</p>
+                          {Array.isArray(childRow.description) ? (
+                            childRow.description.map((paragraph) => (
+                              <p class="[&+&]:mt-8">{paragraph}</p>
+                            ))
+                          ) : (
+                            <p>{childRow.description}</p>
+                          )}
                         </Tooltip.Content>
                       </Tooltip.Root>
                     </div>
@@ -144,3 +156,5 @@ const UUID = crypto.randomUUID()
     description.innerHTML = formatCodeInString(description.innerHTML)
   })
 </script>
+
+<!-- TODO: break styles out to astro classes -->

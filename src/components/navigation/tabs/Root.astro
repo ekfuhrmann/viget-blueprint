@@ -1,0 +1,85 @@
+---
+interface Props {
+  /**
+    The default tab to be selected
+  */
+  defaultValue?: string
+}
+
+const { defaultValue } = Astro.props
+---
+
+<custom-tabs data-default-tab={defaultValue}>
+  <slot />
+</custom-tabs>
+
+<script>
+  class CustomDialog extends HTMLElement {
+    constructor() {
+      super()
+
+      this.resetTabs()
+      this.setDefaultTab()
+    }
+
+    connectedCallback() {
+      this.tabs?.forEach((tab: HTMLElement) => {
+        tab.addEventListener('click', this.handleTabClick)
+      })
+    }
+
+    disconnectedCallback() {
+      this.tabs?.forEach((tab: HTMLElement) => {
+        tab.removeEventListener('click', this.handleTabClick)
+      })
+    }
+
+    private get tabs(): NodeListOf<HTMLElement> {
+      return this.querySelectorAll('[role="tab"]')
+    }
+
+    private get tabpanels(): NodeListOf<HTMLElement> {
+      return this.querySelectorAll('[role="tabpanel"]')
+    }
+
+    private get defaultTab(): HTMLElement {
+      return this.querySelector(`#tab-${this.dataset.defaultTab}`)
+    }
+
+    private get defaultTabPanel(): HTMLElement {
+      return this.querySelector(`#tabpanel-${this.dataset.defaultTab}`)
+    }
+
+    private setDefaultTab = () => {
+      const tab = this.defaultTab || this.tabs[0]
+      const panel = this.defaultTabPanel || this.tabpanels[0]
+
+      tab.setAttribute('aria-selected', 'true')
+      panel.removeAttribute('hidden')
+    }
+
+    private resetTabs = () => {
+      this.tabs.forEach((tab: HTMLElement) => {
+        tab.setAttribute('aria-selected', 'false')
+      })
+      this.tabpanels.forEach((tabpanel: HTMLElement) => {
+        tabpanel.setAttribute('hidden', 'true')
+      })
+    }
+
+    private handleTabClick = (event: Event) => {
+      this.resetTabs()
+
+      const targetElement = event.target as HTMLElement
+      const targetElementPanel = this.querySelector(
+        `#${targetElement.getAttribute('aria-controls')}`,
+      ) as HTMLElement
+
+      targetElement.setAttribute('aria-selected', 'true')
+      targetElementPanel?.removeAttribute('hidden')
+      targetElementPanel?.focus()
+    }
+  }
+
+  customElements.define('custom-tabs', CustomDialog)
+</script>

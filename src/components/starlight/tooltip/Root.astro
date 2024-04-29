@@ -99,18 +99,20 @@ const { uuid } = Astro.props
     }
 
     private show = () => {
+      console.log('show')
       this.content.style.display = 'block'
+      this.isVisible = true
       this.create()
     }
 
     private hide = () => {
       this.content.style.display = 'none'
+      this.isVisible = false
       this.cleanup
     }
 
     private toggle = () => {
       this.isVisible ? this.hide() : this.show()
-      this.isVisible = !this.isVisible
     }
 
     private toggleListener: EventListener = () => {
@@ -118,7 +120,7 @@ const { uuid } = Astro.props
     }
 
     private hideListener: EventListener = () => {
-      this.toggle()
+      this.hide()
     }
 
     private isVisible: boolean = false

@@ -1,0 +1,454 @@
+---
+title: Tabs
+description: A component for displaying a set of layered sections of content that are displayed individually and toggled through.
+---
+
+import {
+  Tabs as StarlightTabs,
+  TabItem,
+  Aside,
+  Icon,
+  Code,
+} from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Tabs from '@/components/navigation/tabs/Tabs'
+import TabsRaw from '@/components/navigation/tabs/Tabs?raw'
+import TabsRoot from '@/components/navigation/tabs/Root.astro'
+import TabsRootRaw from '@/components/navigation/tabs/Root.astro?raw'
+import TabsList from '@/components/navigation/tabs/List.astro'
+import TabsListRaw from '@/components/navigation/tabs/List.astro?raw'
+import TabsTrigger from '@/components/navigation/tabs/Trigger.astro'
+import TabsTriggerRaw from '@/components/navigation/tabs/Trigger.astro?raw'
+import TabsContent from '@/components/navigation/tabs/Content.astro'
+import TabsContentRaw from '@/components/navigation/tabs/Content.astro?raw'
+
+Tabs are a set of layered sections of content that are displayed individually and toggled through.
+
+<Aside>
+  When building tabs, you need to ensure that the `value` for the tab
+  **Trigger** and tab **Content** are unique pairings and match each other. This
+  is how the tabs are connected and toggled.
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Tabs.Root>
+      <Tabs.List>
+        <Tabs.Trigger value="tab-1">Tab 1</Tabs.Trigger>
+        <Tabs.Trigger value="tab-2">Tab 2</Tabs.Trigger>
+        <Tabs.Trigger value="tab-3">Tab 3</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="tab-1">
+        <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+        <p>Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud tempor est minim irure fugiat sit aute laborum.</p>
+      </Tabs.Content>
+      <Tabs.Content value="tab-2">
+        <h1 class="text-xl font-bold">Laboris aliquip</h1>
+        <p>Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt. Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua. Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt occaecat enim labore id.</p>
+      </Tabs.Content>
+      <Tabs.Content value="tab-3">
+        <h1 class="text-xl font-bold">Amet nisi labore</h1>
+        <p>Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat. Aute irure nisi sint minim id ad laboris et sunt do ad pariatur consectetur. </p>
+      </Tabs.Content>
+    </Tabs.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <StarlightTabs class="border-none">
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Tabs.Root>
+          <Tabs.List>
+            <Tabs.Trigger value="tab-1">Tab 1</Tabs.Trigger>
+            <Tabs.Trigger value="tab-2">Tab 2</Tabs.Trigger>
+            <Tabs.Trigger value="tab-3">Tab 3</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab-1">
+            <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+            <p>Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud tempor est minim irure fugiat sit aute laborum.</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab-2">
+            <h1 class="text-xl font-bold">Laboris aliquip</h1>
+            <p>Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt. Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua. Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt occaecat enim labore id.</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab-3">
+            <h1 class="text-xl font-bold">Amet nisi labore</h1>
+            <p>Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat. Aute irure nisi sint minim id ad laboris et sunt do ad pariatur consectetur. </p>
+          </Tabs.Content>
+        </Tabs.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-tabs>
+          <ul class="mb-16 flex list-none border-b p-0" role="tablist">
+            <li>
+              <button
+                id="tab-tab-1"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-1"
+                aria-selected="true"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 1</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="tab-tab-2"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-2"
+                aria-selected="false"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 2</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="tab-tab-3"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-3"
+                aria-selected="false"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 3</span
+                >
+              </button>
+            </li>
+          </ul>
+          <div
+            id="tabpanel-tab-1"
+            aria-labelledby="tab-tab-1"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+            <p>
+              Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate
+              enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est
+              elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud
+              tempor est minim irure fugiat sit aute laborum.
+            </p>
+            <a href="#tab-tab-1" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+          <div
+            id="tabpanel-tab-2"
+            aria-labelledby="tab-tab-2"
+            role="tabpanel"
+            tabindex="0"
+            hidden="true"
+          >
+            <h1 class="text-xl font-bold">Laboris aliquip</h1>
+            <p>
+              Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa
+              excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt.
+              Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua.
+              Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt
+              occaecat enim labore id.
+            </p>
+            <a href="#tab-tab-2" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+          <div
+            id="tabpanel-tab-3"
+            aria-labelledby="tab-tab-3"
+            role="tabpanel"
+            tabindex="0"
+            hidden="true"
+          >
+            <h1 class="text-xl font-bold">Amet nisi labore</h1>
+            <p>
+              Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id
+              anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat.
+              Aute irure nisi sint minim id ad laboris et sunt do ad pariatur
+              consectetur.
+            </p>
+            <a href="#tab-tab-3" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+        </custom-tabs>
+        ```
+      </TabItem>
+    </StarlightTabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Anatomy
+
+This component is comprised of several elements that work together to create a tablist. The following are the elements that make up the Tabs component.
+
+```astro
+---
+import Tabs from '@/components/navigation/tabs/Tabs'
+---
+
+<Tabs.Root>
+  <Tabs.List>
+    <Tabs.Trigger />
+  </Tabs.List>
+  <Tabs.Content />
+</Tabs.Root>
+```
+
+## API Reference
+
+### Root
+
+The root element of the Tabs component. This element wraps the tablist and content elements and provides the scripting logic to toggle between tabs.
+
+<PropTable
+  rows={[
+    {
+      prop: 'defaultValue',
+      type: 'string',
+      description: 'The default tab value to be selected on page load.',
+    },
+  ]}
+/>
+
+### List
+
+The list element of the Tabs component. This element wraps the tab trigger elements and is based on the `<ul>` element and can take in any generic HTML attributes.
+
+### Trigger
+
+The trigger element of the Tabs component. This component is based on the `<button>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'value',
+      type: 'string',
+      description: [
+        'The controlled value of the tab to bind to the correct content panel.',
+        'This value should pair with a tab content value, be unique within the set of tabs, and be in kebab-case.',
+      ],
+      required: true,
+    },
+  ]}
+/>
+
+### Content
+
+The content element of the Tabs component. This component is based on the `<div>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'value',
+      type: 'string',
+      description: [
+        'The controlled value of the content to bind to the correct tab.',
+        'This value should pair with a tablist value, be unique within the set of tabs, and be in kebab-case.',
+      ],
+      required: true,
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `Tabs` component is designed with a strong emphasis on accessibility. It employs `aria` attributes to establish a clear association between the content and the tabs. This ensures that when a tab is activated, the correct tab name is announced to screen reader users.
+
+Moreover, the component manages the focus state of the tabs. This is crucial as it ensures that when a tab is activated, the corresponding content is brought into focus, enhancing the experience for users relying on keyboard navigation.
+
+Additionally, the component includes a hidden link within the content field that points back to the tab trigger. This feature is particularly beneficial for screen reader and keyboard navigation users, as it provides an easy way to navigate back to the list of tabs.
+
+## Examples
+
+### Change the Default Tab
+
+You can change the default tab that is opened when the component is first rendered by using the `defaultValue` prop on the `<Tabs.Root>` component.
+
+ <Preview.Root>
+  <Preview.Canvas>
+    <Tabs.Root defaultValue="tab-2">
+      <Tabs.List>
+        <Tabs.Trigger value="tab-1">Tab 1</Tabs.Trigger>
+        <Tabs.Trigger value="tab-2">Tab 2</Tabs.Trigger>
+        <Tabs.Trigger value="tab-3">Tab 3</Tabs.Trigger>
+      </Tabs.List>
+      <Tabs.Content value="tab-1">
+        <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+        <p>Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud tempor est minim irure fugiat sit aute laborum.</p>
+      </Tabs.Content>
+      <Tabs.Content value="tab-2">
+        <h1 class="text-xl font-bold">Laboris aliquip</h1>
+        <p>Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt. Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua. Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt occaecat enim labore id.</p>
+      </Tabs.Content>
+      <Tabs.Content value="tab-3">
+        <h1 class="text-xl font-bold">Amet nisi labore</h1>
+        <p>Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat. Aute irure nisi sint minim id ad laboris et sunt do ad pariatur consectetur. </p>
+      </Tabs.Content>
+    </Tabs.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <StarlightTabs class="border-none">
+      <TabItem label="Astro" icon="astro">
+        ```astro /defaultValue=.*"/
+        <Tabs.Root defaultValue="tab-2">
+          <Tabs.List>
+            <Tabs.Trigger value="tab-1">Tab 1</Tabs.Trigger>
+            <Tabs.Trigger value="tab-2">Tab 2</Tabs.Trigger>
+            <Tabs.Trigger value="tab-3">Tab 3</Tabs.Trigger>
+          </Tabs.List>
+          <Tabs.Content value="tab-1">
+            <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+            <p>Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud tempor est minim irure fugiat sit aute laborum.</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab-2">
+            <h1 class="text-xl font-bold">Laboris aliquip</h1>
+            <p>Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt. Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua. Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt occaecat enim labore id.</p>
+          </Tabs.Content>
+          <Tabs.Content value="tab-3">
+            <h1 class="text-xl font-bold">Amet nisi labore</h1>
+            <p>Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat. Aute irure nisi sint minim id ad laboris et sunt do ad pariatur consectetur. </p>
+          </Tabs.Content>
+        </Tabs.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html /data-default-tab=.*"/
+        <custom-tabs data-default-tab="tab-2">
+          <ul class="mb-16 flex list-none border-b p-0" role="tablist">
+            <li>
+              <button
+                id="tab-tab-1"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-1"
+                aria-selected="false"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 1</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="tab-tab-2"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-2"
+                aria-selected="true"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 2</span
+                >
+              </button>
+            </li>
+            <li>
+              <button
+                id="tab-tab-3"
+                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                role="tab"
+                aria-controls="tabpanel-tab-3"
+                aria-selected="false"
+              >
+                <span
+                  class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+                  >Tab 3</span
+                >
+              </button>
+            </li>
+          </ul>
+          <div
+            id="tabpanel-tab-1"
+            aria-labelledby="tab-tab-1"
+            role="tabpanel"
+            tabindex="0"
+            hidden="true"
+          >
+            <h1 class="text-xl font-bold">Consequat sint dolor incididunt</h1>
+            <p>
+              Ex do nulla elit amet et laboris tempor qui nulla. Sunt amet voluptate
+              enim dolore sit cupidatat. Incididunt ex non minim aliquip sunt eu. Est
+              elit et eu enim sunt enim qui do adipisicing. Culpa veniam laboris nostrud
+              tempor est minim irure fugiat sit aute laborum.
+            </p>
+            <a href="#tab-tab-1" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+          <div
+            id="tabpanel-tab-2"
+            aria-labelledby="tab-tab-2"
+            role="tabpanel"
+            tabindex="0"
+          >
+            <h1 class="text-xl font-bold">Laboris aliquip</h1>
+            <p>
+              Veniam eu occaecat cillum ut anim esse minim anim veniam amet quis culpa
+              excepteur aute. Nulla duis nostrud laborum Lorem esse ea consectetur sunt.
+              Ut dolor eu sit ipsum Lorem enim non nisi incididunt in proident aliqua.
+              Sunt cupidatat officia amet quis irure qui tempor ipsum labore deserunt
+              occaecat enim labore id.
+            </p>
+            <a href="#tab-tab-2" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+          <div
+            id="tabpanel-tab-3"
+            aria-labelledby="tab-tab-3"
+            role="tabpanel"
+            tabindex="0"
+            hidden="true"
+          >
+            <h1 class="text-xl font-bold">Amet nisi labore</h1>
+            <p>
+              Aliqua occaecat voluptate laborum amet fugiat. Duis dolore exercitation id
+              anim sit ut ipsum occaecat consectetur ullamco dolor consequat occaecat.
+              Aute irure nisi sint minim id ad laboris et sunt do ad pariatur
+              consectetur.
+            </p>
+            <a href="#tab-tab-3" class="btn-text sr-only focus-visible:not-sr-only"
+              >Back to tabs list</a
+            >
+          </div>
+        </custom-tabs>
+
+        ```
+      </TabItem>
+    </StarlightTabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro compound component to serve as a blueprint for how you could possibly set up a Tabs component, and what properties and accessibility to consider.
+
+<StarlightTabs>
+  <TabItem label="Tabs" icon="seti:typescript">
+    <Code code={TabsRaw} lang="typescript" title="Tabs.ts" />
+  </TabItem>
+  <TabItem label="Root" icon="astro">
+    <Code code={TabsRootRaw} lang="astro" title="Root.astro" />
+  </TabItem>
+  <TabItem label="List" icon="astro">
+    <Code code={TabsListRaw} lang="astro" title="List.astro" />
+  </TabItem>
+  <TabItem label="Trigger" icon="astro">
+    <Code code={TabsTriggerRaw} lang="astro" title="Trigger.astro" />
+  </TabItem>
+  <TabItem label="Content" icon="astro">
+    <Code code={TabsContentRaw} lang="astro" title="Content.astro" />
+  </TabItem>
+</StarlightTabs>

@@ -1,0 +1,35 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+
+interface Props extends HTMLAttributes<'button'> {
+  /**
+    The controlled value of the tab to bind to the correct content panel.
+
+    Should be unique within the set of tabs and in kebab-case.
+  */
+  value: string
+}
+
+const { value, class: className, ...attrs } = Astro.props
+---
+
+<li>
+  <button
+    id=`tab-${value}`
+    class:list={[
+      'aria-selected:font-bold',
+      {
+        'group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]':
+          !className,
+      },
+      className,
+    ]}
+    {...attrs}
+    role="tab"
+    aria-controls={`tabpanel-${value}`}
+    ><span
+      class="pointer-events-none mb-4 flex items-center justify-center rounded px-8 py-0 group-hover:bg-gray-100 group-active:bg-gray-200 dark:group-hover:bg-gray-800 dark:group-active:bg-gray-700"
+      ><slot /></span
+    ></button
+  >
+</li>

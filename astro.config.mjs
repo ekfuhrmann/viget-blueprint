@@ -19,6 +19,10 @@ export default defineConfig({
           autogenerate: { directory: 'layout' },
         },
         {
+          label: 'Navigation',
+          autogenerate: { directory: 'navigation' }, 
+        },
+        {
           label: 'Forms',
           autogenerate: { directory: 'forms' },
         },

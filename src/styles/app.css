@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.expressive-code .frame pre {
-  @apply rounded-lg;
+.expressive-code {
+  @apply overflow-hidden rounded-lg;
 }

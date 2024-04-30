@@ -9,6 +9,9 @@ export default defineConfig({
       social: {
         github: 'https://github.com/ekfuhrmann/starlight-docs/',
       },
+      expressiveCode: {
+        themes: ['material-theme-palenight', 'light-plus'],
+      },
       sidebar: [
         {
           label: 'Guides',
@@ -20,7 +23,7 @@ export default defineConfig({
         },
         {
           label: 'Navigation',
-          autogenerate: { directory: 'navigation' }, 
+          autogenerate: { directory: 'navigation' },
         },
         {
           label: 'Forms',

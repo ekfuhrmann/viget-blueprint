@@ -2,6 +2,24 @@ import starlightPlugin from '@astrojs/starlight-tailwind'
 import colors from 'tailwindcss/colors'
 import { pxPair } from './config/tailwind/helpers'
 
+// Generated color palettes
+const accent = {
+  200: '#9aceff',
+  600: '#0070b7',
+  900: '#00345a',
+  950: '#002543',
+}
+const gray = {
+  100: '#f5f6fa',
+  200: '#ebedf6',
+  300: '#bfc2cc',
+  400: '#858b9e',
+  500: '#525769',
+  700: '#333748',
+  800: '#222636',
+  900: '#16181f',
+}
+
 /** @type {import('tailwindcss').Config} */
 export default {
   content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
@@ -34,10 +52,7 @@ export default {
       ...pxPair(128),
     },
     extend: {
-      colors: {
-        accent: colors.blue, // Your Preferred accent color.
-        gray: colors.zinc, // Your preferred gray scale.
-      },
+      colors: { accent, gray },
       fontFamily: {
         sans: ['"Atkinson Hyperlegible"'], // Your preferred text font.
         mono: ['"IBM Plex Mono"'], // Your preferred code font.

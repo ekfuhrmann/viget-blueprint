@@ -19,7 +19,7 @@ const { value, class: className, ...attrs } = Astro.props
     class:list={[
       'aria-selected:font-bold',
       {
-        'group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]':
+        'group shrink-0 cursor-pointer whitespace-nowrap bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]':
           !className,
       },
       className,

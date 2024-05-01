@@ -1,0 +1,220 @@
+---
+title: Pagination
+description: A component used to navigate through a list of items that are split across multiple pages.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Pagination from '@/components/navigation/Pagination.astro'
+import PaginationRaw from '@/components/navigation/Pagination.astro?raw'
+import PaginateTsRaw from '@/helpers/paginate.ts?raw'
+
+The Pagination component is used to navigate through a list of items that are split across multiple pages. It is a common pattern used in web applications to help users navigate through a large dataset.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Pagination totalPages={5} currentPage={1} />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs class="border-none">
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Pagination totalPages={5} currentPage={3} />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <nav aria-label="pagination navigation" data-component="Pagination">
+          <ul class="flex list-none flex-wrap items-center p-0 gap-10">
+            <li>
+              <a href="?page=2" data-component="Button" class="btn-outlined">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path></svg>
+                Previous
+                <span class="sr-only">page</span>
+              </a>
+            </li>
+            <li>
+              <a
+                href="?page=1"
+                data-component="Button"
+                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+              >
+                <span class="sr-only">Go to page</span>
+                1
+              </a>
+            </li>
+            <li>
+              <a
+                href="?page=2"
+                data-component="Button"
+                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+              >
+                <span class="sr-only">Go to page</span>
+                2
+              </a>
+            </li>
+            <li>
+              <a
+                href="?page=3"
+                data-component="Button"
+                class="btn-contained !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+              >
+                <span class="sr-only">Go to page</span>
+                3
+              </a>
+            </li>
+            <li>
+              <a
+                href="?page=4"
+                data-component="Button"
+                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+              >
+                <span class="sr-only">Go to page</span>
+                4
+              </a>
+            </li>
+            <li>
+              <a
+                href="?page=5"
+                data-component="Button"
+                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+              >
+                <span class="sr-only">Go to page</span>
+                5
+              </a>
+            </li>
+            <li>
+              <a href="?page=4" data-component="Button" class="btn-outlined">
+                Next
+                <span class="sr-only">page</span>
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M1 8a.5.5 0 0 1 .5-.5h11.793l-3.147-3.146a.5.5 0 0 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4a.5.5 0 0 1-.708-.708L13.293 8.5H1.5A.5.5 0 0 1 1 8z"></path>
+                </svg>
+              </a>
+            </li>
+          </ul>
+        </nav>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component's root element is based on the `<nav>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'totalPages',
+      type: 'number',
+      description: 'The total number of pages for the dataset.',
+      required: true,
+    },
+    {
+      prop: 'currentPage',
+      type: 'number',
+      description: 'The current page number.',
+      required: true,
+    },
+    {
+      prop: 'size',
+      type: '"sm" | "md" | "lg"',
+      description: ['The size of the pagination component.'],
+      default: '"md"',
+    },
+  ]}
+/>
+
+## Pagination Logic
+
+<Aside>
+  Pagination logic is handled by a JS helper file which can be found and adapted
+  [here](https://github.com/ekfuhrmann/starlight-docs/tree/master/src/helpers/paginate.ts).
+</Aside>
+
+There are some core rules associated to pagination components that should be considered based on the total number of pages as well as the current page. These rules should be modified to fit your project’s use case, but in the case of this documentation the rules are as follows:
+
+- If there are less than 6 pages, all pages should be visible.
+- The first and last page should always be visible.
+- Show the current page and at least one page before and after it.
+- If there are 6 or more pages and the current page is more than 3 away from the start or end, ellipsis should be shown to indicate that there are more pages in between.
+- The previous and next buttons should be disabled if the current page is the first or last page, respectively.
+
+With these rules defined, you end up getting all of the following variations:
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-col items-center gap-32">
+      <Pagination totalPages={5} currentPage={1} />
+      <Pagination totalPages={8} currentPage={3} />
+      <Pagination totalPages={8} currentPage={5} />
+      <Pagination totalPages={8} currentPage={6} />
+      <Pagination totalPages={5} currentPage={5} />
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs class="border-none">
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Pagination totalPages={5} currentPage={1} />
+        <Pagination totalPages={8} currentPage={3} />
+        <Pagination totalPages={8} currentPage={5} />
+        <Pagination totalPages={8} currentPage={6} />
+        <Pagination totalPages={5} currentPage={5} />
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Examples
+
+### Sizes
+
+Use the `size` prop to adjust the size. Pagination comes in the following different sizes: `sm`, `md`, and `lg`. By default, pagination will use `md` unless otherwise specified. Sizes should be added, removed, and tweaked as necessary based on the needs of the project.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <div class="flex flex-col items-center gap-32">
+      <Pagination totalPages={5} currentPage={3} size="sm" />
+      <Pagination totalPages={5} currentPage={3} size="md" />
+      <Pagination totalPages={5} currentPage={3} size="lg" />
+    </div>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs class="border-none">
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Pagination totalPages={5} currentPage={3} size="sm" />
+        <Pagination totalPages={5} currentPage={3} size="md" />
+        <Pagination totalPages={5} currentPage={3} size="lg" />
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Accessibility
+
+The `Pagination` component has some predefined accessibility features that are important to consider when implementing it in your project. The following are some of the key accessibility features that are included in the component:
+
+- The root element is given an `aria-label` attribute providing context to screen readers on what the element is.
+- There are `sr-only` elements in each of the page buttons to provide context to screen readers on what the button is for. This includes both the **Previous** and **Next** buttons as well as the page numbers themselves.
+
+## Astro Component
+
+Due to the display logic necessary for pagination, it is recommended to use it as a component. This will allow you to pass in the total number of pages and the current page as props and have the component handle the display logic for you. In this case, we have put together the following Astro component to serve as a blueprint for how you possibly handle the logic in your own project.
+
+<Tabs>
+  <TabItem label="Component" icon="astro">
+    <Code code={PaginationRaw} lang="astro" title="Pagintation.astro" />
+  </TabItem>
+  <TabItem label="TypeScript" icon="seti:typescript">
+    <Code code={PaginateTsRaw} lang="typescript" title="paginate.ts" />
+  </TabItem>
+</Tabs>

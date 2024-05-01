@@ -1,0 +1,91 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import Button from '@/components/elements/Button.astro'
+import arrowLeft from '@/assets/svg/arrow-left.svg?raw'
+import arrowRight from '@/assets/svg/arrow-right.svg?raw'
+import collapseRange from '@/helpers/paginate'
+
+interface Props extends HTMLAttributes<'nav'> {
+  /**
+    The total number of pages.
+  */
+  totalPages: number
+  /**
+    The currently active page number.
+  */
+  currentPage: number
+  /**
+    The size of the pagination component.
+  */
+  size?: 'sm' | 'md' | 'lg'
+}
+
+const { totalPages, currentPage, size = 'md', ...attrs } = Astro.props
+
+const collapsedPages = collapseRange(currentPage, totalPages)
+---
+
+<nav aria-label="pagination navigation" data-component="Pagination" {...attrs}>
+  <ul
+    class:list={[
+      'flex list-none flex-wrap items-center p-0',
+      {
+        'gap-8': size === 'sm',
+        'gap-10': size === 'md',
+        'gap-16': size === 'lg',
+      },
+    ]}
+  >
+    <li>
+      <Button
+        variant="outlined"
+        href={`?page=${currentPage - 1}`}
+        size={size === 'lg' ? 'md' : size}
+        disabled={currentPage === 1}
+      >
+        <Fragment set:html={arrowLeft} />
+        Previous
+        <span class="sr-only">page</span>
+      </Button>
+    </li>
+    {
+      // show page numbers
+      collapsedPages.map((pageNumber) => {
+        if (pageNumber === '...') {
+          return <li class="text-sky-600 dark:text-white">...</li>
+        }
+        return (
+          <li>
+            <Button
+              variant={currentPage === pageNumber ? 'contained' : 'subtle'}
+              class:list={[
+                '!min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white',
+                {
+                  'size-32 text-sm': size === 'sm',
+                  'size-44': size === 'md',
+                  'size-56': size === 'lg',
+                },
+              ]}
+              href={`?page=${pageNumber}`}
+            >
+              <span class="sr-only">Go to page</span>
+              {pageNumber}
+            </Button>
+          </li>
+        )
+      })
+    }
+    <li>
+      <Button
+        variant="outlined"
+        href={`?page=${currentPage + 1}`}
+        size={size === 'lg' ? 'md' : size}
+        disabled={currentPage === totalPages}
+      >
+        Next
+        <span class="sr-only">page</span>
+        <Fragment set:html={arrowRight} />
+      </Button>
+    </li>
+  </ul>
+</nav>

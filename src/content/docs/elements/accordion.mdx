@@ -138,6 +138,12 @@ The content is the element that is hidden by default and is shown when the accor
   ]}
 />
 
+## Accessibility
+
+The `<Accordion>` component leverages the `<details>` and `<summary>` elements which are natively accessible. The following are some additional accessibility features that are built into the component:
+
+- The `<summary>` element has both a hover and focus state that can be styled to indicate that it is interactive for both keyboard and mouse users.
+
 ## Examples
 
 ### Custom Summary & Content
@@ -158,7 +164,7 @@ You can customize the summary and content elements to fit the needs of your proj
   <Preview.Docs>
     <Tabs>
       <TabItem label="Astro" icon="astro">
-        ```astro /class=.*"/ /as=.*"/ /src=.*"/ /alt=.*"/
+        ```astro /hideMarker/ /class=.*"/ /as=.*"/ /src=.*"/ /alt=.*"/
         <Accordion.Root>
           <Accordion.Summary hideMarker>
             <h2 class="text-lg">Lorem ipsum dolor sit amet</h2>

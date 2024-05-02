@@ -1,0 +1,198 @@
+---
+title: Video Embed
+description: A component that embeds a video from a video hosting service such as YouTube, Wistia, or Vimeo.
+---
+
+import { Tabs, TabItem, Aside, Icon, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import { Image } from 'astro:assets'
+import PropTable from '@/components/starlight/PropTable.astro'
+import VideoEmbed from '@/components/elements/VideoEmbed.astro'
+import VideoEmbedRaw from '@/components/elements/VideoEmbed.astro?raw'
+
+Video embed components are used to embed videos from video hosting services such as YouTube, Wistia, or Vimeo.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <VideoEmbed source="https://www.youtube.com/embed/lJIrF4YjHfQ" />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <VideoEmbed source="https://www.youtube.com/embed/lJIrF4YjHfQ" />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="relative" data-component="VideoEmbed">
+          <a
+            href="#video-9631154b-5978-4c24-a82d-3afeb46fa62d"
+            data-component="Button"
+            class="btn-text sr-only focus-visible:not-sr-only"
+          >
+            Skip past video
+          </a>
+          <iframe
+            src="https://www.youtube.com/embed/lJIrF4YjHfQ"
+            class="aspect-video size-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div id="video-9631154b-5978-4c24-a82d-3afeb46fa62d"></div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component root is based on the `<div>` element and can take in any additional HTML attributes. In addition, the `<iframe>` attributes can be passed to the component to customize the video embed as well through the `iframeAttrs` prop. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'source',
+      type: `string`,
+      description:
+        'The source of the video. E.g. `https://www.youtube.com/embed/lJIrF4YjHfQ`',
+      required: true,
+    },
+    {
+      prop: 'iframeAttrs',
+      type: `HTMLAttributes<'iframe'>`,
+      description: 'Additional attributes to pass to the iframe element.',
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `<VideoEmbed>` component has some accessibility considerations baked into it. The following are some of the key accessibility features that are included in the component and worth considering:
+
+- There is a hidden skip link prior to the embed that allows users to skip past the video and its controls. This is done by using a visually hidden hash link that only displays on keyboard focus and is linked to an empty div immediately after the video embed.
+
+## Examples
+
+### YouTube
+
+<Preview.Root>
+  <Preview.Canvas>
+    <VideoEmbed source="https://www.youtube.com/embed/lJIrF4YjHfQ" />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <VideoEmbed source="https://www.youtube.com/embed/lJIrF4YjHfQ" />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="relative" data-component="VideoEmbed">
+          <a
+            href="#video-9631154b-5978-4c24-a82d-3afeb46fa62d"
+            data-component="Button"
+            class="btn-text sr-only focus-visible:not-sr-only"
+          >
+            Skip past video
+          </a>
+          <iframe
+            src="https://www.youtube.com/embed/lJIrF4YjHfQ"
+            class="aspect-video size-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div id="video-9631154b-5978-4c24-a82d-3afeb46fa62d"></div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Wistia
+
+<Preview.Root>
+  <Preview.Canvas>
+    <VideoEmbed source="https://fast.wistia.net/embed/iframe/30q7n48g4f?seo=true&videoFoam=false" />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <VideoEmbed source="https://fast.wistia.net/embed/iframe/30q7n48g4f?seo=true&videoFoam=false" />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="relative" data-component="VideoEmbed">
+          <a
+            href="#video-9631154b-5978-4c24-a82d-3afeb46fa62d"
+            data-component="Button"
+            class="btn-text sr-only focus-visible:not-sr-only"
+          >
+            Skip past video
+          </a>
+          <iframe
+            src="https://fast.wistia.net/embed/iframe/30q7n48g4f?seo=true&videoFoam=false"
+            class="aspect-video size-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div id="video-9631154b-5978-4c24-a82d-3afeb46fa62d"></div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Vimeo
+
+<Preview.Root>
+  <Preview.Canvas>
+    <VideoEmbed source="https://player.vimeo.com/video/877473729?h=255330332d&title=0&byline=0&portrait=0" />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <VideoEmbed source="https://player.vimeo.com/video/877473729?h=255330332d&title=0&byline=0&portrait=0" />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div class="relative" data-component="VideoEmbed">
+          <a
+            href="#video-9631154b-5978-4c24-a82d-3afeb46fa62d"
+            data-component="Button"
+            class="btn-text sr-only focus-visible:not-sr-only"
+          >
+            Skip past video
+          </a>
+          <iframe
+            src="https://player.vimeo.com/video/877473729?h=255330332d&title=0&byline=0&portrait=0"
+            class="aspect-video size-full"
+            allow="autoplay; fullscreen; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div id="video-9631154b-5978-4c24-a82d-3afeb46fa62d"></div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+Depending on the framework, it’s sometimes beneficial to use a component. In this case, we have put together the following Astro component to serve as a blueprint for how you could possibly set up a Video Embed component, and what properties to consider.
+
+<Code code={VideoEmbedRaw} lang="astro" title="VideoEmbed.astro" />

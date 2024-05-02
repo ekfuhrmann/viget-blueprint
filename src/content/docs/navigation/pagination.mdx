@@ -14,7 +14,7 @@ The Pagination component is used to navigate through a list of items that are sp
 
 <Preview.Root>
   <Preview.Canvas>
-    <Pagination totalPages={5} currentPage={1} />
+    <Pagination totalPages={5} currentPage={3} />
   </Preview.Canvas>
   <Preview.Docs>
     <Tabs class="border-none">
@@ -26,7 +26,7 @@ The Pagination component is used to navigate through a list of items that are sp
       <TabItem label="Compiled" icon="seti:html">
         ```html
         <nav aria-label="pagination navigation" data-component="Pagination">
-          <ul class="flex list-none flex-wrap items-center p-0 gap-10">
+          <ul class="flex list-none flex-wrap items-center gap-10 p-0">
             <li>
               <a href="?page=2" data-component="Button" class="btn-outlined">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M15 8a.5.5 0 0 0-.5-.5H2.707l3.147-3.146a.5.5 0 1 0-.708-.708l-4 4a.5.5 0 0 0 0 .708l4 4a.5.5 0 0 0 .708-.708L2.707 8.5H14.5A.5.5 0 0 0 15 8z"></path></svg>
@@ -38,7 +38,7 @@ The Pagination component is used to navigate through a list of items that are sp
               <a
                 href="?page=1"
                 data-component="Button"
-                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+                class="btn-subtle size-44 !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white"
               >
                 <span class="sr-only">Go to page</span>
                 1
@@ -48,7 +48,7 @@ The Pagination component is used to navigate through a list of items that are sp
               <a
                 href="?page=2"
                 data-component="Button"
-                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+                class="btn-subtle size-44 !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white"
               >
                 <span class="sr-only">Go to page</span>
                 2
@@ -58,7 +58,7 @@ The Pagination component is used to navigate through a list of items that are sp
               <a
                 href="?page=3"
                 data-component="Button"
-                class="btn-contained !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+                class="btn-contained size-44 !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white"
               >
                 <span class="sr-only">Go to page</span>
                 3
@@ -68,7 +68,7 @@ The Pagination component is used to navigate through a list of items that are sp
               <a
                 href="?page=4"
                 data-component="Button"
-                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+                class="btn-subtle size-44 !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white"
               >
                 <span class="sr-only">Go to page</span>
                 4
@@ -78,7 +78,7 @@ The Pagination component is used to navigate through a list of items that are sp
               <a
                 href="?page=5"
                 data-component="Button"
-                class="btn-subtle !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white size-44"
+                class="btn-subtle size-44 !min-h-0 items-center justify-center rounded-full !p-0 text-center ring-inset hover:ring-1 hover:ring-sky-700 dark:hover:ring-white"
               >
                 <span class="sr-only">Go to page</span>
                 5
@@ -201,7 +201,7 @@ Use the `size` prop to adjust the size. Pagination comes in the following differ
 
 ## Accessibility
 
-The `Pagination` component has some predefined accessibility features that are important to consider when implementing it in your project. The following are some of the key accessibility features that are included in the component:
+The `<Pagination>` component has some predefined accessibility features that are important to consider when implementing it in your project. The following are some of the key accessibility features that are included in the component:
 
 - The root element is given an `aria-label` attribute providing context to screen readers on what the element is.
 - There are `sr-only` elements in each of the page buttons to provide context to screen readers on what the button is for. This includes both the **Previous** and **Next** buttons as well as the page numbers themselves.

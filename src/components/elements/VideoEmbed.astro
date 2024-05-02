@@ -1,0 +1,39 @@
+---
+import type { HTMLAttributes } from 'astro/types'
+import Button from '@/components/elements/Button.astro'
+
+interface Props extends HTMLAttributes<'div'> {
+  /**
+    The source of the video. E.g. 'https://www.youtube.com/embed/lJIrF4YjHfQ'
+  */
+  source: string
+  /**
+    Additional attributes to pass to the iframe element.
+  */
+  iframeAttrs: HTMLAttributes<'iframe'>
+}
+
+const { source, class: className, iframeAttrs, ...attrs } = Astro.props
+
+// Generate a unique ID for the video element
+const id = `video-${crypto.randomUUID()}`
+---
+
+<div
+  class:list={['relative', className]}
+  data-component="VideoEmbed"
+  {...attrs}
+>
+  <Button
+    href={`#${id}`}
+    variant="text"
+    class="sr-only focus-visible:not-sr-only">Skip past video</Button
+  >
+  <iframe
+    src={source}
+    class:list={['aspect-video size-full', iframeAttrs?.class]}
+    allow={iframeAttrs?.allow || 'autoplay; fullscreen; picture-in-picture'}
+    allowfullscreen={iframeAttrs?.allowfullscreen || true}
+    {...iframeAttrs}></iframe>
+</div>
+<div id={id}></div>

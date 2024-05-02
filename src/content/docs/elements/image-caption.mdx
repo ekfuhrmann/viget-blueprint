@@ -21,6 +21,7 @@ Image Caption components are used to group an image with a caption. This compone
           alt: '',
           width: 400,
           height: 300,
+          loading: 'eager'
         }}
         caption={{
           text: 'Ipsum dolor sit esse fugiat sint enim minim.',
@@ -83,7 +84,6 @@ This component is based on the `<figure>` element and can take in any additional
           description: 'The URL of the image.',
           required: true,
         },
-
         {
           prop: 'alt',
           type: 'string',
@@ -99,6 +99,16 @@ This component is based on the `<figure>` element and can take in any additional
           prop: 'height',
           type: 'number',
           description: 'The height of the image.',
+        },
+        {
+          prop: 'decoding',
+          type: `'async' | 'sync' | 'auto'`,
+          description: 'The decoding attribute of the image.',
+        },
+        {
+          prop: 'loading',
+          type: `'lazy' | 'eager'`,
+          description: 'The loading attribute of the image.',
         },
       ],
     },
@@ -118,6 +128,14 @@ This component is based on the `<figure>` element and can take in any additional
 
 ]}
 />
+
+## Accessibility
+
+The `<ImageCaption>` component has some accessibility considerations baked into it. The following are some of the key accessibility features that are included in the component and worth considering:
+
+- When the image is decorative, the `alt` property can be omitted and will automatically be converted to `alt=""`.
+- If an image has a `caption`, the `alt` will default to that caption text unless otherwise specified.
+- If an image has the same `caption` and `alt` text, the `caption` will be given the `aria-hidden="true"` attribute to prevent duplication of content to screen readers.
 
 ## Astro Component
 

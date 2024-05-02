@@ -17,13 +17,19 @@ interface Props extends HTMLAttributes<'figure'> {
 }
 
 const {
-  image: { alt = '', ...image },
+  image: { alt, ...image },
   caption: { text, ...captionAttrs },
   ...attrs
 } = Astro.props
 ---
 
 <figure {...attrs}>
-  {image && <Image alt={alt} {...image} />}
-  {text && <figcaption {...captionAttrs}>{text}</figcaption>}
+  {image && <Image alt={alt || text || ''} {...image} />}
+  {
+    text && (
+      <figcaption {...captionAttrs} aria-hidden={alt === text}>
+        {text}
+      </figcaption>
+    )
+  }
 </figure>

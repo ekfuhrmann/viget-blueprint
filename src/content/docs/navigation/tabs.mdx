@@ -85,7 +85,7 @@ Tabs are a set of layered sections of content that are displayed individually an
             <li>
               <button
                 id="tab-tab-1"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-1"
                 aria-selected="true"
@@ -99,7 +99,7 @@ Tabs are a set of layered sections of content that are displayed individually an
             <li>
               <button
                 id="tab-tab-2"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-2"
                 aria-selected="false"
@@ -113,7 +113,7 @@ Tabs are a set of layered sections of content that are displayed individually an
             <li>
               <button
                 id="tab-tab-3"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-3"
                 aria-selected="false"
@@ -262,11 +262,11 @@ The content element of the Tabs component. This component is based on the `<div>
 
 ## Accessibility
 
-The `Tabs` component is designed with a strong emphasis on accessibility. It employs `aria` attributes to establish a clear association between the content and the tabs. This ensures that when a tab is activated, the correct tab name is announced to screen reader users.
+The `<Tabs>` component has some predefined accessibility features that are important to consider when implementing it in your project. The following are some of the key accessibility features that are included in the component:
 
-Moreover, the component manages the focus state of the tabs. This is crucial as it ensures that when a tab is activated, the corresponding content is brought into focus, enhancing the experience for users relying on keyboard navigation.
-
-Additionally, the component includes a hidden link within the content field that points back to the tab trigger. This feature is particularly beneficial for screen reader and keyboard navigation users, as it provides an easy way to navigate back to the list of tabs.
+- The component uses `aria` attributes to establish a clear association between the content and the tabs.
+- When a tab is activated, the corresponding content is brought into focus, enhancing the experience for users relying on keyboard navigation.
+- The component includes a hidden jump link within the content field that points back to the tab trigger.
 
 ## Examples
 
@@ -328,7 +328,7 @@ You can change the default tab that is opened when the component is first render
             <li>
               <button
                 id="tab-tab-1"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-1"
                 aria-selected="false"
@@ -342,7 +342,7 @@ You can change the default tab that is opened when the component is first render
             <li>
               <button
                 id="tab-tab-2"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-2"
                 aria-selected="true"
@@ -356,7 +356,7 @@ You can change the default tab that is opened when the component is first render
             <li>
               <button
                 id="tab-tab-3"
-                class="aria-selected:font-bold group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
+                class="group cursor-pointer bg-transparent px-8 pb-4 transition-colors aria-selected:font-bold aria-selected:shadow-[inset_0_-3px_theme(colors.blue.500)]"
                 role="tab"
                 aria-controls="tabpanel-tab-3"
                 aria-selected="false"

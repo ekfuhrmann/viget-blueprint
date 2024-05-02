@@ -8,16 +8,17 @@ interface Props extends HTMLAttributes<'div'> {
     Whether or not the close button should be hidden.
   */
   hideClose?: boolean
-  /*
-    Classes to pass into the alert banner content element.
-  */
-  class: string
 }
 
 const { hideClose = false, class: className, ...attrs } = Astro.props
 ---
 
-<custom-alert-banner role="alert">
+<custom-alert-banner
+  role="alert"
+  data-component="AlertBanner"
+  aria-live="assertive"
+  aria-atomic="true"
+>
   <div
     class:list={[
       'relative flex bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48',

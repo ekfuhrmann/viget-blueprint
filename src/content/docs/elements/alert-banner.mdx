@@ -38,7 +38,12 @@ Alert Banners are used to display notifications or time-sensitive information, i
       </TabItem>
       <TabItem label="Compiled" icon="seti:html">
         ```html
-        <custom-alert-banner role="alert">
+        <custom-alert-banner
+          role="alert"
+          data-component="AlertBanner"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
           <div class="relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48">
             <h2 class="text-md font-bold">Consectetur quis magna</h2>
             <p>
@@ -85,6 +90,14 @@ This component is based on the `<div>` element and can take in any additional HT
   ]}
 />
 
+## Accessibility
+
+The `<AlertBanner>` component is designed to be accessible by default. The following are some additional accessibility features that have been implemented in the component:
+
+- The component includes the `role="alert"` attribute to indicate that it contains important information that should be conveyed to the user.
+- The component includes the `aria-live="assertive"` attribute to ensure that screen readers announce the content immediately.
+- The component includes the `aria-atomic="true"` attribute to ensure that screen readers announce the entire content of the alert banner when it changes.
+
 ## Examples
 
 ### Hide Close
@@ -118,7 +131,12 @@ Use the `hideClose` prop to hide the close button from the Alert Banner.
       </TabItem>
       <TabItem label="Compiled" icon="seti:html">
         ```html
-        <custom-alert-banner role="alert">
+        <custom-alert-banner
+          role="alert"
+          data-component="AlertBanner"
+          aria-live="assertive"
+          aria-atomic="true"
+        >
           <div class="relative flex flex-col gap-16 bg-sky-100 p-24 dark:bg-gray-600 dark:text-white lg:p-48">
             <h2 class="text-md font-bold">Consectetur quis magna</h2>
             <p>

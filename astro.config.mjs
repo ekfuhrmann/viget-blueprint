@@ -14,10 +14,6 @@ export default defineConfig({
       },
       sidebar: [
         {
-          label: 'Guides',
-          autogenerate: { directory: 'guides' },
-        },
-        {
           label: 'Layout',
           autogenerate: { directory: 'layout' },
         },

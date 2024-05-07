@@ -24,7 +24,7 @@ const {
 ---
 
 <figure {...attrs}>
-  {image && <Image alt={alt || text || ''} {...image} />}
+  {image && <Image alt={alt || ''} {...image} />}
   {
     text && (
       <figcaption {...captionAttrs} aria-hidden={alt === text}>

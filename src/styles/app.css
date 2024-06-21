@@ -5,3 +5,21 @@
 .expressive-code {
   @apply overflow-hidden rounded-lg;
 }
+
+#starlight__sidebar details details {
+  & .large {
+    @apply text-sm font-normal text-[var(--sl-color-gray-2)];
+  }
+
+  & summary:hover .large {
+    @apply dark:text-white;
+  }
+
+  &[open] .large {
+    @apply font-semibold dark:text-white;
+  }
+
+  & a {
+    @apply text-xs;
+  }
+}

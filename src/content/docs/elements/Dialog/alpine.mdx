@@ -1,0 +1,583 @@
+---
+title: Dialog (Alpine)
+description: A component that informs users about a task and can contain critical information, require decisions, or involve multiple tasks.
+sidebar:
+  label: Alpine
+---
+
+import { Tabs, TabItem, Aside, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Dialog from '@/components/elements/dialog/alpine/Dialog.astro'
+import DialogRaw from '@/components/elements/dialog/alpine/Dialog.astro?raw'
+import TextInput from '@/components/forms/TextInput.astro'
+import Button from '@/components/elements/Button.astro'
+
+The dialog component informs users about a task and can contain critical information, require decisions, or involve multiple tasks. The Dialog component can be used to create a modal, alert, or other custom dialog and can be fully customized to fit your needs.
+
+<Aside>
+  Dialog styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/vigetlabs/blueprint-starlight/blob/master/config/tailwind/dialog.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Dialog />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          data-component="Dialog"
+          x-data="{
+            open: false,
+
+            // Close the dialog when the user clicks backdrop
+            handleDialogClick(event) {
+              (event.target === $refs.dialogRef) &amp;&amp; this.handleDialogClose()
+            },
+
+            // Delay close to allow for animation
+            handleDialogClose() {
+              $refs.dialogRef.dataset.dialogStatus = 'closing'
+              this.open = false
+
+              setTimeout(() => {
+                delete $refs.dialogRef.dataset.dialogStatus
+                $refs.dialogRef.close()
+              }, 300);
+            }
+          }"
+          x-init="() => {
+            // Intercept default escape and add custom close behavior
+            window.addEventListener('keydown', (event) => {
+              if (open &amp;&amp; event.key === 'Escape') {
+                event.preventDefault()
+                handleDialogClose()
+              }
+            })
+          }"
+        >
+          <!-- trigger -->
+          <button
+            type="button"
+            data-component="Button"
+            @click="$refs.dialogRef.showModal(), open = true"
+            class="btn-contained"
+          >
+            Open Dialog
+          </button>
+          <!-- dialog -->
+          <dialog
+            x-ref="dialogRef"
+            x-trap.noscroll="open"
+            @click="handleDialogClick(event)"
+            class="dialog"
+          >
+            <button
+              type="button"
+              title="Close"
+              data-component="Button"
+              @click="handleDialogClose()"
+              class="[&amp;_svg]:size-12 btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 15 14"
+              >
+                <path
+                  d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"
+                ></path>
+              </svg>
+              Close
+            </button>
+            <div class="flex items-center">
+              No content has been provided for this dialog.
+            </div>
+          </dialog>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## API Reference
+
+This component is based on the `<dialog>` HTML element. The following are the props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'hideClose',
+      type: 'boolean',
+      description: 'Whether or not the close button should be hidden.',
+      default: 'false',
+    },
+    {
+      prop: 'triggerProps',
+      type: 'object',
+      description: 'Props to be passed to the trigger element.',
+      children: [
+        {
+          prop: 'variant',
+          type: '"contained" | "outlined" | "subtle" | "text"',
+          description:
+            'The variant the button will take. Corresponds to the design system.',
+          default: '"contained"',
+        },
+        {
+          prop: 'size',
+          type: '"sm" | "md" | "lg"',
+          description:
+            'The size of the button. Corresponds to the design system.',
+          default: '"md"',
+        },
+        {
+          prop: 'title',
+          type: 'string',
+          description:
+            'The title of the button. Used for screen readers and assistive tooltips',
+        },
+        {
+          prop: 'icon',
+          type: 'boolean',
+          description:
+            'Whether the button should be an icon only button or not. If `true`, the button will omit the text, become a 1:1 aspect ratio, and only display the icon.',
+          default: 'false',
+        },
+        {
+          prop: 'href',
+          type: 'string',
+          description:
+            'The URL to link to. Passing in a value will cause the element to render as an anchor.',
+        },
+        {
+          prop: 'disabled',
+          type: 'boolean',
+          description: 'Whether the button is disabled or not.',
+          default: 'false',
+        },
+      ],
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `<Dialog>` component leverages the `<dialog>` element which is natively accessible. The following are some additional accessibility features that are built into the component:
+
+- Clicking off from the dialog will close it. This is done by listening for a click event on the dialog element and checking if the target is the dialog itself.
+- When the dialog element is opened, the body prevents scrolling of the page. This is done by using `x-trap.noscroll` and having it track the `open` state of the dialog element.
+  - This feature requires the Alpine.js [Focus Plugin](https://alpinejs.dev/plugins/focus) to be installed and configured in order to work.
+- When the dialog includes a form, we suggest passing `autofocus` to the first input field to ensure that the user can start interacting with the form immediately.
+- Ensure forms are validated before submitting. This can be done by adding the `required` attribute to the input fields and setting the `formnovalidate` attribute on the cancel button.
+
+## Examples
+
+### Hide Close Button
+
+You can hide the default close button by passing the `hideClose` prop to the `<Dialog>` component.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog hideClose />
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /hideClose/
+        <Dialog hideClose />
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          data-component="Dialog"
+          x-data="{
+            open: false,
+
+            // Close the dialog when the user clicks backdrop
+            handleDialogClick(event) {
+              (event.target === $refs.dialogRef) && this.handleDialogClose()
+            },
+
+            // Delay close to allow for animation
+            handleDialogClose() {
+              $refs.dialogRef.dataset.dialogStatus = 'closing'
+              this.open = false
+
+              setTimeout(() => {
+                delete $refs.dialogRef.dataset.dialogStatus
+                $refs.dialogRef.close()
+              }, 300);
+            }
+          }"
+          x-init="() => {
+            // Intercept default escape and add custom close behavior
+            window.addEventListener('keydown', (event) => {
+              if (open && event.key === 'Escape') {
+                event.preventDefault()
+                handleDialogClose()
+              }
+            })
+          }"
+        >
+          <!-- trigger -->
+          <button
+            type="button"
+            data-component="Button"
+            @click="$refs.dialogRef.showModal(), open = true"
+            class="btn-contained"
+          >Open Dialog</button>
+
+          <!-- dialog -->
+          <dialog
+            x-ref="dialogRef"
+            x-trap.noscroll="open"
+            @click="handleDialogClick(event)"
+            class="dialog"
+          >
+            <div class="flex items-center">
+              No content has been provided for this dialog.
+            </div>
+          </dialog>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Form Dialog
+
+You can use a dialog to handle form data. The following example demonstrates how to create a custom form dialog using the `<Dialog>` component.
+
+<Aside>The form can not be submitted without valid inputs.</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog>
+      <form method="dialog" class="grid gap-24">
+        <div class="flex gap-16 p-2">
+          <TextInput
+            label="First Name"
+            name="first-name"
+            placeholder="John"
+            required
+            inputProps={{ autofocus: true }}
+          />
+          <TextInput
+            label="Last Name"
+            name="last-name"
+            placeholder="Smith"
+            required
+          />
+        </div>
+        <footer class="flex items-center justify-end gap-16">
+          <Button
+            type="submit"
+            variant="outlined"
+            data-dialog="close"
+            formnovalidate
+          >Cancel</Button>
+          <Button type="submit">Submit</Button>
+        </footer>
+      </form>
+    </Dialog>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        ---
+        import Button from '@/components/Button.astro'
+        import TextInput from '@/components/forms/TextInput.astro'
+        ---
+
+        <Dialog>
+          <form method="dialog" class="grid gap-24">
+            <div class="flex gap-16 p-2">
+              <TextInput
+                label="First Name"
+                name="first-name"
+                placeholder="John"
+                required
+                inputProps={{ autofocus: true }}
+              />
+              <TextInput
+                label="Last Name"
+                name="last-name"
+                placeholder="Smith"
+                required
+              />
+            </div>
+            <footer class="flex items-center justify-end gap-16">
+              <Button
+                type="submit"
+                variant="outlined"
+                data-dialog="close"
+                formnovalidate
+              >Cancel</Button>
+              <Button type="submit">Submit</Button>
+            </footer>
+          </form>
+        </Dialog>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          data-component="Dialog"
+          x-data="{
+            open: false,
+
+            // Close the dialog when the user clicks backdrop
+            handleDialogClick(event) {
+              (event.target === $refs.dialogRef) &amp;&amp; this.handleDialogClose()
+            },
+
+            // Delay close to allow for animation
+            handleDialogClose() {
+              $refs.dialogRef.dataset.dialogStatus = 'closing'
+              this.open = false
+
+              setTimeout(() => {
+                delete $refs.dialogRef.dataset.dialogStatus
+                $refs.dialogRef.close()
+              }, 300);
+            }
+          }"
+          x-init="() => {
+            // Intercept default escape and add custom close behavior
+            window.addEventListener('keydown', (event) => {
+              if (open &amp;&amp; event.key === 'Escape') {
+                event.preventDefault()
+                handleDialogClose()
+              }
+            })
+          }"
+        >
+          <!-- trigger -->
+          <button
+            type="button"
+            data-component="Button"
+            @click="$refs.dialogRef.showModal(), open = true"
+            class="btn-contained"
+          >
+            Open Dialog
+          </button>
+          <!-- dialog -->
+          <dialog
+            x-ref="dialogRef"
+            x-trap.noscroll="open"
+            @click="handleDialogClick(event)"
+            class="dialog"
+          >
+            <button
+              type="button"
+              title="Close"
+              data-component="Button"
+              @click="handleDialogClose()"
+              class="[&amp;_svg]:size-12 btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 15 14"
+              >
+                <path
+                  d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"
+                ></path>
+              </svg>
+              Close
+            </button>
+            <form method="dialog" class="grid gap-24">
+              <div class="flex gap-16 p-2">
+                <div
+                  class="field-group"
+                  data-required=""
+                  data-layout="FieldGroup"
+                  data-component="TextInput"
+                >
+                  <label for="first-name" id="label-first-name">
+                    <span class="field-label">First Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="input-first-name"
+                    placeholder="John"
+                    required=""
+                    aria-labelledby="label-first-name"
+                    autofocus=""
+                  />
+                </div>
+                <div
+                  class="field-group"
+                  data-required=""
+                  data-layout="FieldGroup"
+                  data-component="TextInput"
+                >
+                  <label for="last-name" id="label-last-name">
+                    <span class="field-label">Last Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="input-last-name"
+                    placeholder="Smith"
+                    required=""
+                    aria-labelledby="label-last-name"
+                  />
+                </div>
+              </div>
+              <footer class="flex items-center justify-end gap-16">
+                <button
+                  type="submit"
+                  data-component="Button"
+                  data-dialog="close"
+                  formnovalidate=""
+                  class="btn-outlined"
+                >
+                  Cancel
+                </button>
+                <button type="submit" data-component="Button" class="btn-contained">
+                  Submit
+                </button>
+              </footer>
+            </form>
+          </dialog>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Custom Trigger & Dialog
+
+The dialog element can be customized to fit whatever context it is being used in. The following example demonstrates how to create a custom trigger and dialog using the `<Dialog>` component. In addition, the dialog element uses a named slot of `"trigger"` for the content of the button. Any additional elements placed within the dialog will be rendered as the dialog content.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog
+      class="rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24"
+      triggerProps={{class:"rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75"}}
+    >
+      <span slot="trigger">Open Custom Dialog</span>
+      <div class="flex items-center">
+        Culpa proident non exercitation eu consequat Lorem ipsum.
+      </div>
+    </Dialog>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /class="rounded.*"/ /triggerProps=.*"/ /slot="trigger"/
+        <Dialog
+          class="rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24"
+          triggerProps={{class:"rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75"}}
+        >
+          <span slot="trigger">Open Custom Dialog</span>
+          <div class="flex items-center">
+            Culpa proident non exercitation eu consequat Lorem ipsum.
+          </div>
+        </Dialog>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <div
+          data-component="Dialog"
+          x-data="{
+            open: false,
+
+            // Close the dialog when the user clicks backdrop
+            handleDialogClick(event) {
+              (event.target === $refs.dialogRef) && this.handleDialogClose()
+            },
+
+            // Delay close to allow for animation
+            handleDialogClose() {
+              $refs.dialogRef.dataset.dialogStatus = 'closing'
+              this.open = false
+
+              setTimeout(() => {
+                delete $refs.dialogRef.dataset.dialogStatus
+                $refs.dialogRef.close()
+              }, 300);
+            }
+          }"
+          x-init="() => {
+            // Intercept default escape and add custom close behavior
+            window.addEventListener('keydown', (event) => {
+              if (open && event.key === 'Escape') {
+                event.preventDefault()
+                handleDialogClose()
+              }
+            })
+          }"
+        >
+          <!-- trigger -->
+          <button
+            type="button"
+            data-component="Button"
+            @click="$refs.dialogRef.showModal(), open = true"
+            class="btn-contained rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75"
+          >
+            <span>Open Custom Dialog</span>
+          </button>
+          <!-- dialog -->
+          <dialog
+            x-ref="dialogRef"
+            x-trap.noscroll="open"
+            @click="handleDialogClick(event)"
+            class="dialog rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24"
+          >
+            <button
+              type="button"
+              title="Close"
+              data-component="Button"
+              @click="handleDialogClose()"
+              class="btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 15 14"
+              >
+                <path
+                  d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"
+                ></path>
+              </svg>
+              Close
+            </button>
+            <div class="flex items-center">
+              <p>Culpa proident non exercitation eu consequat Lorem ipsum.</p>
+            </div>
+          </dialog>
+        </div>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro component using Alpine.js to serve as a blueprint for how you could possibly set up a Dialog component, and what properties to consider.
+
+<Code code={DialogRaw} lang="astro" title="Dialog.astro" />

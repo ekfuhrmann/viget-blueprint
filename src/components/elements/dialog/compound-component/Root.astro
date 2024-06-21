@@ -2,7 +2,7 @@
 
 ---
 
-<custom-dialog>
+<custom-dialog data-component="Dialog">
   <slot />
 </custom-dialog>
 
@@ -22,6 +22,7 @@
         dialogClose.addEventListener('click', this.handleDialogCloseClick)
       })
       this.dialogForm?.addEventListener('submit', this.handleDialogFormSubmit)
+      this.dialog.addEventListener('keydown', this.handleDialogEsc)
     }
 
     disconnectedCallback() {
@@ -37,6 +38,7 @@
         'submit',
         this.handleDialogFormSubmit,
       )
+      this.dialog.removeEventListener('keydown', this.handleDialogEsc)
     }
 
     private static readonly DELAY_TIME = 300
@@ -66,7 +68,10 @@
       setTimeout(() => {
         delete this.dialog.dataset.dialogStatus
       }, CustomDialog.DELAY_TIME)
+
       this.dialog.showModal()
+      // Lock scroll when dialog is open
+      document.body.style.overflow = 'hidden'
     }
 
     // Close the dialog when the user clicks backdrop
@@ -76,10 +81,17 @@
       if (event.target === this.dialog) this.handleDialogClose()
     }
 
+    // Intercept default escape and add custom close behavior
+    private handleDialogEsc = (event: KeyboardEvent) => {
+      if (this.dialog.open && event.key === 'Escape') {
+        event.preventDefault()
+        this.handleDialogClose()
+      }
+    }
+
     // Close the dialog when the user clicks a close button
     private handleDialogCloseClick = (event: Event) => {
       event.preventDefault()
-
       this.handleDialogClose()
     }
 
@@ -92,11 +104,16 @@
 
     // Close the dialog with delay for animation
     private handleDialogClose() {
+      if ('dialogStatus' in this.dialog.dataset) return
+
       this.dialog.dataset.dialogStatus = 'closing'
       setTimeout(() => {
         delete this.dialog.dataset.dialogStatus
         this.dialog.close()
       }, CustomDialog.DELAY_TIME)
+
+      // Unlock scroll when dialog is closed
+      document.body.style.overflow = ''
     }
   }
 

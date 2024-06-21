@@ -1,0 +1,472 @@
+---
+title: Dialog (Compound Component)
+description: A component that informs users about a task and can contain critical information, require decisions, or involve multiple tasks.
+sidebar:
+  label: Compound Component
+  order: -1
+---
+
+import { Tabs, TabItem, Aside, Code } from '@astrojs/starlight/components'
+import Preview from '@/components/starlight/preview/Preview.ts'
+import PropTable from '@/components/starlight/PropTable.astro'
+import Dialog from '@/components/elements/dialog/compound-component/Dialog'
+import DialogRaw from '@/components/elements/dialog/compound-component/Dialog.ts?raw'
+import DialogRootRaw from '@/components/elements/dialog/compound-component/Root.astro?raw'
+import DialogContentRaw from '@/components/elements/dialog/compound-component/Content.astro?raw'
+import DialogTriggerRaw from '@/components/elements/dialog/compound-component/Trigger.astro?raw'
+import TextInput from '@/components/forms/TextInput.astro'
+import Button from '@/components/elements/Button.astro'
+
+The dialog component informs users about a task and can contain critical information, require decisions, or involve multiple tasks. The Dialog component can be used to create a modal, alert, or other custom dialog and can be fully customized to fit your needs.
+
+<Aside>
+  Dialog styles are generated via a [Tailwind
+  Plugin](https://tailwindcss.com/docs/plugins) which can be found and adapted
+  [here](https://github.com/vigetlabs/blueprint-starlight/blob/master/config/tailwind/dialog.js).
+</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog.Root>
+      <Dialog.Content />
+      <Dialog.Trigger />
+    </Dialog.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        <Dialog.Root>
+          <Dialog.Content />
+          <Dialog.Trigger />
+        </Dialog.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-dialog>
+          <dialog data-dialog="dialog" class="dialog">
+            <button
+              type="button"
+              title="Close"
+              data-component="Button"
+              data-dialog="close"
+              class="btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"><path d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"></path></svg>
+              Close
+            </button>
+            <div class="flex items-center">
+              No content has been provided for this dialog.
+            </div>
+          </dialog>
+          <button
+            type="button"
+            data-component="Button"
+            data-dialog="trigger"
+            class="btn-contained"
+          >
+            Open Dialog
+          </button>
+        </custom-dialog>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Anatomy
+
+This component is comprised of several elements that work together to create a dialog. The following are the elements that make up the Dialog component.
+
+```astro
+---
+import Dialog from '@/components/elements/dialog/compound-component/Dialog'
+---
+
+<Dialog.Root>
+  <Dialog.Content />
+  <Dialog.Trigger />
+</Dialog.Root>
+```
+
+## API Reference
+
+### Root
+
+The root element of the Dialog component. This element wraps the content and trigger elements and provides the scripting logic to open and close the dialog.
+
+### Content
+
+The content of the Dialog component. This component is based on the `<dialog>` element and can take in any additional HTML attributes. The following are the custom props that can be passed to the component.
+
+<PropTable
+  rows={[
+    {
+      prop: 'hideClose',
+      type: 'boolean',
+      description: 'Whether or not the close button should be hidden.',
+      default: 'false',
+    },
+  ]}
+/>
+
+### Trigger
+
+The trigger that opens the Dialog component. This element inherits from the [Button component](/elements/button/).
+
+<PropTable
+  rows={[
+    {
+      prop: 'variant',
+      type: '"contained" | "outlined" | "subtle" | "text"',
+      description:
+        'The variant the button will take. Corresponds to the design system.',
+      default: '"contained"',
+    },
+    {
+      prop: 'size',
+      type: '"sm" | "md" | "lg"',
+      description: 'The size of the button. Corresponds to the design system.',
+      default: '"md"',
+    },
+    {
+      prop: 'title',
+      type: 'string',
+      description:
+        'The title of the button. Used for screen readers and assistive tooltips',
+    },
+    {
+      prop: 'icon',
+      type: 'boolean',
+      description:
+        'Whether the button should be an icon only button or not. If `true`, the button will omit the text, become a 1:1 aspect ratio, and only display the icon.',
+      default: 'false',
+    },
+    {
+      prop: 'href',
+      type: 'string',
+      description:
+        'The URL to link to. Passing in a value will cause the element to render as an anchor.',
+    },
+    {
+      prop: 'disabled',
+      type: 'boolean',
+      description: 'Whether the button is disabled or not.',
+      default: 'false',
+    },
+  ]}
+/>
+
+## Accessibility
+
+The `<Dialog>` component leverages the `<dialog>` element which is natively accessible. The following are some additional accessibility features that are built into the component:
+
+- Clicking off from the dialog will close it. This is done by listening for a click event on the dialog element and checking if the target is the dialog itself.
+- When the dialog element is opened, the body element will receive the `overflow-hidden` class to prevent scrolling.
+- When the dialog includes a form, we suggest passing `autofocus` to the first input field to ensure that the user can start interacting with the form immediately.
+- Ensure forms are validated before submitting. This can be done by adding the `required` attribute to the input fields and setting the `formnovalidate` attribute on the cancel button.
+
+## Examples
+
+### Hide Close Button
+
+You can hide the default close button by passing the `hideClose` prop to the `<Dialog.Content>` component.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog.Root>
+      <Dialog.Content hideClose />
+      <Dialog.Trigger />
+    </Dialog.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /hideClose/
+        <Dialog.Root>
+          <Dialog.Content hideClose />
+          <Dialog.Trigger />
+        </Dialog.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-dialog>
+          <dialog data-dialog="dialog" class="dialog">
+            <div class="flex items-center">
+              No content has been provided for this dialog.
+            </div>
+          </dialog>
+          <button
+            type="button"
+            data-component="Button"
+            data-dialog="trigger"
+            class="btn-contained"
+          >
+            Open Dialog
+          </button>
+        </custom-dialog>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Form Dialog
+
+You can use a dialog to handle form data. The following example demonstrates how to create a custom form dialog using the `<Dialog>` component.
+
+<Aside>The form can not be submitted without valid inputs.</Aside>
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog.Root>
+      <Dialog.Content>
+        <form method="dialog" class="grid gap-24">
+          <div class="flex gap-16 p-2">
+            <TextInput
+              label="First Name"
+              name="first-name"
+              placeholder="John"
+              required
+              inputProps={{ autofocus: true }}
+            />
+            <TextInput
+              label="Last Name"
+              name="last-name"
+              placeholder="Smith"
+              required
+            />
+          </div>
+          <footer class="flex items-center justify-end gap-16">
+            <Button
+              type="submit"
+              variant="outlined"
+              data-dialog="close"
+              formnovalidate
+            >Cancel</Button>
+            <Button type="submit">Submit</Button>
+          </footer>
+        </form>
+      </Dialog.Content>
+      <Dialog.Trigger />
+    </Dialog.Root>
+
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro
+        ---
+        import Button from '@/components/Button.astro'
+        import TextInput from '@/components/forms/TextInput.astro'
+        ---
+
+        <Dialog.Root>
+          <Dialog.Content>
+            <form method="dialog" class="grid gap-24">
+              <div class="flex gap-16 p-2">
+                <TextInput
+                  label="First Name"
+                  name="first-name"
+                  placeholder="John"
+                  required
+                  inputProps={{ autofocus: true }}
+                />
+                <TextInput
+                  label="Last Name"
+                  name="last-name"
+                  placeholder="Smith"
+                  required
+                />
+              </div>
+              <footer class="flex items-center justify-end gap-16">
+                <Button
+                  type="submit"
+                  variant="outlined"
+                  data-dialog="close"
+                  formnovalidate
+                >Cancel</Button>
+                <Button type="submit">Submit</Button>
+              </footer>
+            </form>
+          </Dialog.Content>
+          <Dialog.Trigger />
+        </Dialog.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-dialog>
+          <dialog data-dialog="dialog" class="dialog">
+            <button type="button" title="Close" data-component="Button" data-dialog="close" class="btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"><path d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"></path></svg>
+              Close
+            </button>
+            <form method="dialog" class="grid gap-24">
+              <div class="flex gap-16 p-2">
+                <div
+                  class="field-group"
+                  data-required=""
+                  data-layout="FieldGroup" data-component="TextInput"
+                >
+                  <label for="first-name" id="label-first-name">
+                    <span class="field-label">First Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="first-name"
+                    name="input-first-name"
+                    placeholder="John"
+                    required=""
+                    aria-labelledby="label-first-name"
+                    autofocus=""
+                  >
+                </div>
+                <div
+                  class="field-group"
+                  data-required=""
+                  data-layout="FieldGroup"
+                  data-component="TextInput"
+                >
+                  <label for="last-name" id="label-last-name">
+                    <span class="field-label">Last Name</span>
+                  </label>
+                  <input
+                    type="text"
+                    id="last-name"
+                    name="input-last-name"
+                    placeholder="Smith"
+                    required=""
+                    aria-labelledby="label-last-name"
+                  >
+                </div>
+              </div>
+              <footer class="flex items-center justify-end gap-16">
+                <button
+                  type="submit"
+                  data-component="Button"
+                  data-dialog="close"
+                  formnovalidate=""
+                  class="btn-outlined"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  data-component="Button"
+                  class="btn-contained"
+                >
+                  Submit
+                </button>
+              </footer>
+            </form>
+          </dialog>
+
+          <button
+            type="button"
+            data-component="Button"
+            data-dialog="trigger"
+            class="btn-contained"
+          >
+            Open Dialog
+          </button>
+        </custom-dialog>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+### Custom Trigger & Dialog
+
+The dialog element can be customized to fit whatever context it is being used in. The following example demonstrates how to create a custom trigger and dialog.
+
+<Preview.Root>
+  <Preview.Canvas>
+    <Dialog.Root>
+      <Dialog.Content class="rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24">
+        <div class="flex items-center">
+          Culpa proident non exercitation eu consequat Lorem ipsum.
+        </div>
+      </Dialog.Content>
+      <Dialog.Trigger class="rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75">
+        Open Custom Dialog
+      </Dialog.Trigger>
+    </Dialog.Root>
+  </Preview.Canvas>
+  <Preview.Docs>
+    <Tabs>
+      <TabItem label="Astro" icon="astro">
+        ```astro /class="rounded.*"/
+        <Dialog.Root>
+          <Dialog.Content class="rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24">
+            <div class="flex items-center">
+              Culpa proident non exercitation eu consequat Lorem ipsum.
+            </div>
+          </Dialog.Content>
+          <Dialog.Trigger class="rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75">
+            Open Custom Dialog
+          </Dialog.Trigger>
+        </Dialog.Root>
+        ```
+      </TabItem>
+      <TabItem label="Compiled" icon="seti:html">
+        ```html
+        <custom-dialog>
+          <dialog
+            data-dialog="dialog"
+            class="dialog rounded-lg border-2 border-white bg-gradient-to-r from-indigo-500 from-10% via-sky-500 via-30% to-emerald-500 to-90% p-24"
+          >
+            <button
+              type="button"
+              title="Close"
+              data-component="Button"
+              data-dialog="close"
+              class="btn-subtle btn-sm btn-icon absolute right-4 top-4 size-24 !min-h-0 [&_svg]:size-12"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 15 14"><path d="M14.57 1.41L13.16 0 7.57 5.59 1.98 0 .57 1.41 6.16 7 .57 12.59 1.98 14l5.59-5.59L13.16 14l1.41-1.41L8.98 7l5.59-5.59z"></path></svg>
+              Close
+            </button>
+            <div class="flex items-center">
+              No content has been provided for this dialog.
+            </div>
+          </dialog>
+          <button
+            type="button"
+            data-component="Button"
+            data-dialog="trigger"
+            class="btn-contained rounded bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 p-8 font-bold !text-white transition hover:bg-gradient-to-tr hover:opacity-85 active:opacity-75"
+          >
+            Open Dialog
+          </button>
+        </custom-dialog>
+        ```
+      </TabItem>
+    </Tabs>
+
+  </Preview.Docs>
+</Preview.Root>
+
+## Astro Component
+
+It’s recommended that an element like this is made as a reusable component. In this case, we have put together the following Astro compound component to serve as a blueprint for how you could possibly set up a Dialog component, and what properties to consider.
+
+<Tabs>
+  <TabItem label="Dialog" icon="seti:typescript">
+    <Code code={DialogRaw} lang="typescript" title="Dialog.ts" />
+  </TabItem>
+  <TabItem label="Root" icon="astro">
+    <Code code={DialogRootRaw} lang="astro" title="Root.astro" />
+  </TabItem>
+  <TabItem label="Content" icon="astro">
+    <Code code={DialogContentRaw} lang="astro" title="Content.astro" />
+  </TabItem>
+  <TabItem label="Trigger" icon="astro">
+    <Code code={DialogTriggerRaw} lang="astro" title="Trigger.astro" />
+  </TabItem>
+</Tabs>

@@ -95,8 +95,9 @@ The `<PropTable>` component is used to display a table of the props that are ava
 See example below:
 
 ```jsx
-import PropTable from '@/components/starlight/PropTable.astro'
-;<PropTable
+import PropTable from '@/components/starlight/PropTable.astro';
+
+<PropTable
   rows={[
     {
       prop: 'foo',

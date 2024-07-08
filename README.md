@@ -86,17 +86,17 @@ import Preview from '@/components/starlight/preview/Preview.ts';
 </Preview.Root>
 ````
 
-<img src="https://github.com/vigetlabs/blueprint-starlight/assets/8878152/a1a805cd-1362-4966-a8f9-cea30f3a0989" alt="" style="width: 600px;" />
+<img src="https://github.com/ekfuhrmann/viget-blueprint/assets/8878152/f5c5f84f-1bf0-4b9a-8bcd-1733fb00213b" alt="" style="width: 600px;" />
 
 ### PropTable
 
 The `<PropTable>` component is used to display a table of the props that are available for a component. The component takes in a `rows` prop which is an array of objects that represent the props that are available for the component. Each object can have the following properties: `prop`, `type`, `description`, `default`, and `children`. Children is used to nest properties within a property, following the same pattern as the parent object.
 
 See example below:
-```jsx
-import PropTable from '@/components/starlight/PropTable.astro';
 
-<PropTable
+```jsx
+import PropTable from '@/components/starlight/PropTable.astro'
+;<PropTable
   rows={[
     {
       prop: 'foo',
@@ -128,9 +128,8 @@ import PropTable from '@/components/starlight/PropTable.astro';
 />
 ```
 
-
-<img src="https://github.com/vigetlabs/blueprint-starlight/assets/8878152/a831a5b9-d4bd-4c49-a0fe-73b74b111900" alt="" style="width: 600px;" />
+<img src="https://github.com/ekfuhrmann/viget-blueprint/assets/8878152/d8610b94-2ae6-47e6-ab8e-9bd3e3db8bbb" alt="" style="width: 600px;" />
 
 ## ❤️ Contribute
 
-The Blueprint library is still in its early stages, and we have plans to continue expanding the library with more components, examples, and best practices as we go. We are also hoping to include more code examples for different platforms, such as including React, Craft, and Django. If you have any suggestions or examples for components or features you’d like to see in Blueprint, please feel free to [open an issue on GitHub](https://github.com/vigetlabs/blueprint-starlight/issues).
+The Blueprint library is still in its early stages, and we have plans to continue expanding the library with more components, examples, and best practices as we go. We are also hoping to include more code examples for different platforms, such as including React, Craft, and Django. If you have any suggestions or examples for components or features you’d like to see in Blueprint, please feel free to [open an issue on GitHub](https://github.com/ekfuhrmann/viget-blueprint/issues).

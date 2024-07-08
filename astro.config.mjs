@@ -10,7 +10,7 @@ export default defineConfig({
       title: 'Blueprint',
       titleDelimiter: '-',
       social: {
-        github: 'https://github.com/vigetlabs/blueprint-starlight/',
+        github: 'https://github.com/ekfuhrmann/viget-blueprint',
       },
       expressiveCode: {
         themes: ['material-theme-palenight', 'light-plus'],
